@@ -1,5 +1,5 @@
 import React from 'react';
-import "../css/Geral.css";
+
 import {Table} from "reactstrap";
 
 
