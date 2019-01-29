@@ -1,0 +1,27 @@
+
+.card_estafeta{
+
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+    display: inline;
+    background: white;
+    border-color: transparent;
+    border-radius: 0.5rem;
+    width: 100px;
+    height: 100px;
+
+
+
+}
+
+.coluna_cacifo{
+
+    height: 150px;
+    width: 150px;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+
+    background: white;
+    border-color: green;
+    border-bottom-width: 20px;
+    border-radius: 1rem;
+    margin: 30px 10px;
+}

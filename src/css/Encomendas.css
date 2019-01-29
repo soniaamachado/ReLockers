@@ -1,0 +1,22 @@
+body {
+    font-size: .875rem;
+    background-color:#F1F3F6 ;
+}
+
+.table_in{
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+
+#tab_encomendas.active{
+    padding: 3px;
+    background: none;
+    border-bottom: 25px #5887F9;
+    box-shadow: 0px 5px;
+    box-shadow:#5887F9;
+    color: #5887F9;
+    border: none;
+    font-weight: bold;
+}
