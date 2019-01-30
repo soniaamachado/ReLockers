@@ -25,28 +25,29 @@ class Cacifos extends Component {
 
         return (
 
-                <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                    {cacifos.map(cacifo => {
-                    const { temperatura, id, numero} = cacifo;
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                {cacifos.map(cacifo => {
+                    const {temperatura, id, numero} = cacifo;
                     return (
-                        <Card key={id} className='coluna_cacifo'>
-                            <Card className='card_estafeta'>
-                                <CardBody style={{borderColor: 'green'}}>
+                        <div className='coluna_cacifo'>
+                            <Card key={id} className='card_estafeta'>
+                                <CardBody>
                                     <CardTitle>{numero}</CardTitle>
                                     <p style={{color: '#999'}}>{temperatura}</p>
                                     <p style={{color: '#999'}}>Tamanho</p>
-                                    <NavLink to={'/cacifoDetalhe'} style={{
-                                        textAlign: 'center',
-                                        color: 'white',
-                                        backgroundColor: 'green',
-                                        margin: 'auto'
-                                    }}>mais...</NavLink>
+                                    <NavLink to={'/cacifoDetalhe'}
+                                             style={{
+                                                 textAlign: 'center',
+                                                 color: 'white',
+                                                 backgroundColor: 'green',
+                                                 margin: 'auto'
+                                             }}>mais...</NavLink>
                                 </CardBody>
                             </Card>
-                        </Card>
+                        </div>
                     );
 
-                    })}
+                })}
 
             </main>
 
