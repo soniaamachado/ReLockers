@@ -12,7 +12,7 @@ class Cacifos extends Component {
     componentDidMount() {
         axios.get('http://167.99.202.225/api/cacifos')
             .then(response => {
-                this.setState({cacifos: response.data})
+                this.setState({cacifos: response.data.data})
             })
             .catch(function (error) {
                 console.log(error);
@@ -20,29 +20,33 @@ class Cacifos extends Component {
     }
 
     render() {
-        for (let [key, value] of Object.entries(this.state.cacifos)) {
-            console.log(key, value);
-        }
+
+        const cacifos = this.state.cacifos;
 
         return (
 
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-                    <Card className='coluna_cacifo'>
-                        <Card className='card_estafeta'>
-                            <CardBody style={{borderColor: 'green'}}>
-                                <CardTitle>FFRF</CardTitle>
-                                <p style={{color: '#999'}}>dcdc</p>
-                                <p style={{color: '#999'}}>jjjo</p>
-                                <NavLink to={'/cacifoDetalhe'} style={{
-                                    textAlign: 'center',
-                                    color: 'white',
-                                    backgroundColor: 'green',
-                                    margin: 'auto'
-                                }}>mais...</NavLink>
-                            </CardBody>
+                <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    {cacifos.map(cacifo => {
+                    const { temperatura, id, numero} = cacifo;
+                    return (
+                        <Card key={id} className='coluna_cacifo'>
+                            <Card className='card_estafeta'>
+                                <CardBody style={{borderColor: 'green'}}>
+                                    <CardTitle>{numero}</CardTitle>
+                                    <p style={{color: '#999'}}>{temperatura}</p>
+                                    <p style={{color: '#999'}}>Tamanho</p>
+                                    <NavLink to={'/cacifoDetalhe'} style={{
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        backgroundColor: 'green',
+                                        margin: 'auto'
+                                    }}>mais...</NavLink>
+                                </CardBody>
+                            </Card>
                         </Card>
-                    </Card>
+                    );
+
+                    })}
 
             </main>
 

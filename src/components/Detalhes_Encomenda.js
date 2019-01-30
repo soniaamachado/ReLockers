@@ -16,9 +16,6 @@ class Detalhes_Encomenda extends Component {
                 </div>
 
 
-
-
-
                 <div>
                     <Breadcrumb tag="nav" listTag="div">
 
