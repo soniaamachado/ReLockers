@@ -7,6 +7,7 @@ import Estafetas from "./components/Estafetas";
 import Inicio from "./components/Inicio";
 import Cacifos from "./components/Cacifos";
 import Definicoes from "./components/Definicoes";
+import DetalhesEncomenda from "./components/DetalhesEncomenda";
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
                         <Route exact path='/estafetas' component={Estafetas}/>
                         <Route exact path='/cacifos' component={Cacifos}/>
                         <Route exact path='/definicoes' component={Definicoes}/>
+                        <Route exact path='/detalhes_encomenda' component={DetalhesEncomenda}/>
                         <Route exact path='/' component={Inicio}/>
                     </div>
                 </Switch>
