@@ -6,7 +6,7 @@ export default class Navbar extends React.Component {
 
     render() {
         return (
-            <div style={{position:'fixed'}}>
+            <div style={{position:'fixed', zIndex:'1500'}}>
             <nav className="navbar navbar-dark bg-light fixed-top flex-md-nowrap p-0 shadow-sm">
                 <NavLink className="navbar-brand bg-light col-sm-3 col-md-2 mr-0" to={"/"} style={{color:'#5887F9'}}>ReLockers</NavLink>
                     <ul className="navbar-nav px-3">

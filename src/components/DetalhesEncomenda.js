@@ -49,98 +49,98 @@ class Detalhes_Encomenda extends Component {
                 </div>
 
 
-                    <table className="table table_encomenda table-sm">
+                <table className="table table_encomenda table-sm">
 
-                        <tbody>
-                        <tr>
-                            <td>Identificador de encomenda</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Data estimada de entrega</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Data de entrega</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Data de levantamento</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Localização de encomenda</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Tamanho de encomenda</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>Observações</td>
-                            <td>1</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <tbody>
+                    <tr>
+                        <td>Identificador de encomenda</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Data estimada de entrega</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Data de entrega</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Data de levantamento</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Localização de encomenda</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Tamanho de encomenda</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Observações</td>
+                        <td>1</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                    <table className="table_encomenda table table-sm">
+                <table className="table_encomenda table table-sm">
 
-                        <tbody>
+                    <tbody>
 
-                        <tr>
+                    <tr>
                         <th className='detalhe_titulo'>Cliente</th>
-                        </tr>
+                    </tr>
 
-                        <tr>
-                            <td className='detalhe_text'>Nome</td>
-                            <td>1</td>
+                    <tr>
+                        <td className='detalhe_text'>Nome</td>
+                        <td>1</td>
 
-                        </tr>
-                        <tr>
-                            <td className='detalhe_text'>Apelido</td>
-                            <td>1</td>
+                    </tr>
+                    <tr>
+                        <td className='detalhe_text'>Apelido</td>
+                        <td>1</td>
 
-                        </tr>
-                        <tr>
-                            <td className='detalhe_text'>Email de cliente</td>
-                            <td>1</td>
+                    </tr>
+                    <tr>
+                        <td className='detalhe_text'>Email de cliente</td>
+                        <td>1</td>
 
-                        </tr>
-                        <tr>
-                            <td className='detalhe_text'>Telefone de cliente</td>
-                            <td>1</td>
+                    </tr>
+                    <tr>
+                        <td className='detalhe_text'>Telefone de cliente</td>
+                        <td>1</td>
 
-                        </tr>
+                    </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
 
-                    <table className="table table-sm table_encomenda">
+                <table className="table table-sm table_encomenda">
 
-                        <tbody>
+                    <tbody>
 
-                        <tr>
-                            <th className='detalhe_titulo'>Cacifo</th>
-                        </tr>
+                    <tr>
+                        <th className='detalhe_titulo'>Cacifo</th>
+                    </tr>
 
-                        <tr>
-                            <td className='detalhe_text'>Número do cacifo</td>
-                            <td>1</td>
+                    <tr>
+                        <td className='detalhe_text'>Número do cacifo</td>
+                        <td>1</td>
 
-                        </tr>
-                        <tr>
-                            <td className='detalhe_text'>Localização do cacifo</td>
-                            <td>1</td>
+                    </tr>
+                    <tr>
+                        <td className='detalhe_text'>Localização do cacifo</td>
+                        <td>1</td>
 
-                        </tr>
-                        <tr>
-                            <td className='detalhe_text'>Temperatura do cacifo</td>
-                            <td>1</td>
+                    </tr>
+                    <tr>
+                        <td className='detalhe_text'>Temperatura do cacifo</td>
+                        <td>1</td>
 
-                        </tr>
+                    </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </main>
         );
     }

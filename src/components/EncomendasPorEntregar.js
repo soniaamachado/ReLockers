@@ -1,10 +1,12 @@
 import React from 'react';
 
 import {Table} from "reactstrap";
+import axios from "axios/index";
 
 export default class EncomendasPorEntregar extends React.Component {
 
     render() {
+
         return (
             <Table className='table_in' responsive>
                 <thead>

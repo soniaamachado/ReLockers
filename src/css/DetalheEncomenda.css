@@ -9,4 +9,6 @@
 .table_encomenda{
     background-color: white;
     margin-top: 20px;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
 }
