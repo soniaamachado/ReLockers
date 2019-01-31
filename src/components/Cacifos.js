@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Badge, Button, Card, CardBody} from "reactstrap";
+import {Badge, Button, Card, CardBody, Col} from "reactstrap";
 import {NavLink} from "react-router-dom";
 import MaterialIcon from 'material-icons-react';
 
@@ -45,7 +45,7 @@ class Cacifos extends Component {
                 {cacifos.map(cacifo => {
                     const {temperatura, id, numero, tamanho} = cacifo;
                     return (
-                        <div className='coluna_cacifo'>
+                            <div className="coluna_cacifo">
                             <Card key={id} className='card_cacifo'>
                                 <CardBody>
                                     <h4>{numero}</h4>
@@ -67,7 +67,7 @@ class Cacifos extends Component {
                                     </Button>
                                 </CardBody>
                             </Card>
-                        </div>
+                            </div>
                     );
 
                 })}

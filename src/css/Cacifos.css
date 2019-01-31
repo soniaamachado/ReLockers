@@ -18,7 +18,8 @@
     border-color: #5887F9;
     border-bottom-width: 20px;
     border-radius: 1rem;
-    margin: 10px 10px;
+    margin: auto 20px 20px auto;
+
 }
 .btn_detalhes{
     background-color: #5887F9;
@@ -26,11 +27,13 @@
     color: white;
     margin-top: 20px;
     border-radius: 0.3rem;
+    text-align: center;
 }
 
 .btn_detalhes a{
     color: white;
     text-decoration: none;
+    text-align: center;
 
 }
 .badge{

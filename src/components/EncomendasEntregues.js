@@ -67,7 +67,7 @@ export default class EncomendasEntregues extends React.Component {
                             <td>
                                 <span className="dropdown">
 				                        <button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="btn btn-primary dropdown-toggle dropdown-menu-right">
-                                            <MaterialIcon size={'tiny'} icon="settings" color={'#fff'} />
+                                            <i className="material-icons md-18" style={{color:'white'}}>settings</i>
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2" className=" btn_acoes dropdown-menu mt-1 dropdown-menu-right" >
 				                            <a href="#" className="dropdown-item"><i className="fa fa-eye"></i> Open Task</a>
