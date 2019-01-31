@@ -1,148 +1,61 @@
 import React, {Component} from 'react';
 import "../css/DetalheEncomenda.css";
-
-import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import axios from 'axios';
+import {ListGroup, ListGroupItem} from "reactstrap";
 
 class Detalhes_Encomenda extends Component {
 
+    state = {
+       encomendas: []
+    };
+    componentDidMount() {
+        axios.get('http://167.99.202.225/api/encomendas/'+this.props.match.params.id)
+            .then(response => {
+                this.setState({encomendas: response.data});
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
     render() {
+        const encomendas =this.state.encomendas;
+        if(this.state.encomendas.length === 0){
+            return null;
+        }
+        else{
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div className="chartjs-size-monitor" style={{
-                    position: "absolute",
-                    left: "0px",
-                    top: "0px",
-                    right: "0px",
-                    bottom: "0px",
-                    overflow: "hidden",
-                    pointerEvents: "none",
-                    visibility: "hidden",
-                    zIndex: '-1'
-                }}>
-                    <div className="chartjs-size-monitor-shrink" style={{
-                        position: 'absolute',
-                        left: '0',
-                        top: '0',
-                        right: '0',
-                        bottom: '0',
-                        overflow: 'hidden',
-                        pointerEvents: 'none',
-                        visibility: 'hidden',
-                        zIndex: '-1'
-                    }}>
-                        <div style={{position: 'absolute', width: '200%', height: '200%', left: '0', top: '0'}}></div>
-                    </div>
-                </div>
-                <div
-                    className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <h1 className="h2">Detalhes de encomenda</h1>
+                {encomendas.map(encomenda => {
+                    const {id, data_de_entrega,data_de_levantamento, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo, users} = encomenda;
 
-                </div>
+                    return(
+                        <div key={id}>
 
+                            <ListGroup>
+                                <ListGroupItem>
+                                    <h5>Encomenda #{id}</h5>
+                                    <p>Localização: {localizacao}</p>
+                                    <p>Entregue em: {data_de_entrega}</p>
+                                    <p>Levantada em: {data_de_levantamento}</p>
+                                    <p>{temperatura}</p>
+                                </ListGroupItem>
+                            </ListGroup>
+                            {id}
 
-                <div>
-                    <Breadcrumb tag="nav" listTag="div">
+                            {temperatura}
+                            {tamanho}
+                            {localizacao}
+                            {tempolimite_de_levantamento}
+                            {cliente.nome}
+                        </div>
+                    )
 
-                        <BreadcrumbItem tag="a" href="#">Encomendas</BreadcrumbItem>
-                        <BreadcrumbItem active tag="span">Encomenda x</BreadcrumbItem>
-                    </Breadcrumb>
-                </div>
+                })}
 
-
-                <table className="table table_encomenda table-sm">
-
-                    <tbody>
-                    <tr>
-                        <td>Identificador de encomenda</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Data estimada de entrega</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Data de entrega</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Data de levantamento</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Localização de encomenda</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Tamanho de encomenda</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Observações</td>
-                        <td>1</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <table className="table_encomenda table table-sm">
-
-                    <tbody>
-
-                    <tr>
-                        <th className='detalhe_titulo'>Cliente</th>
-                    </tr>
-
-                    <tr>
-                        <td className='detalhe_text'>Nome</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td className='detalhe_text'>Apelido</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td className='detalhe_text'>Email de cliente</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td className='detalhe_text'>Telefone de cliente</td>
-                        <td>1</td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
-
-                <table className="table table-sm table_encomenda">
-
-                    <tbody>
-
-                    <tr>
-                        <th className='detalhe_titulo'>Cacifo</th>
-                    </tr>
-
-                    <tr>
-                        <td className='detalhe_text'>Número do cacifo</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td className='detalhe_text'>Localização do cacifo</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td className='detalhe_text'>Temperatura do cacifo</td>
-                        <td>1</td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
             </main>
         );
+        }
     }
 }
 

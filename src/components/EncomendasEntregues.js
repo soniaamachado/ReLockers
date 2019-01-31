@@ -3,6 +3,7 @@ import '../css/Encomendas.css'
 import {Table} from "reactstrap";
 import axios from "axios/index";
 import moment from "moment";
+import {Link} from "react-router-dom";
 
 
 export default class EncomendasEntregues extends React.Component {
@@ -88,13 +89,16 @@ export default class EncomendasEntregues extends React.Component {
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">remove_red_eye</i> Abrir</a>
+				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item">
+                                                <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
 				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</a>
 				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</a>
 				                        </span>
 				                    </span>
                             </td>
+
                         </tr>
+
                     );
 
 

@@ -33,11 +33,11 @@ class Encomendas extends Component {
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
-                <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                    <MaterialIcon icon={'location_on'}> </MaterialIcon>
-                    <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
-                    <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>
-                </div>
+                {/*<div style={{textAlign: 'center', marginBottom: '50px'}}>*/}
+                    {/*<MaterialIcon icon={'location_on'}> </MaterialIcon>*/}
+                    {/*<h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>*/}
+                    {/*<a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>*/}
+                {/*</div>*/}
                 <Col>
                     <Nav tabs>
                         <NavItem>
