@@ -1,58 +1,33 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import "../css/Estafetas.css";
-import EstafetaCards from './EstafetasCards';
+import axios from 'axios';
+import { Button, Card, CardBody, CardSubtitle, CardTitle} from "reactstrap";
+import {NavLink} from "react-router-dom";
 
 class Estafetas extends Component {
+    state = {
+        users: []
+    };
 
-    constructor () {
-        super();
-        this.state = {
-            people:[
-                {
-                    name:"caio jacobina",
-                    email:"cjacobina@uapt",
-                    key:"1",
-                },
-                {
-                    name:"caio jacobina2",
-                    email:"cjacobina@uapt",
-                    key:"2",
-
-                },
-                {
-                    name:"caio jacobina3",
-                    email:"cjacobina@uapt",
-                    key:"3",
-
-                },
-                {
-                    name:"caio jacobina2",
-                    email:"cjacobina@uapt",
-                    key:"s3",
-
-                },
-                {
-                    name:"caio jacobina2",
-                    email:"cjacobina@uapt",
-                    key:"3ff",
-
-                }
-            ]
-        }
+    componentDidMount() {
+        axios.get('http://167.99.202.225/api/users')
+            .then(response => {
+                this.setState({users: response.data.data})
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
+
     render() {
-        let estafetaCards = this.state.people.map(person => {
-            return (
 
-                    <EstafetaCards person ={person} />
+        const users = this.state.users;
 
-            )
-        });
         return (
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4"><div className="chartjs-size-monitor" style={{position: "absolute", left: "0px", top: "0px", right: "0px", bottom: "0px", overflow: "hidden",pointerEvents: "none",visibility: "hidden",zIndex: '-1'}}>
-                <div className="chartjs-size-monitor-shrink" style={{position:'absolute',left:'0',top:'0',right:'0',bottom:'0',overflow:'hidden',pointerEvents:'none',visibility:'hidden',zIndex:'-1'}}>
-                    <div style={{position:'absolute',width:'200%',height:'200%',left:'0',top:'0'}}> </div></div></div>
-                <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+
+            <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div
+                    className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Estafetas</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                         <div className="btn-group mr-2">
@@ -63,16 +38,46 @@ class Estafetas extends Component {
                             <button  type="button" className="btn btn-sm btn-outline-secondary">Não ativos</button>
 
                         </div>
-
-                        <button type="button" className="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            This week
-                        </button>
-
                     </div>
                 </div>
+                <div style={{textAlign: 'center', marginBottom: '50px'}}>
 
-                    {estafetaCards}
+                    <svg width="15" height="15" viewBox="0 0 54.757 54.757" fill="none"
+                         xmlns="http://www.w3.org/2000/svg" stroke="currentColor" strokeWidth="1"
+                         strokeLinecap="round" strokeLinejoin="round" className="feather feather-users">
+                        <path
+                            d="M27.557,12c-3.859,0-7,3.141-7,7s3.141,7,7,7s7-3.141,7-7S31.416,12,27.557,12z M27.557,24c-2.757,0-5-2.243-5-5
+		s2.243-5,5-5s5,2.243,5,5S30.314,24,27.557,24z"/>
+                        <path
+                            d="M40.94,5.617C37.318,1.995,32.502,0,27.38,0c-5.123,0-9.938,1.995-13.56,5.617c-6.703,6.702-7.536,19.312-1.804,26.952
+		L27.38,54.757L42.721,32.6C48.476,24.929,47.643,12.319,40.94,5.617z M41.099,31.431L27.38,51.243L13.639,31.4
+		C8.44,24.468,9.185,13.08,15.235,7.031C18.479,3.787,22.792,2,27.38,2s8.901,1.787,12.146,5.031
+		C45.576,13.08,46.321,24.468,41.099,31.431z"/>
+                    </svg>
+                    <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
+                    <NavLink to={'/definicoes'}
+                             style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</NavLink>
+
+                </div>
+
+
+                {users.map(user => {
+                    const {nome, email} = user;
+                    return (<Card className='col-md-3'>
+                            <Card className='card_estafeta'>
+                                <CardBody>
+                                    <img className='img_estafeta'  alt={'lol'}
+                                         src={'https://www.comshalom.org/wp-content/uploads/2018/02/pexels-photo-683381.jpeg'}/>
+                                    <CardTitle key={nome} style={{display:'block'}}> {nome}</CardTitle>
+                                    <CardSubtitle  style={{color:'#999'}}>{email}</CardSubtitle>
+                                    <Button className='btn_detalhes' size="sm"> <NavLink to={'/cacifosDetalhes'}>Ver
+                                        detalhes</NavLink></Button>
+                                </CardBody>
+                            </Card>
+                        </Card>
+                    );
+
+                })}
 
             </main>
 
@@ -81,3 +86,4 @@ class Estafetas extends Component {
 }
 
 export default Estafetas;
+
