@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Table} from "reactstrap";
 import axios from "axios/index";
+import MaterialIcon, {colorPalette} from 'material-icons-react';
+
 
 
 export default class EncomendasEntregues extends React.Component {
@@ -26,7 +28,7 @@ export default class EncomendasEntregues extends React.Component {
         const encomendas = this.state.encomendas;
 
         return (
-            <Table className='table_in' responsive>
+            <Table className='table_in table-hover' responsive>
                 <thead>
                 <tr>
                     <th>#</th>
@@ -39,7 +41,7 @@ export default class EncomendasEntregues extends React.Component {
                     <th>Estafeta</th>
                     <th>Cacifo</th>
                     <th>Recolha até</th>
-                    <th>Editar</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -62,7 +64,20 @@ export default class EncomendasEntregues extends React.Component {
                             <td> </td>
                             <td>{cacifo.numero}</td>
                             <td>{tempolimite_de_levantamento}</td>
-                            <td>Editar</td>
+                            <td>
+                                <span className="dropdown">
+				                        <button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="btn btn-primary dropdown-toggle dropdown-menu-right">
+                                            <MaterialIcon size={'tiny'} icon="settings" color={'#fff'} />
+                                        </button>
+				                        <span aria-labelledby="btnSearchDrop2" className=" btn_acoes dropdown-menu mt-1 dropdown-menu-right" >
+				                            <a href="#" className="dropdown-item"><i className="fa fa-eye"></i> Open Task</a>
+				                            <a href="#" className="dropdown-item"><i className="fa fa-pencil"></i> Edit Task</a>
+				                            <a href="#" className="dropdown-item"><i className="fa fa-check"></i> Complete Task</a>
+				                            <a href="#" className="dropdown-item"><i className="ft-upload"></i> Assign to</a>
+				                            <a href="#" className="dropdown-item"><i className="fa fa-trash"></i> Delete Task</a>
+				                        </span>
+				                    </span>
+                            </td>
                         </tr>
                     );
 

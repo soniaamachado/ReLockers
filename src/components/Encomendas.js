@@ -6,7 +6,6 @@ import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";
 
 
-
 class Encomendas extends Component {
     constructor(props) {
         super(props);

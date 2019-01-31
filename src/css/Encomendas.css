@@ -20,3 +20,9 @@ body {
     border: none;
     font-weight: bold;
 }
+
+.btn_acoes{
+    position: absolute;
+    transform: translate3d(-100px, -180px, 0px); top: 0; left: 0;
+    will-change: transform;
+}
