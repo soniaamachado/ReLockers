@@ -26,7 +26,7 @@ class Encomendas extends Component {
     }
     render() {
         return (
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{height:'100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Encomendas</h1>
@@ -46,7 +46,7 @@ class Encomendas extends Component {
                                 id={'tab_encomendas'}
                                 onClick={() => { this.toggle('1'); }}
                             >
-                                Encomendas por entregar
+                                Por entregar
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -55,7 +55,7 @@ class Encomendas extends Component {
                                 id={'tab_encomendas'}
                                 onClick={() => { this.toggle('2'); }}
                             >
-                                Encomendas entregues
+                                Entregues
                             </NavLink>
                         </NavItem>
                     </Nav>

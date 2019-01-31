@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@coreui/react": "latest",
+    "@material/tab-bar": "^0.43.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "classnames": "latest",

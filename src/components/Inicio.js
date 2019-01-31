@@ -3,6 +3,7 @@ import "../css/Inicio.css";
 import {Card, CardBody, CardText, CardTitle, Table} from "reactstrap";
 import {NavLink} from "react-router-dom";
 import MaterialIcon from 'material-icons-react';
+import EncomendasPorEntregar from "./EncomendasPorEntregar";
 
 class Inicio extends Component {
 
@@ -58,61 +59,7 @@ class Inicio extends Component {
 
                     {/*Tabela encomendas por entregar*/}
                     <div className='col-6' style={{display: 'inline-block', margin: 'auto'}}>
-                        <div
-                            className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                            <h5>Encomendas por entregar</h5>
-                            <div className="btn-toolbar mb-2 mb-md-0">
-                            </div>
-                        </div>
-
-                        <Table className='table_in' borderless>
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Data</th>
-                                <th>Hora</th>
-                                <th>Local</th>
-                                <th>Cliente</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">200</th>
-                                <td>01/11/2020</td>
-                                <td>20:30h</td>
-                                <td>Universidade de Aveiro</td>
-                                <td>Sónia Machado</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">250</th>
-                                <td>01/11/2020</td>
-                                <td>20:30h</td>
-                                <td>Universidade de Aveiro</td>
-                                <td>Sónia Machado</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">255</th>
-                                <td>01/11/2020</td>
-                                <td>20:30h</td>
-                                <td>Universidade de Aveiro</td>
-                                <td>Sónia Machado</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">400</th>
-                                <td>01/11/2020</td>
-                                <td>20:30h</td>
-                                <td>Universidade de Aveiro</td>
-                                <td>Sónia Machado</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">820</th>
-                                <td>01/11/2020</td>
-                                <td>20:30h</td>
-                                <td>Universidade de Aveiro</td>
-                                <td>Sónia Machado</td>
-                            </tr>
-                            </tbody>
-                        </Table>
+                        <EncomendasPorEntregar/>
                     </div>
 
 

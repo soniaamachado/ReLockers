@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Badge, Button, Card, CardBody, Col} from "reactstrap";
+import {Badge, Button, Card, CardBody} from "reactstrap";
 import {NavLink} from "react-router-dom";
 import MaterialIcon from 'material-icons-react';
 
@@ -27,7 +27,7 @@ class Cacifos extends Component {
 
         return (
 
-            <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <p className="h2">Cacifos</p>

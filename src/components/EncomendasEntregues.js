@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../css/Encomendas.css'
 import {Table} from "reactstrap";
 import axios from "axios/index";
 import moment from "moment";
@@ -88,11 +88,9 @@ export default class EncomendasEntregues extends React.Component {
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <a href="#" className="dropdown-item"><i className="fa fa-eye"></i> Open Task</a>
-				                            <a href="#" className="dropdown-item"><i className="fa fa-pencil"></i> Edit Task</a>
-				                            <a href="#" className="dropdown-item"><i className="fa fa-check"></i> Complete Task</a>
-				                            <a href="#" className="dropdown-item"><i className="ft-upload"></i> Assign to</a>
-				                            <a href="#" className="dropdown-item"><i className="fa fa-trash"></i> Delete Task</a>
+				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">remove_red_eye</i> Abrir</a>
+				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</a>
+				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</a>
 				                        </span>
 				                    </span>
                             </td>
