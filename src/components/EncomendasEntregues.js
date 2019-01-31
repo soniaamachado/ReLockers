@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Table} from "reactstrap";
 import axios from "axios/index";
-import MaterialIcon, {colorPalette} from 'material-icons-react';
+import MaterialIcon from 'material-icons-react';
 
 
 
