@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Button, Card, CardBody} from "reactstrap";
+import {Badge, Button, Card, CardBody} from "reactstrap";
 import {NavLink} from "react-router-dom";
 
 class Cacifos extends Component {
@@ -25,7 +25,7 @@ class Cacifos extends Component {
 
         return (
 
-            <main style={{zIndex:'-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <p className="h2">Cacifos</p>
@@ -54,15 +54,28 @@ class Cacifos extends Component {
 
 
                 {cacifos.map(cacifo => {
-                    const {temperatura, id, numero} = cacifo;
+                    const {temperatura, id, numero, tamanho} = cacifo;
                     return (
                         <div className='coluna_cacifo'>
                             <Card key={id} className='card_cacifo'>
                                 <CardBody>
                                     <h4>{numero}</h4>
-                                    <p style={{color: '#999'}}>Temperatura (ºC): {temperatura}</p>
-                                    <p style={{color: '#999'}}>Tamanho:</p>
-                                    <Button className='btn_detalhes' size="sm"> <NavLink to={'/cacifosDetalhes'}>Ver detalhes</NavLink></Button>
+                                    <div style={{display: 'inline', marginBottom: '10px'}}>
+                                        <h6>
+                                            Temperatura
+                                            <Badge className='badge'>{temperatura}ºC</Badge>
+                                        </h6>
+                                    </div>
+                                    <div style={{display: 'inline'}}>
+                                        <h6>
+                                            Tamanho
+                                            <Badge className='badge'>{tamanho.tamanho}</Badge>
+                                        </h6>
+                                    </div>
+
+                                    <Button className='btn_detalhes' size="sm"> <NavLink to={'/cacifosDetalhes'}>Ver
+                                        detalhes</NavLink>
+                                    </Button>
                                 </CardBody>
                             </Card>
                         </div>

@@ -24,9 +24,20 @@
     background-color: #5887F9;
     border: none;
     color: white;
+    margin-top: 20px;
+    border-radius: 0.3rem;
 }
 
 .btn_detalhes a{
     color: white;
     text-decoration: none;
+
+}
+.badge{
+    height:20px;
+    width:45px;
+    float: right;
+    background-Color: #F1F3F6;
+    color: #333;
+    text-Align:center;
 }

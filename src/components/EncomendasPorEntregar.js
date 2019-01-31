@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {Table} from "reactstrap";
-import axios from "axios/index";
 
 export default class EncomendasPorEntregar extends React.Component {
 
