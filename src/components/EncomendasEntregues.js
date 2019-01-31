@@ -2,21 +2,19 @@ import React from 'react';
 
 import {Table} from "reactstrap";
 import axios from "axios/index";
-import MaterialIcon from 'material-icons-react';
-
+import moment from "moment";
 
 
 export default class EncomendasEntregues extends React.Component {
     state = {
-        encomendas: [
-
-        ],
+        encomendas: [],
+        users: []
     };
 
     componentDidMount() {
         axios.get('http://167.99.202.225/api/encomendas')
             .then(response => {
-                this.setState({encomendas: response.data.data})
+                this.setState({encomendas: response.data});
             })
             .catch(function (error) {
                 console.log(error);
@@ -26,6 +24,7 @@ export default class EncomendasEntregues extends React.Component {
 
     render() {
         const encomendas = this.state.encomendas;
+        console.log(encomendas);
 
         return (
             <Table className='table_in table-hover' responsive>
@@ -40,7 +39,7 @@ export default class EncomendasEntregues extends React.Component {
                     <th>Cliente</th>
                     <th>Estafeta</th>
                     <th>Cacifo</th>
-                    <th>Recolha até</th>
+                    <th>Recolha</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -48,11 +47,19 @@ export default class EncomendasEntregues extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    const {id, data_de_entrega, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo} = encomenda;
+                    const {id, data_de_entrega,data_de_levantamento, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo, users} = encomenda;
                     const data_split = data_de_entrega.split(" ");
+                    const data_final= data_de_levantamento - data_de_entrega;
+                    console.log(data_final);
+
+                    const end = moment(data_split[0]); //todays date
+                    const now = moment("1971-04-06"); // another date
+                    const duration = moment.duration(now.diff(end));
+                    const days = duration.asDays();
+                    console.log(days);
+
 
                     return (
-
                         <tr key={id}>
                             <th scope="row">{id}</th>
                             <td>{data_split[0]}</td>
@@ -61,15 +68,26 @@ export default class EncomendasEntregues extends React.Component {
                             <td>{temperatura}ºC</td>
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
-                            <td> </td>
+                            {encomenda.users.map(user =>
+                                <td>{user.nome}</td>
+                            )}
                             <td>{cacifo.numero}</td>
-                            <td>{tempolimite_de_levantamento}</td>
+
+                            <td>{days} dias</td>
                             <td>
                                 <span className="dropdown">
-				                        <button id="btnSearchDrop2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="btn btn-primary dropdown-toggle dropdown-menu-right">
-                                            <i className="material-icons md-18" style={{color:'white'}}>settings</i>
+				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none'}}
+                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false"
+                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
+                                            <i className="material-icons md-18" style={{
+                                                color: 'white',
+                                                verticalAlign: 'middle',
+                                                marginRight: '5px'
+                                            }}>settings</i>
                                         </button>
-				                        <span aria-labelledby="btnSearchDrop2" className=" btn_acoes dropdown-menu mt-1 dropdown-menu-right" >
+				                        <span aria-labelledby="btnSearchDrop2"
+                                              className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
 				                            <a href="#" className="dropdown-item"><i className="fa fa-eye"></i> Open Task</a>
 				                            <a href="#" className="dropdown-item"><i className="fa fa-pencil"></i> Edit Task</a>
 				                            <a href="#" className="dropdown-item"><i className="fa fa-check"></i> Complete Task</a>

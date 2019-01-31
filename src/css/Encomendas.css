@@ -26,3 +26,6 @@ body {
     transform: translate3d(-100px, -180px, 0px); top: 0; left: 0;
     will-change: transform;
 }
+.btnSearchDrop2 .btn-primary{
+   background-color: #5887F9 !important;
+}
