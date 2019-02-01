@@ -6,7 +6,7 @@ import {Col, Row} from "reactstrap";
 class Detalhes_Encomenda extends Component {
 
     state = {
-        encomendas: []
+        encomendas: [],
     };
 
     componentDidMount() {
@@ -21,6 +21,7 @@ class Detalhes_Encomenda extends Component {
 
     render() {
 
+        const encomendas=this.state.encomendas;
         if (this.state.encomendas.length === 0) {
             return null;
         }
@@ -35,14 +36,14 @@ class Detalhes_Encomenda extends Component {
                         </Col>
                     </Row>
 
-                    <Row key={this.state.encomendas.id}>
+                    <Row key={encomendas.id}>
                         <Col xs="6" sm="4" style={{backgroundColor: 'white'}}>
                             <div>
                                 <p style={{verticalAlign: 'middle'}}>
                                     <i style={{verticalAlign: 'middle'}}
                                        className="material-icons md-18">assignment</i>Encomenda
                                 </p>
-                                <h4>XFF45{this.state.encomendas.id}</h4>
+                                <h4>{encomendas.id}</h4>
                             </div>
                             <div>
                                 <p style={{verticalAlign: 'middle'}}>
@@ -51,43 +52,43 @@ class Detalhes_Encomenda extends Component {
                                         location_on
                                     </i>
                                     Localização</p>
-                                <p>{this.state.encomendas.id}</p>
+                                <p>{encomendas.cacifo.localizacao.nome}</p>
                             </div>
                         </Col>
-                        {/*<Col xs="6" sm="4" style={{backgroundColor:'white'}}>*/}
-                        {/*<div>*/}
-                        {/*<p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}*/}
-                        {/*className="material-icons md-18">assignment</i>Encomenda*/}
-                        {/*</p>*/}
-                        {/*<h4>XFF45{id}</h4>*/}
-                        {/*</div>*/}
-                        {/*<div>*/}
-                        {/*<p style={{verticalAlign: 'middle'}}>*/}
-                        {/*<i style={{verticalAlign: 'middle'}}*/}
-                        {/*className="material-icons md-18">*/}
-                        {/*location_on*/}
-                        {/*</i>*/}
-                        {/*Localização</p>*/}
-                        {/*<p>{localizacao}</p>*/}
-                        {/*</div>*/}
-                        {/*</Col>*/}
-                        {/*<Col sm="4" style={{backgroundColor:'white'}}>*/}
-                        {/*<div>*/}
-                        {/*<p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}*/}
-                        {/*className="material-icons md-18">assignment</i>Encomenda*/}
-                        {/*</p>*/}
-                        {/*<h4>XFF45{id}</h4>*/}
-                        {/*</div>*/}
-                        {/*<div>*/}
-                        {/*<p style={{verticalAlign: 'middle'}}>*/}
-                        {/*<i style={{verticalAlign: 'middle'}}*/}
-                        {/*className="material-icons md-18">*/}
-                        {/*location_on*/}
-                        {/*</i>*/}
-                        {/*Localização</p>*/}
-                        {/*<p>{localizacao}</p>*/}
-                        {/*</div>*/}
-                        {/*</Col>*/}
+                        <Col xs="6" sm="4" style={{backgroundColor:'white'}}>
+                        <div>
+                        <p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}
+                        className="material-icons md-18">temperature</i>Encomenda
+                        </p>
+                        <p>{encomendas.temperatura}</p>
+                        </div>
+                        <div>
+                        <p style={{verticalAlign: 'middle'}}>
+                        <i style={{verticalAlign: 'middle'}}
+                        className="material-icons md-18">
+                        location_on
+                        </i>
+                        Localização</p>
+                        <p>{encomendas.tamanho}</p>
+                        </div>
+                        </Col>
+                        <Col sm="4" style={{backgroundColor:'white'}}>
+                        <div>
+                        <p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}
+                        className="material-icons md-18">assignment</i>Encomenda
+                        </p>
+                        <h4>XFF45{encomendas.id}</h4>
+                        </div>
+                        <div>
+                        <p style={{verticalAlign: 'middle'}}>
+                        <i style={{verticalAlign: 'middle'}}
+                        className="material-icons md-18">
+                        location_on
+                        </i>
+                        Localização</p>
+                        <p>{encomendas.id}</p>
+                        </div>
+                        </Col>
                     </Row>
 
                 </main>

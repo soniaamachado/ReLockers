@@ -113,7 +113,7 @@ section {
 /*pagina inicial*/
 
 .wrap {
-    display: flex;
+    display: inline-block;
     background: white;
     padding: 1rem 1rem 1rem 1rem;
     border-radius: 0.5rem;

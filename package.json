@@ -8,6 +8,8 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "classnames": "latest",
+    "google-map-react": "^1.1.2",
+    "google-maps-react": "^2.0.2",
     "material-icons-react": "^1.0.4",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
