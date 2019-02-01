@@ -77,7 +77,7 @@ export default class EncomendasEntregues extends React.Component {
                             <td>{days} dias</td>
                             <td>
                                 <span className="dropdown">
-				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none'}}
+				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none', width:'68px'}}
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"
                                                 className="btn btn-dark dropdown-toggle dropdown-menu-right">
@@ -89,8 +89,7 @@ export default class EncomendasEntregues extends React.Component {
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item">
-                                                <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item"> <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
 				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</Link>
 				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</Link>
 				                        </span>
