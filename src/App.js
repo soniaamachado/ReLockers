@@ -9,6 +9,8 @@ import Cacifos from "./components/Cacifos";
 import Definicoes from "./components/Definicoes";
 import DetalhesEncomenda from "./components/DetalhesEncomenda";
 import EncomendasEntregues from "./components/EncomendasEntregues";
+import DetalhesEstafeta from "./components/DetalhesEstafeta";
+import DetalhesCacifo from "./components/DetalhesCacifo";
 
 
 
@@ -25,6 +27,8 @@ class App extends Component {
                         <Route exact path='/cacifos' component={Cacifos}/>
                         <Route exact path='/definicoes' component={Definicoes}/>
                         <Route exact path='/detail/:id' component={DetalhesEncomenda}/>
+                        <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta}/>
+                        <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo}/>
                         <Route exact path='/' component={Inicio}/>
 
                     </div>

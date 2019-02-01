@@ -1,0 +1,11 @@
+.breadcrumb{
+    background-color: white;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+}
+.table_estafeta{
+    background-color: white;
+    box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+    margin-bottom: 20px ;
+}

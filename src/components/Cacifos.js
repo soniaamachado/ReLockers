@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
 import {Badge, Button, Card, CardBody} from "reactstrap";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import MaterialIcon from 'material-icons-react';
 
 
@@ -62,8 +62,8 @@ class Cacifos extends Component {
                                         </h6>
                                     </div>
 
-                                    <Button className='btn_detalhes' size="sm"> <NavLink to={'/cacifosDetalhes'}>Ver
-                                        detalhes</NavLink>
+                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
+                                        detalhes</Link>
                                     </Button>
                                 </CardBody>
                             </Card>
