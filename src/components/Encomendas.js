@@ -4,7 +4,6 @@ import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col} from "reactstrap";
 import classnames from 'classnames';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";
-import MaterialIcon from 'material-icons-react';
 
 
 class Encomendas extends Component {

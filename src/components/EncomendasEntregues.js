@@ -9,13 +9,13 @@ import {Link} from "react-router-dom";
 export default class EncomendasEntregues extends React.Component {
     state = {
         encomendas: [],
-        users: []
+        estafetas: []
     };
 
     componentDidMount() {
         axios.get('http://167.99.202.225/api/encomendas')
             .then(response => {
-                this.setState({encomendas: response.data});
+                this.setState({encomendas: response.data.data});
             })
             .catch(function (error) {
                 console.log(error);
@@ -48,7 +48,7 @@ export default class EncomendasEntregues extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    const {id, data_de_entrega,data_de_levantamento, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo, users} = encomenda;
+                    const {id, data_de_entrega,data_de_levantamento, temperatura, tamanho, localizacao, cliente, cacifo} = encomenda;
                     const data_split = data_de_entrega.split(" ");
                     const data_final= data_de_levantamento - data_de_entrega;
                     console.log(data_final);
@@ -69,8 +69,8 @@ export default class EncomendasEntregues extends React.Component {
                             <td>{temperatura}ºC</td>
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
-                            {encomenda.users.map(user =>
-                                <td>{user.nome}</td>
+                            {encomenda.estafeta.map(estafeta =>
+                                <td>{estafeta.nome}</td>
                             )}
                             <td>{cacifo.numero}</td>
 

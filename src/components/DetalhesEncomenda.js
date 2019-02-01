@@ -35,7 +35,7 @@ class Detalhes_Encomenda extends Component {
                         </Col>
                     </Row>
                     {encomendas.map(encomenda => {
-                        const {id, data_de_entrega, data_de_levantamento, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo, users} = encomenda;
+                        const {id, data_de_entrega, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo, users} = encomenda;
 
                         return (
                                 <Row key={id}>
