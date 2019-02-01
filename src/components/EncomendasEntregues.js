@@ -91,8 +91,8 @@ export default class EncomendasEntregues extends React.Component {
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
 				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item">
                                                 <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</a>
-				                            <a href="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</a>
+				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</Link>
+				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</Link>
 				                        </span>
 				                    </span>
                             </td>
