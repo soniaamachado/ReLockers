@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col} from "reactstrap";
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
 import classnames from 'classnames';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";
@@ -38,6 +38,9 @@ class Encomendas extends Component {
                     {/*<a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>*/}
                 {/*</div>*/}
                 <Col>
+                    <Button style={{float:'right'}} color="primary" size="sm">
+                        <i style={{width: '20%'}} className="material-icons md-24 nav_icon">add</i>
+                        Adicionar encomenda</Button>{' '}
                     <Nav tabs>
                         <NavItem>
                             <NavLink

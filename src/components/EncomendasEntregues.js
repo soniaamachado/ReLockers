@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/Encomendas.css'
-import {Table} from "reactstrap";
+import {Alert, Table} from "reactstrap";
 import axios from "axios/index";
 import moment from "moment";
 import {Link} from "react-router-dom";
@@ -48,16 +48,20 @@ export default class EncomendasEntregues extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    const {id, data_de_entrega,data_de_levantamento, temperatura, tamanho, localizacao, cliente, cacifo} = encomenda;
-                    const data_split = data_de_entrega.split(" ");
-                    const data_final= data_de_levantamento - data_de_entrega;
-                    console.log(data_final);
+                    const {id, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo} = encomenda;
 
+                    const data_split = tempolimite_de_levantamento.split(" ");
                     const end = moment(data_split[0]); //todays date
                     const now = moment("1971-04-06"); // another date
                     const duration = moment.duration(now.diff(end));
-                    const days = duration.asDays();
-                    console.log(days);
+                    let days = duration.asDays();
+
+                    if(days <= 0){
+                        days =
+                            <Alert color="danger">
+                                Prazo excecido
+                            </Alert>
+                    }
 
 
                     return (
@@ -74,7 +78,7 @@ export default class EncomendasEntregues extends React.Component {
                             )}
                             <td>{cacifo.numero}</td>
 
-                            <td>{days} dias</td>
+                            <td>{days}</td>
                             <td>
                                 <span className="dropdown">
 				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none', width:'68px'}}
