@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "../css/Estafetas.css";
 import axios from 'axios';
 import { Button, Card, CardBody, CardSubtitle, CardTitle} from "reactstrap";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import MaterialIcon from 'material-icons-react';
 
 class Estafetas extends Component {
@@ -51,16 +51,15 @@ class Estafetas extends Component {
 
 
                 {users.map(user => {
-                    const {nome, email} = user;
-                    return (<Card className='col-md-3'>
+                    const {id, nome, email} = user;
+                    return (<Card className='col-md-3' key ={id}>
                             <Card className='card_estafeta'>
                                 <CardBody>
                                     <img className='img_estafeta'  alt={'lol'}
                                          src={'https://www.comshalom.org/wp-content/uploads/2018/02/pexels-photo-683381.jpeg'}/>
                                     <CardTitle key={nome} style={{display:'block'}}> {nome}</CardTitle>
                                     <CardSubtitle  style={{color:'#999'}}>{email}</CardSubtitle>
-                                    <Button className='btn_detalhes' size="sm"> <NavLink to={'/cacifosDetalhes'}>Ver
-                                        detalhes</NavLink></Button>
+                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheEstafeta/${id}`, query: {id: id}}} > Ver detalhes </Link></Button>
                                 </CardBody>
                             </Card>
                         </Card>
