@@ -31,7 +31,7 @@ export default class EncomendasPorEntregar extends React.Component {
             <Table className='table_in table-hover' responsive>
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Número</th>
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Local</th>
