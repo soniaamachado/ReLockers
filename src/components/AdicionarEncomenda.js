@@ -21,17 +21,22 @@ export default class AdicionarEncomenda extends Component {
     componentDidMount() {
 
         axios.post('http://167.99.202.225/api/encomendas', {
-            numero_encomenda:125,
+            numero_encomenda:252,
             data_estimada:new_timestamp,
             data_de_entrada_no_sistema:new_timestamp,
+            data_de_entrega:new_timestamp,
+            data_de_entrada:new_timestamp,
+            data_de_levantamento:new_timestamp,
             data_de_entrega_pretendida:new_timestamp,
             tempo_limite_de_levantamento:new_timestamp,
             tamanho:'S',
-            localizacao:'Rio Tinto',
+            localizacao:'Vagos',
+            observacoes:'entrega muito boa',
+            temperatura:'20',
+            estado_encomenda:0
         })
             .then(response => {
                 this.setState({encomendas: response.data.data});
-                console.log(this.state.encomendas)
             })
             .catch(function (error) {
                 console.log(error);

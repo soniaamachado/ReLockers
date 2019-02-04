@@ -25,6 +25,7 @@ class Detalhes_Estafeta extends Component {
     render() {
         const cacifos = this.state.cacifos;
         console.log('efef', (this.state.cacifos));
+
         if (cacifos.length === 0) {
             return null;
         }
@@ -85,6 +86,7 @@ class Detalhes_Estafeta extends Component {
                                     <tr>
                                         <th scope="row">Disponibilidade</th>
                                         <td>{cacifos.estado.estado}</td>
+                                        <td></td>
 
                                     </tr>
                                     <tr>
@@ -97,14 +99,13 @@ class Detalhes_Estafeta extends Component {
                                                          className="z-depth-1-half map-container-5"
                                                          style={{height: '300px'}}>
                                                         <iframe title={cacifos.id}
-                                                            src={'https://maps.google.com/maps?q=' + cacifos.localizacao.nome + '&t=&z=13&ie=UTF8&iwloc=&output=embed'}
-                                                            frameBorder="0" style={{border: '0'}} allowFullScreen>
+                                                                src={"https://maps.google.com/maps?q="+String(cacifos.localizacao.lat)+","+String(cacifos.localizacao.lng)+"&t=&z=13&ie=UTF8&iwloc=&output=embed"}
+                                                                frameBorder="0" style={{border: '0'}} allowFullScreen>
                                                         </iframe>
                                                     </div>
                                                 </div>
                                             </li>
                                         </th>
-                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>

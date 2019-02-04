@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, FormGroup, Label, CustomInput} from "reactstrap";
 import classnames from 'classnames';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";
@@ -35,10 +35,23 @@ class Encomendas extends Component {
                     </div>
                 </div>
                 {/*<div style={{textAlign: 'center', marginBottom: '50px'}}>*/}
-                {/*<MaterialIcon icon={'location_on'}> </MaterialIcon>*/}
+                    {/*<i className="material-icons md-24 nav_icon">location_on</i>*/}
                 {/*<h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>*/}
                 {/*<a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>*/}
                 {/*</div>*/}
+                <div style={{textAlign: 'center', marginBottom: '50px'}}>
+
+                <FormGroup>
+                    <CustomInput style={{width:'10rem', border:'none', backgroundColor:'#F1F3F6'}} type="select" id="exampleCustomSelect" name="customSelect">
+                        <option value="">Select</option>
+                        <option>Value 1</option>
+                        <option>Value 2</option>
+                        <option>Value 3</option>
+                        <option>Value 4</option>
+                        <option>Value 5</option>
+                    </CustomInput>
+                </FormGroup>
+                </div>
                 <Col>
 
                     <Link to={'/adicionar_encomenda'}>
