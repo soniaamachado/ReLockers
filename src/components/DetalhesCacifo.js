@@ -96,7 +96,7 @@ class Detalhes_Estafeta extends Component {
                                                     <div id="map-container-google-9"
                                                          className="z-depth-1-half map-container-5"
                                                          style={{height: '300px'}}>
-                                                        <iframe
+                                                        <iframe title={cacifos.id}
                                                             src={'https://maps.google.com/maps?q=' + cacifos.localizacao.nome + '&t=&z=13&ie=UTF8&iwloc=&output=embed'}
                                                             frameBorder="0" style={{border: '0'}} allowFullScreen>
                                                         </iframe>

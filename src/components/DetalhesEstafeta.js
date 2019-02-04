@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../css/DetalheEstafeta.css";
 import axios from 'axios';
-import {Card, Col, Row} from "reactstrap";
+import {Link} from "react-router-dom";
 
 class Detalhes_Estafeta extends Component {
 
@@ -23,7 +23,6 @@ class Detalhes_Estafeta extends Component {
     }
 
     render() {
-console.log('efef', (this.state.users))
         if (this.state.users.length === 0) {
             return null;
         }
@@ -34,9 +33,9 @@ console.log('efef', (this.state.users))
                         <div className="card-body">
                             <h1>Detalhes de Estafeta</h1>
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="index.html">Estafetas</a>
+                                <li className="breadcrumb-item"><Link to="/estafetas">Estafetas</Link>
                                 </li>
-                                <li className="breadcrumb-item"><a href="#">Detalhes de Estafeta</a>
+                                <li className="breadcrumb-item"> <Link to={'#'}>Detalhes de Estafeta</Link>
                                 </li>
 
                             </ol>

@@ -4,6 +4,7 @@ import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reac
 import classnames from 'classnames';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";
+import {Link} from "react-router-dom";
 
 
 class Encomendas extends Component {
@@ -23,9 +24,10 @@ class Encomendas extends Component {
             });
         }
     }
+
     render() {
         return (
-            <main style={{height:'100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Encomendas</h1>
@@ -33,29 +35,43 @@ class Encomendas extends Component {
                     </div>
                 </div>
                 {/*<div style={{textAlign: 'center', marginBottom: '50px'}}>*/}
-                    {/*<MaterialIcon icon={'location_on'}> </MaterialIcon>*/}
-                    {/*<h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>*/}
-                    {/*<a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>*/}
+                {/*<MaterialIcon icon={'location_on'}> </MaterialIcon>*/}
+                {/*<h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>*/}
+                {/*<a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>*/}
                 {/*</div>*/}
                 <Col>
-                    <Button style={{float:'right'}} color="primary" size="sm">
-                        <i style={{width: '20%'}} className="material-icons md-24 nav_icon">add</i>
-                        Adicionar encomenda</Button>{' '}
+
+                    <Link to={'/adicionar_encomenda'}>
+                        <Button style={{
+                            float: 'right',
+                            width: 'auto',
+                            margin: 'auto',
+                            backgroundColor: 'rgb(181, 160, 251)',
+                            border: 'none'
+                        }} size="sm">
+                            <i style={{verticalAlign: 'middle'}} className="material-icons md-24">add</i>
+                            Adicionar encomenda
+                        </Button> </Link>
+
                     <Nav tabs>
                         <NavItem>
                             <NavLink
-                                className={classnames({ active: this.state.activeTab === '1' })}
+                                className={classnames({active: this.state.activeTab === '1'})}
                                 id={'tab_encomendas'}
-                                onClick={() => { this.toggle('1'); }}
+                                onClick={() => {
+                                    this.toggle('1');
+                                }}
                             >
                                 Por entregar
                             </NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
-                                className={classnames({ active: this.state.activeTab === '2' })}
+                                className={classnames({active: this.state.activeTab === '2'})}
                                 id={'tab_encomendas'}
-                                onClick={() => { this.toggle('2'); }}
+                                onClick={() => {
+                                    this.toggle('2');
+                                }}
                             >
                                 Entregues
                             </NavLink>

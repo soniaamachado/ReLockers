@@ -11,6 +11,7 @@ import DetalhesEncomenda from "./components/DetalhesEncomenda";
 import EncomendasEntregues from "./components/EncomendasEntregues";
 import DetalhesEstafeta from "./components/DetalhesEstafeta";
 import DetalhesCacifo from "./components/DetalhesCacifo";
+import AdicionarEncomenda from "./components/AdicionarEncomenda";
 
 
 
@@ -30,6 +31,7 @@ class App extends Component {
                         <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta}/>
                         <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo}/>
                         <Route exact path='/' component={Inicio}/>
+                        <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda}/>
 
                     </div>
                 </Switch>
