@@ -50,7 +50,7 @@ export default class EncomendasEntregues extends React.Component {
                 {encomendas.map(encomenda => {
 
 
-                    const {id, temperatura, tamanho, localizacao, tempo_limite_de_levantamento, data_de_levantamento, data_de_entrega_pretendida, data_de_entrega, cliente, cacifo} = encomenda;
+                    const {id, numero_encomenda, temperatura, tamanho, localizacao, tempo_limite_de_levantamento, data_de_levantamento, data_de_entrega_pretendida, data_de_entrega, cliente, cacifo} = encomenda;
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
 
@@ -63,7 +63,7 @@ export default class EncomendasEntregues extends React.Component {
                         ("0" + m.getUTCMinutes()).slice(-2) + ":" +
                         ("0" + m.getUTCSeconds()).slice(-2);
                     const prazo_levantamento = new_timestamp.split(" ");
-
+                    const data_levantamento= data_de_levantamento.split(" ");
 
                     const data_split = tempo_limite_de_levantamento.split(" ");
                     const now = moment(data_split[0]); //todays date
@@ -79,30 +79,29 @@ export default class EncomendasEntregues extends React.Component {
                     }
                     else if (days > 0) {
                         days =
-                            <Alert color="success">
-                                Levantamento em {days} dias
+                            <Alert color="warning">
+                                Levantamento em {parseInt(days)} dias
                             </Alert>;
 
                             if (data_de_levantamento !=null){
                                 days=
                                 <Alert color="success">
-                                    Encomenda levantada
+                                    Levantada em {data_levantamento[0]}
                                 </Alert>;
                             }
-
                     }
 
 
                     if (data_de_entrega == null) {
                         return (
-                            <div></div>
+                            null
                         );
                     }
 
 
                     return (
                         <tr key={id}>
-                            <th scope="row">{id}</th>
+                            <th scope="row">{numero_encomenda}</th>
                             <td>{data_entrega[0]}</td>
                             <td>{data_entrega[1]}</td>
                             <td>{localizacao}</td>
@@ -110,7 +109,7 @@ export default class EncomendasEntregues extends React.Component {
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
                             {encomenda.estafeta.map(estafeta =>
-                                <td>{estafeta.nome}</td>
+                                <td key={id}>{estafeta.nome}</td>
                             )}
                             <td>{cacifo.numero}</td>
 
