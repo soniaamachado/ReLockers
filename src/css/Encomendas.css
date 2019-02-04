@@ -25,8 +25,9 @@ body {
     background-color: white;
 }
 
-#tab_encomendas{
-    border: none;
+#tab_encomendas{;
+    border-radius: .2rem;
+    color: #5887F9;
 }
 
 #tab_encomendas:hover{
@@ -35,12 +36,12 @@ body {
 
 #tab_encomendas.active{
     color: white;
-    padding: 0.375rem 0.75rem;
+    padding: 0.360rem 0.65rem;
     display: inline-block;
     margin-bottom: 20px;
     margin-right: 10px;
-    border-radius: 0.3rem;
     background-color: #5887F9;
+    border-radius: .2rem;
 }
 
 .btn_acoes{
@@ -80,3 +81,4 @@ body {
     border: #5887F9;
     text-decoration: none;
 }
+

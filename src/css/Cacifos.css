@@ -4,21 +4,21 @@
     background: white;
     border-color: transparent;
     border-radius: 0.5rem;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
 }
 
 .coluna_cacifo{
 
-    height: 180px;
-    width: 180px;
+    height: 200px;
+    width: 200px;
     box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
     display: inline-block;
     background: white;
     border-color: #5887F9;
     border-bottom-width: 20px;
     border-radius: 1rem;
-    margin: auto 20px 20px auto;
+    margin: auto 26px 26px auto;
 
 }
 .btn_detalhes{

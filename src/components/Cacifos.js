@@ -1,76 +1,84 @@
 import React, {Component} from 'react';
-import "../css/Cacifos.css";
-import axios from 'axios';
-import {Badge, Button, Card, CardBody} from "reactstrap";
-import {Link, NavLink} from "react-router-dom";
-import MaterialIcon from 'material-icons-react';
+import '../css/Encomendas.css';
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
+import classnames from 'classnames';
+import {Link} from "react-router-dom";
+import CacifosLivres from "./CacifosLivres";
+import CacifosOcupados from "./CacifosOcupados";
 
 
-class Cacifos extends Component {
-    state = {
-        cacifos: []
-    };
+export default class Cacifos extends Component {
+    constructor(props) {
+        super(props);
 
-    componentDidMount() {
-        axios.get('http://167.99.202.225/api/cacifos')
-            .then(response => {
-                this.setState({cacifos: response.data.data})
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            activeTab: '1'
+        };
+    }
+
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     render() {
-
-        const cacifos = this.state.cacifos;
-
         return (
-
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <p className="h2">Cacifos</p>
+                    <h1 className="h2">Encomendas</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
-
                 <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                    <MaterialIcon icon={'location_on'}> </MaterialIcon>
+                    <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
                     <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
-                    <NavLink to={'/definicoes'}
-                             style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</NavLink>
+                    <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>
                 </div>
 
-                {cacifos.map(cacifo => {
-                    const {temperatura, id, numero, tamanho} = cacifo;
-                    return (
-                            <div className="coluna_cacifo">
-                            <Card key={id} className='card_cacifo'>
-                                <CardBody>
-                                    <h4>{numero}</h4>
-                                    <div style={{display: 'inline', marginBottom: '10px'}}>
-                                        <h6>
-                                            Temperatura
-                                            <Badge className='badge'>{temperatura}ºC</Badge>
-                                        </h6>
-                                    </div>
-                                    <div style={{display: 'inline'}}>
-                                        <h6>
-                                            Tamanho
-                                            <Badge className='badge'>{tamanho.tamanho}</Badge>
-                                        </h6>
-                                    </div>
+                <Col>
 
-                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
-                                        detalhes</Link>
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                            </div>
-                    );
-
-                })}
+                    <Nav tabs>
+                        <NavItem>
+                            <NavLink
+                                className={classnames({active: this.state.activeTab === '1'})}
+                                id={'tab_encomendas'}
+                                onClick={() => {
+                                    this.toggle('1');
+                                }}
+                            >
+                                Livres
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                                className={classnames({active: this.state.activeTab === '2'})}
+                                id={'tab_encomendas'}
+                                onClick={() => {
+                                    this.toggle('2');
+                                }}
+                            >
+                                Ocupados
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
+                    <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="1">
+                            <Row>
+                                <CacifosLivres/>
+                            </Row>
+                        </TabPane>
+                        <TabPane tabId="2">
+                            <Row>
+                                <CacifosOcupados/>
+                            </Row>
+                        </TabPane>
+                    </TabContent>
+                </Col>
 
             </main>
 
@@ -78,4 +86,3 @@ class Cacifos extends Component {
     }
 }
 
-export default Cacifos;
