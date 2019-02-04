@@ -46,29 +46,65 @@ export default class EncomendasEntregues extends React.Component {
                 </thead>
                 <tbody>
 
+
                 {encomendas.map(encomenda => {
 
-                    const {id, temperatura, tamanho, localizacao, tempolimite_de_levantamento, cliente, cacifo} = encomenda;
 
-                    const data_split = tempolimite_de_levantamento.split(" ");
-                    const end = moment(data_split[0]); //todays date
-                    const now = moment("1971-04-06"); // another date
+                    const {id, temperatura, tamanho, localizacao, tempo_limite_de_levantamento, data_de_levantamento, data_de_entrega_pretendida, data_de_entrega, cliente, cacifo} = encomenda;
+
+                    const data_entrega = data_de_entrega_pretendida.split(" ");
+
+                    const m = new Date();
+                    const new_timestamp =
+                        m.getUTCFullYear() + "-" +
+                        ("0" + (m.getUTCMonth() + 1)).slice(-2) + "-" +
+                        ("0" + m.getUTCDate()).slice(-2) + " " +
+                        ("0" + m.getUTCHours()).slice(-2) + ":" +
+                        ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+                        ("0" + m.getUTCSeconds()).slice(-2);
+                    const prazo_levantamento = new_timestamp.split(" ");
+
+
+                    const data_split = tempo_limite_de_levantamento.split(" ");
+                    const now = moment(data_split[0]); //todays date
+                    const end = moment(prazo_levantamento[0]); // another date
                     const duration = moment.duration(now.diff(end));
                     let days = duration.asDays();
 
-                    if(days <= 0){
+                    if (days <= 0) {
                         days =
                             <Alert color="danger">
-                                Prazo excecido
+                                Prazo excedido
                             </Alert>
+                    }
+                    else if (days > 0) {
+                        days =
+                            <Alert color="success">
+                                Levantamento em {days} dias
+                            </Alert>;
+
+                            if (data_de_levantamento !=null){
+                                days=
+                                <Alert color="success">
+                                    Encomenda levantada
+                                </Alert>;
+                            }
+
+                    }
+
+
+                    if (data_de_entrega == null) {
+                        return (
+                            <div></div>
+                        );
                     }
 
 
                     return (
                         <tr key={id}>
                             <th scope="row">{id}</th>
-                            <td>{data_split[0]}</td>
-                            <td>{data_split[1]}</td>
+                            <td>{data_entrega[0]}</td>
+                            <td>{data_entrega[1]}</td>
                             <td>{localizacao}</td>
                             <td>{temperatura}ºC</td>
                             <td>{tamanho}</td>
@@ -81,7 +117,8 @@ export default class EncomendasEntregues extends React.Component {
                             <td>{days}</td>
                             <td>
                                 <span className="dropdown">
-				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none', width:'68px'}}
+				                        <button id="btnSearchDrop2"
+                                                style={{backgroundColor: '#b5a0fb', border: 'none', width: '68px'}}
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"
                                                 className="btn btn-dark dropdown-toggle dropdown-menu-right">
@@ -93,9 +130,13 @@ export default class EncomendasEntregues extends React.Component {
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item"> <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</Link>
-				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</Link>
+				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}}
+                                                  className="dropdown-item"> <i
+                                                className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+				                            <Link to="#" className="dropdown-item"><i
+                                                className="material-icons md-18 icon">create</i> Editar</Link>
+				                            <Link to="#" className="dropdown-item"><i
+                                                className="material-icons md-18 icon">delete</i> Remover</Link>
 				                        </span>
 				                    </span>
                             </td>
