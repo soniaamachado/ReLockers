@@ -29,17 +29,18 @@ export default class Cacifos extends Component {
             <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <h1 className="h2">Encomendas</h1>
+                    <h1 className="h2">Cacifos</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
+
                 <div style={{textAlign: 'center', marginBottom: '50px'}}>
                     <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
                     <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
                     <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
                 </div>
 
-                <Col>
+                <Col style={{textAlign:'center'}}>
 
                     <Nav tabs>
                         <NavItem>

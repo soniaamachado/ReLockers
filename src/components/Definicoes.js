@@ -29,15 +29,13 @@ export default class Definicoes extends React.Component {
     render() {
 
         return (
-            <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Definições</h1>
                 </div>
-            <div style={{margin:'0 auto' , height:'auto'}}>
-                <div style={{margin:'0 auto 100px auto' , width:'70%'}}>
 
-                </div>
+                <div style={{margin:'0 auto' , height:'auto'}}>
                 <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
                     <Label for="nome">Nome Completo</Label>
                     <Input
