@@ -1,51 +1,71 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TextInputGroup from "./forms/TextInput";
-import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input, Label } from "reactstrap";
 
 export default class AdicionarEncomenda extends Component {
 
-    state = {
-        estado_encomenda: 0,
-        numero_encomenda: 0,
-        data_de_entrada_no_sistema: "",
-        data_de_entrega_pretendida: "",
-        tempo_limite_de_levantamento: "",
-        tamanho: "",
-        observacoes: "",
-        temperatura: "",
-        cacifo_id: "",
-        cliente_id: "",
-        errors: {}
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            estado_encomenda: 0,
+            numero_encomenda: 0,
+            data_de_entrada_no_sistema: "",
+            data_de_entrega_pretendida: "",
+            tempo_limite_de_levantamento: "",
+            tamanho: "S",
+            observacoes: "",
+            temperatura: 20,
+            cacifo_id: "",
+            cliente_id: "",
+            errors: {}
+        };
 
+        this.handleTamanhoChange = this.handleTamanhoChange.bind(this);
+        this.handleDataDeEntregaChange = this.handleDataDeEntregaChange.bind(this);
+        this.handletempoLimiteDeLevantamento = this.handletempoLimiteDeLevantamento.bind(this);
+        this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
+    }
+
+    getCurrentDate() {
+
+        const fullDate = new Date();
+
+        const year = fullDate.getFullYear();
+        const mouth = ("0" + (fullDate.getMonth() + 1)).slice(-2);
+        const day = ("0" + fullDate.getDate()).slice(-2);
+
+        const hour = fullDate.getHours();
+        const min = (fullDate.getMinutes() < 10 ? '0' : '') + fullDate.getMinutes();
+        const sec = (fullDate.getSeconds() < 10 ? '0' : '') + fullDate.getSeconds();
+
+        return `${year}-${mouth}-${day} ${hour}:${min}:${sec}`;
+
+    }
 
     onSubmit = e => {
         e.preventDefault();
 
-        let {
+        const {
             estado_encomenda, cacifo_id, cliente_id, numero_encomenda,
-            data_de_entrada_no_sistema, data_de_entrega_pretendida,
-            tempo_limite_de_levantamento, tamanho, temperatura, observacoes
+            temperatura, observacoes, tamanho
         } = this.state;
 
+        if (this.state.data_de_entrega_pretendida == "") {
+            this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
+            return;
+        }
 
-        // if (observacoes === "") {
-        //     this.setState({ errors: { observacoes: "URL is required" } });
-        //     return;
-        // }
-        // if (data_de_entrega_pretendida === "") {
-        //     this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
-        //     return;
-        // }
-        // if (tempo_limite_de_levantamento === "") {
-        //     this.setState({ errors: { tempo_limite_de_levantamento: "URL is required" } });
-        //     return;
-        // }
-        // if (tamanho === "") {
-        //     this.setState({ errors: { tamanho: "URL is required" } });
-        //     return;
-        // }
+        if (this.state.tempo_limite_de_levantamento == "") {
+            this.setState({ errors: { tempo_limite_de_levantamento: "URL is required" } });
+            return;
+        }
+
+        const data_de_entrega_pretendida = this.state.data_de_entrega_pretendida.replace("T", " ") + ":00";
+        const tempo_limite_de_levantamento = this.state.tempo_limite_de_levantamento.replace("T", " ") + ":00";
+        const data_de_entrada_no_sistema = this.getCurrentDate();
+
+
         // if (cacifo_id === "") {
         //     this.setState({ errors: { temperatura: "URL is required" } });
         //     return;
@@ -58,28 +78,31 @@ export default class AdicionarEncomenda extends Component {
         const newEncomenda = {
             estado_encomenda,
             numero_encomenda,
-            // data_de_entrada_no_sistema,
-            // data_de_entrega_pretendida,
-            // tempo_limite_de_levantamento,
-            // tamanho,
-            // observacoes,
-            // temperatura,
+            data_de_entrada_no_sistema,
+            data_de_entrega_pretendida,
+            tempo_limite_de_levantamento,
+            tamanho,
+            observacoes,
+            temperatura,
             // cacifo_id,
             // cliente_id
         };
+
         console.log(newEncomenda);
-        // axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
-        //     .then(res => console.log(res.statusText));
+
+        axios.post('http://localhost:80/api/encomendas', newEncomenda)
+            .then(res => console.log(res.statusText))
+            .catch(error => console.log(error));
 
         this.setState({
             estado_encomenda: 0,
             numero_encomenda: "",
-            //     data_de_entrada_no_sistema: "",
-            //     data_de_entrega_pretendida: "",
-            //     tempo_limite_de_levantamento: "",
-            //     tamanho: "",
+            data_de_entrada_no_sistema: "",
+            data_de_entrega_pretendida: "",
+            tempo_limite_de_levantamento: "",
+            tamanho: "",
             observacoes: "",
-            temperatura: "",
+            temperatura: 20,
             //     cacifo_id: "",
             //     cliente_id: ""
 
@@ -94,14 +117,28 @@ export default class AdicionarEncomenda extends Component {
         });
     };
 
-    selectTamanho() {
-        console.log(this.refs.selectTamanho.value);
+    handleTamanhoChange(event) {
+        this.setState({ tamanho: event.target.value });
+    }
+
+    handleDataDeEntregaChange(event) {
+        this.setState({ data_de_entrega_pretendida: event.target.value });
+        console.log(this.state.data_de_entrega_pretendida);
+
+    }
+
+    handletempoLimiteDeLevantamento(event) {
+        console.log(this.state.tempo_limite_de_levantamento);
+        this.setState({ tempo_limite_de_levantamento: event.target.value });
+    }
+
+    handleTemperaturaChange(event) {
+        this.setState({ temperatura: event.target.value });
     }
 
     render() {
         const {
-            numero_encomenda, data_de_entrada_no_sistema, data_de_entrega_pretendida,
-            tempo_limite_de_levantamento, tamanho, observacoes, temperatura, errors
+            numero_encomenda, observacoes, errors
         } = this.state;
         return (
             <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -128,7 +165,7 @@ export default class AdicionarEncomenda extends Component {
                         error={errors.numero_encomenda}
                     />
 
-                    <TextInputGroup
+                    {/* <TextInputGroup
                         label="Temperatura da encomenda [0°C - 20°C]"
                         name="temperatura"
                         placeholder="20°"
@@ -136,7 +173,13 @@ export default class AdicionarEncomenda extends Component {
                         onChange={this.onChange}
                         type={"number"}
                         error={errors.temperatura}
-                    />
+                    /> */}
+
+                    <FormGroup>
+                        <Label for="tamanho">Temperatura da encomenda</Label>
+                        <Input type="number" name="temperatura" id="temperatura" min="0" max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
+                        </Input>
+                    </FormGroup>
 
                     <TextInputGroup
                         label="Observações"
@@ -148,47 +191,36 @@ export default class AdicionarEncomenda extends Component {
                     />
 
                     <FormGroup>
-                        <Label for="tamanho">Tamanho</Label>
-                        <Input type="select" name="tamanho" id="tamanho" value={this.option} ref="tamanhoSelect">
-                            {/* onChange={(e) => { this.selectTamanho(); }} */}
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                        <Label for="tamanho">Tamanho da encomenda</Label>
+                        <Input type="select" name="tamanho" id="tamanho" value={this.state.tamanho} onChange={this.handleTamanhoChange}>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
                         </Input>
                     </FormGroup>
 
-                    {/* <TextInputGroup
-                        label="Tamanho da encomenda"
-                        name="tamanho"
-                        placeholder="Tamanho da encomenda... PASSAR PARA SELECT"
-                        value={tamanho}
-                        type={"select"}
-                        onChange={this.onChange}
-                        error={errors.tamanho}
-                    /> */}
-
-                    <TextInputGroup
-                        label="Tamanho da encomenda"
-                        name="tamanho"
-                        placeholder="Tamanho da encomenda... PASSAR PARA SELECT"
-                        value={tamanho}
-                        type={"datetime-local"}
-                        onChange={this.onChange}
-                        error={errors.tamanho}
-                    />
-
                     <FormGroup>
-                        <Label for="data_de_entrega_pretendida">Entrega</Label>
+                        <Label for="data_de_entrega_pretendida">Data de entrega pretendida</Label>
                         <Input
                             type="datetime-local"
                             name="data_de_entrega_pretendida"
                             id="data_de_entrega_pretendida"
                             placeholder="Data de Entrega"
+                            onChange={this.handleDataDeEntregaChange}
                         />
                     </FormGroup>
 
-
+                    <FormGroup>
+                        <Label for="tempo_limite_de_levantamento">Data limite para levantamento</Label>
+                        <Input
+                            type="datetime-local"
+                            name="tempo_limite_de_levantamento"
+                            id="tempo_limite_de_levantamento"
+                            placeholder="Data limite"
+                            onChange={this.handletempoLimiteDeLevantamento}
+                        />
+                    </FormGroup>
 
                     <Button style={{
                         display: 'block',
@@ -198,35 +230,11 @@ export default class AdicionarEncomenda extends Component {
                         backgroundColor: 'rgb(181, 160, 251)',
                         border: 'none'
                     }} size="sm">
-                        {/* <i style={{ verticalAlign: 'middle' }} className="material-icons md-24">add</i> */}
                         Adicionar encomenda
                         </Button>
 
                 </form>
             </main >
-            // <main>
-            //     <Form onSubmit={this.onSubmit}>
-            //         <FormGroup>
-            //             <Label for="numero_encomenda">Tamanho</Label>
-            //             <Input type="number" name="numero_encomenda" id="numero_encomenda" />
-            //         </FormGroup>
-
-            //         <FormGroup row>
-            //             <Label for="observacoes" sm={2}>Observações</Label>
-            //             <Col sm={10}>
-            //                 <Input type="textarea" name="observacoes" id="observacoes" />
-            //             </Col>
-            //         </FormGroup>
-
-
-            //         <FormGroup check row>
-            //             <Col sm={{ size: 10, offset: 2 }}>
-            //                 <Button>Submit</Button>
-            //             </Col>
-            //         </FormGroup>
-
-            //     </Form>
-            // </main>
         );
     }
 }
