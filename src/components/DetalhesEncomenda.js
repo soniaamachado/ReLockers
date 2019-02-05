@@ -24,6 +24,7 @@ class DetalhesEncomenda extends Component {
 
     render() {
 
+
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                     <div className="card-content collapse show">
@@ -64,7 +65,7 @@ class DetalhesEncomenda extends Component {
 
                                     </tr>
                                     <tr>
-                                        <th scope="row">Data pretendida pelo cliente</th>
+                                        <th scope="row">Data de entrega</th>
                                         <td>{this.state.encomendas.data_estimada}</td>
 
                                     </tr>
