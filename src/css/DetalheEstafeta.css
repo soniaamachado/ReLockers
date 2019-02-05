@@ -9,3 +9,10 @@
     border-radius: 0.5rem;
     margin-bottom: 20px ;
 }
+.nav_icon{
+    display: inline-flex;
+    vertical-align: middle;
+    margin-right: 20px;
+    color: #55595C;
+    text-decoration: none;
+}

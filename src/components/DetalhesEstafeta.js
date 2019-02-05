@@ -31,6 +31,9 @@ class Detalhes_Estafeta extends Component {
                         <div className="card-body">
                             <h1>Detalhes de Estafeta</h1>
                             <ol className="breadcrumb">
+                                <li><Link to={'/estafetas'}><i style={{width: '20%', fontStyle:'none'}}
+                                                             className="material-icons md-24 nav_icon">arrow_back</i></Link>
+                                </li>
                                 <li className="breadcrumb-item"><Link to="/estafetas">Estafetas</Link>
                                 </li>
                                 <li className="breadcrumb-item"> <Link to={'#'}>Detalhes de Estafeta</Link>
@@ -94,7 +97,7 @@ class Detalhes_Estafeta extends Component {
                                         return (
 
                                     <tr>
-                                        <th scope="row">{this.state.users[key].id}</th>
+                                        <th scope="row">{this.state.users[key].numero_encomenda}</th>
 
                                         <td>{this.state.users[key].cacifo.localizacao.nome}</td>
                                         <td>{this.state.users[key].data_de_entrega}</td>

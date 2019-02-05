@@ -37,7 +37,7 @@ class Detalhes_Estafeta extends Component {
                         <div className="card-body">
 
                             <ol className="breadcrumb">
-                                <li><Link to={'/cacifos'}><i style={{width: '20%'}}
+                                <li><Link to={'/cacifos'}><i style={{width: '20%', fontStyle:'none'}}
                                                              className="material-icons md-24 nav_icon">arrow_back</i></Link>
                                 </li>
                                 <li className="breadcrumb-item"><Link to={'/cacifos'}>Cacifos</Link>

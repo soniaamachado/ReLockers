@@ -6,7 +6,7 @@ import moment from "moment";
 import {Link} from "react-router-dom";
 
 
-export default class EncomendasPorEntregar extends React.Component {
+export default class TabelaEncomendasInicio extends React.Component {
     state = {
         encomendas: [],
         estafetas: []
@@ -35,11 +35,6 @@ export default class EncomendasPorEntregar extends React.Component {
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Local</th>
-                    <th>Temperatura</th>
-                    <th>Tamanho</th>
-                    <th>Cliente</th>
-                    <th>Estafeta</th>
-                    <th>Cacifo</th>
                     <th>Recolha</th>
                     <th>Ações</th>
                 </tr>
@@ -48,7 +43,7 @@ export default class EncomendasPorEntregar extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    let {id, temperatura, numero_encomenda, tamanho, data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida,cliente, cacifo} = encomenda;
+                    let {id, numero_encomenda, data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo} = encomenda;
 
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
@@ -72,8 +67,8 @@ export default class EncomendasPorEntregar extends React.Component {
 
                     if (days <= 0) {
                         days =
-                            <Alert color="danger">
-                                Prazo excedido
+                            <Alert color="danger" style={{height:'35px',verticalAlign:'middle'}}>
+                                <i  style={{verticalAlign:'middle', fontSize:'18px', marginBottom:'12px'}} className='material-icons m-16' >warning</i>
                             </Alert>
                     }
                     else if (days > 0) {
@@ -88,25 +83,17 @@ export default class EncomendasPorEntregar extends React.Component {
                         return(
                             null
                         );
-                  }
-                  else
+                    }
+                    else
 
-                    return (
-                        <tr key={id}>
-                            <th scope="row">{numero_encomenda}</th>
-                            <td>{data_entrega[0]}</td>
-                            <td>{data_entrega[1]}</td>
-                            { <td>{cacifo.localizacao.nome == null ? "" : cacifo.localizacao.nome} </td> }
-                            <td>{temperatura}ºC</td>
-                            <td>{tamanho}</td>
-                            <td>{cliente.nome}</td>
-                            {encomenda.estafeta.map(estafeta =>
-                                <td key={id}>{estafeta.nome}</td>
-                            )}
-                            <td>{cacifo.numero}</td>
-
-                            <td>{days}</td>
-                            <td>
+                        return (
+                            <tr key={id}>
+                                <th scope="row">{numero_encomenda}</th>
+                                <td>{data_entrega[0]}</td>
+                                <td>{data_entrega[1]}</td>
+                                { <td>{cacifo.localizacao.nome == null ? "" : cacifo.localizacao.nome} </td> }
+                                <td>{days}</td>
+                                <td>
                                 <span className="dropdown">
 				                        <button id="btnSearchDrop2" style={{backgroundColor: '#b5a0fb', border: 'none', width:'68px'}}
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -120,16 +107,16 @@ export default class EncomendasPorEntregar extends React.Component {
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}} className="dropdown-item"> <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+				                            <Link to={{pathname: `detail/${id}`, query: {id: id}}} className="dropdown-item"> <i className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
 				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">create</i> Editar</Link>
 				                            <Link to="#" className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</Link>
 				                        </span>
 				                    </span>
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    );
+                        );
                 })}
 
                 </tbody>
