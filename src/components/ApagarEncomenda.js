@@ -20,7 +20,6 @@ export default class ApagarEncomenda extends Component {
     }
 
 
-
     render() {
         return (
             <Redirect to='/encomendas'/>
