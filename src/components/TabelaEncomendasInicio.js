@@ -79,11 +79,12 @@ export default class TabelaEncomendasInicio extends React.Component {
                     }
 
 
-                    if(data_de_entrega == null){
+                    if(data_de_entrega != null){
                         return(
                             null
                         );
                     }
+
                     else
 
                         return (
