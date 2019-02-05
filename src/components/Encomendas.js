@@ -36,8 +36,8 @@ class Encomendas extends Component {
                 </div>
                 <div style={{textAlign: 'center', marginBottom: '50px'}}>
                     <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
-                <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
-                <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</a>
+                <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
+                <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
                 </div>
 
                 <Col>
