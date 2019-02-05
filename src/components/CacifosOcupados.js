@@ -37,25 +37,24 @@ export default class CacifosLivres extends Component {
                     }
                     else
                     return (
-                        <div className="coluna_cacifo">
-                            <Card key={id} className='card_cacifo'>
+                        <div className="coluna_cacifo" >
+                            <Card key={id} style={{display:'inline-block'}} className='card_cacifo'>
                                 <CardBody>
                                     <h4>{numero}</h4>
                                     <div style={{display: 'inline', marginBottom: '10px'}}>
-                                        <h6>
+                                        <p>
                                             Temperatura
                                             <Badge className='badge'>{temperatura}ºC</Badge>
-                                        </h6>
+                                        </p>
                                     </div>
-                                    <div style={{display: 'inline'}}>
-                                        <h6>
+                                    <div>
+                                        <p>
                                             Tamanho
                                             <Badge className='badge'>{tamanho.tamanho}</Badge>
-                                        </h6>
+                                        </p>
                                     </div>
 
-                                    <Button className='btn_detalhes' size="sm"> <Link
-                                        to={{pathname: `detalheCacifo/${id}`, query: {id: id}}}>Ver
+                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
                                         detalhes</Link>
                                     </Button>
                                 </CardBody>
