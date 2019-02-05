@@ -94,7 +94,8 @@ class Inicio extends Component {
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td><img style={{width: '40px', height: '40px', borderRadius: '50%'}} alt={'lol'}
+                                <td>
+                                    <img style={{width: '40px', height: '40px', borderRadius: '50%'}} alt={'lol'}
                                          src={'https://www.comshalom.org/wp-content/uploads/2018/02/pexels-photo-683381.jpeg'}/>
                                 </td>
                                 <td>Jacob</td>

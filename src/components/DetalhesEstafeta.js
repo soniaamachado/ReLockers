@@ -7,8 +7,6 @@ class Detalhes_Estafeta extends Component {
 
     state = {
         users: []
-
-
     };
 
     componentDidMount() {
@@ -88,8 +86,6 @@ class Detalhes_Estafeta extends Component {
                                     </tr>
                                     </thead>
 
-
-
                                     <tbody>
 
 
@@ -111,9 +107,6 @@ class Detalhes_Estafeta extends Component {
                             </div>
                             </div>
                         </div>
-
-
-
 
                 </main>
             );
