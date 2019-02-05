@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "../css/Estafetas.css";
 import axios from 'axios';
 import {Link} from "react-router-dom";
-import {Table} from "reactstrap";
+import {Button, Col, Row, Table} from "reactstrap";
 class Estafetas extends Component {
     state = {
         users: []
@@ -41,7 +41,20 @@ class Estafetas extends Component {
                     <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
                 </div>
 
-                <Table className='table_in table-hover' responsive>
+
+                    <Link to={'/adicionar_encomenda'}>
+                    <Button style={{
+                        float: 'right',
+                        width: 'auto',
+                        margin: 'auto',
+                        backgroundColor: 'rgb(181, 160, 251)',
+                        border: 'none'
+                    }} size="sm">
+                        <i style={{verticalAlign: 'middle'}} className="material-icons md-24">add</i>
+                        Adicionar Estafeta
+                    </Button> </Link>
+
+                <Table style={{marginTop:'22px'}} className='table_in table-hover' responsive>
                     <thead>
                     <tr>
                         <th>Número</th>
@@ -61,7 +74,7 @@ class Estafetas extends Component {
                         <tr key={id}>
                             <th scope="row">{id}</th>
                             <td>{nome}</td>
-                            <td>{email}</td>
+                            <td><a href={'mailto:'+email}> {email}</a></td>
                             <td>{telefone}</td>
                             <td>{local_de_trabalho}</td>
                             <td>
@@ -92,7 +105,6 @@ class Estafetas extends Component {
                 })}
                     </tbody>
                 </Table>
-
             </main>
 
         );

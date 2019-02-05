@@ -101,9 +101,9 @@ export default class EncomendasPorEntregar extends React.Component {
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
                             {encomenda.estafeta.map(estafeta =>
-                                <td key={id}>{estafeta.nome}</td>
+                                <td key={id}><Link to={{pathname: `detalheEstafeta/${id}`, query: {id: id}}}> {estafeta.nome}</Link></td>
                             )}
-                            <td>{cacifo.numero}</td>
+                            <td><Link to={{pathname: `detalheCacifo/${cacifo.id}`, query: {id: id}}}>{cacifo.numero} </Link></td>
 
                             <td>{days}</td>
                             <td>
