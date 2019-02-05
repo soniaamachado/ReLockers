@@ -12,6 +12,7 @@ import EncomendasEntregues from "./components/EncomendasEntregues";
 import DetalhesEstafeta from "./components/DetalhesEstafeta";
 import DetalhesCacifo from "./components/DetalhesCacifo";
 import AdicionarEncomenda from "./components/AdicionarEncomenda";
+import Login from "./components/Login";
 
 
 
@@ -20,7 +21,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
+                    <Route exact path='/' component={Login}/>
                     <div>
+
                         <Navbar/>
                         <Route exact path='/encomendas' component={Encomendas}/>
                         <Route exact path='/encomendas/entregues' component={EncomendasEntregues}/>
@@ -31,7 +34,7 @@ class App extends Component {
                         <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta}/>
                         <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo}/>
                         <Route exact path='/detalheEncomenda/:id' component={DetalhesEncomenda}/>
-                        <Route exact path='/' component={Inicio}/>
+                        <Route exact path='/inicio' component={Inicio}/>
                         <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda}/>
 
                     </div>
