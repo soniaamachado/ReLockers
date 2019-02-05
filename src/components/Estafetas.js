@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import "../css/Estafetas.css";
 import axios from 'axios';
 import { Button, Card, CardBody, CardSubtitle, CardTitle} from "reactstrap";
-import {Link, NavLink} from "react-router-dom";
-import MaterialIcon from 'material-icons-react';
-
+import {Link} from "react-router-dom";
 class Estafetas extends Component {
     state = {
         users: []
@@ -42,11 +40,9 @@ class Estafetas extends Component {
                     </div>
                 </div>
                 <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                    <MaterialIcon icon={'location_on'}> </MaterialIcon>
-                    <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
-                    <NavLink to={'/definicoes'}
-                             style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</NavLink>
-
+                    <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
+                    <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
+                    <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
                 </div>
 
 

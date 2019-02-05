@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import "../css/Inicio.css";
 import {Card, CardBody, CardText, CardTitle, Table} from "reactstrap";
-import {NavLink} from "react-router-dom";
-import MaterialIcon from 'material-icons-react';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 
 class Inicio extends Component {
@@ -17,12 +15,11 @@ class Inicio extends Component {
                         <div className="btn-toolbar mb-2 mb-md-0">
                         </div>
                     </div>
-                    <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                        <MaterialIcon icon={'location_on'}> </MaterialIcon>
-                        <h6 style={{display: 'inline'}}>Aveiro, Portugal</h6>
-                        <NavLink to={'/definicoes'}
-                                 style={{marginLeft: '5px', fontSize: '10px', display: 'inline'}}>Alterar</NavLink>
 
+                    <div style={{textAlign: 'center', marginBottom: '50px'}}>
+                        <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
+                        <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
+                        <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
                     </div>
 
                     <div className="row mbr-justify-content-center">

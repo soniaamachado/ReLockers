@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, FormGroup, Label, CustomInput} from "reactstrap";
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
 import classnames from 'classnames';
 import EncomendasPorEntregar from "./EncomendasPorEntregar";
 import EncomendasEntregues from "./EncomendasEntregues";

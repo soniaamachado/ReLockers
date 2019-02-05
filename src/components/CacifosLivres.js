@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Badge, Button, Card, CardBody, Col} from "reactstrap";
+import {Badge, Button, Card, CardBody} from "reactstrap";
 import {Link} from "react-router-dom";
 
 

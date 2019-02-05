@@ -54,6 +54,9 @@ export default class EncomendasEntregues extends React.Component {
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
 
+                    console.log(id);
+                    console.log(temperatura);
+
                     const m = new Date();
                     const new_timestamp =
                         m.getUTCFullYear() + "-" +

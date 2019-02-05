@@ -48,7 +48,7 @@ export default class EncomendasPorEntregar extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    let {id, temperatura, numero_encomenda, tamanho,data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida,cliente, cacifo} = encomenda;
+                    let {id, temperatura, numero_encomenda, tamanho, data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida,cliente, cacifo} = encomenda;
 
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
@@ -84,7 +84,7 @@ export default class EncomendasPorEntregar extends React.Component {
                     }
 
 
-                    if(data_de_entrega !=null){
+                    if(data_de_entrega != null){
                         return(
                             null
                         );
@@ -96,7 +96,7 @@ export default class EncomendasPorEntregar extends React.Component {
                             <th scope="row">{numero_encomenda}</th>
                             <td>{data_entrega[0]}</td>
                             <td>{data_entrega[1]}</td>
-                            <td>{cacifo.localizacao.nome}</td>
+                            { <td>{cacifo.localizacao.nome == null ? "" : cacifo.localizacao.nome} </td> }
                             <td>{temperatura}ºC</td>
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
@@ -130,8 +130,6 @@ export default class EncomendasPorEntregar extends React.Component {
                         </tr>
 
                     );
-
-
                 })}
 
                 </tbody>
