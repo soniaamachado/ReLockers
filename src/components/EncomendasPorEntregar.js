@@ -48,7 +48,7 @@ export default class EncomendasPorEntregar extends React.Component {
 
                 {encomendas.map(encomenda => {
 
-                    let {id, temperatura, numero_encomenda, tamanho,data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida,cliente, cacifo} = encomenda;
+                    let {id, temperatura, numero_encomenda, tamanho, data_de_entrega,tempo_limite_de_levantamento, data_de_entrega_pretendida,cliente, cacifo} = encomenda;
 
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
@@ -84,7 +84,7 @@ export default class EncomendasPorEntregar extends React.Component {
                     }
 
 
-                    if(data_de_entrega !=null){
+                    if(data_de_entrega != null){
                         return(
                             null
                         );
@@ -130,8 +130,6 @@ export default class EncomendasPorEntregar extends React.Component {
                         </tr>
 
                     );
-
-
                 })}
 
                 </tbody>
