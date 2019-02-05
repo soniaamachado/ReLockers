@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../css/Login.css';
 import {
     Button,
     Card,
@@ -40,11 +41,10 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="app flex-row align-items-center">
                 <Container>
                     <Row className="justify-content-center">
                         <Col md="8">
-                            <CardGroup>
+                            <CardGroup className='login_form'>
                                 <Card className="p-4">
                                     <CardBody>
                                         <Form>
@@ -71,7 +71,7 @@ class Login extends Component {
                                         </Form>
                                     </CardBody>
                                 </Card>
-                                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
+                                <Card className="text-white bg-primary py-5 d-md-down-none">
                                     <CardBody className="text-center">
                                         <div>
                                             <h2>ReLockers</h2>
@@ -85,7 +85,6 @@ class Login extends Component {
                         </Col>
                     </Row>
                 </Container>
-            </div>
         );
     }
 }
