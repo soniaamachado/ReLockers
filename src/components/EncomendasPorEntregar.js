@@ -96,7 +96,7 @@ export default class EncomendasPorEntregar extends React.Component {
                             <th scope="row">{numero_encomenda}</th>
                             <td>{data_entrega[0]}</td>
                             <td>{data_entrega[1]}</td>
-                            <td>{cacifo.localizacao.nome}</td>
+                            { <td>{cacifo.localizacao.nome == null ? "" : cacifo.localizacao.nome} </td> }
                             <td>{temperatura}ºC</td>
                             <td>{tamanho}</td>
                             <td>{cliente.nome}</td>
