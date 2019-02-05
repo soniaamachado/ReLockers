@@ -10,14 +10,8 @@ class Inicio extends Component {
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div style={{margin: 'auto'}}>
-                    <div
-                        className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                        <p className="h2">Início</p>
-                        <div className="btn-toolbar mb-2 mb-md-0">
-                        </div>
-                    </div>
 
-                    <div style={{textAlign: 'center', marginBottom: '50px'}}>
+                    <div style={{textAlign: 'center', marginBottom: '50px',marginTop:'50px'}}>
                         <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
                         <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
                         <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
