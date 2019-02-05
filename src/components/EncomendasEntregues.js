@@ -137,8 +137,8 @@ export default class EncomendasEntregues extends React.Component {
                                                 className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
 				                            <Link to="#" className="dropdown-item"><i
                                                 className="material-icons md-18 icon">create</i> Editar</Link>
-				                            <Link to="#" className="dropdown-item"><i
-                                                className="material-icons md-18 icon">delete</i> Remover</Link>
+                                            <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}} className="dropdown-item"><i className="material-icons md-18 icon">delete</i> Remover</Link>
+
 				                        </span>
 				                    </span>
                             </td>
