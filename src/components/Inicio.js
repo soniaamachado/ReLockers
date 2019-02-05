@@ -28,14 +28,14 @@ class Inicio extends Component {
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3">20</h1>
                                 </CardTitle>
-                                <CardText className="mbr-fonts-style text1 mbr-text display-6">Encomendas por entregar</CardText>
+                                <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas por entregar</CardText>
                             </CardBody>
                         </Card>
                         <Card className="wrap col">
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3">170</h1>
                                 </CardTitle>
-                                <CardText className="mbr-fonts-style text1 mbr-text display-6">Encomendas
+                                <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas
                                     entregues</CardText>
                             </CardBody>
                         </Card>
@@ -43,14 +43,14 @@ class Inicio extends Component {
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3">20</h1>
                                 </CardTitle>
-                                <CardText className="mbr-fonts-style text1 mbr-text display-6">Encomendas a entregar</CardText>
+                                <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas a entregar</CardText>
                             </CardBody>
                         </Card>
                         <Card className="wrap col">
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3">15</h1>
                                 </CardTitle>
-                                <CardText className="mbr-fonts-style text1 mbr-text display-6">Encomendas para recolher</CardText>
+                                <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas para recolher</CardText>
                             </CardBody>
                         </Card>
                     </div>
