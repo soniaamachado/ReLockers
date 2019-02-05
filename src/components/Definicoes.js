@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap';
+import React from 'react';
+import {Label, Input, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -27,8 +27,6 @@ export default class Definicoes extends React.Component {
 
 
     render() {
-
-        const {userinfo} = this.state;
 
         return (
             <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">

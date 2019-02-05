@@ -13,15 +13,16 @@ export default class AdicionarEncomenda extends Component {
         tamanho:"",
         observacoes:"",
         temperatura:"",
+        cacifo_id:1,
+        cliente_id:1,
         errors:{}
-
     };
 
 
     onSubmit = e => {
         e.preventDefault();
 
-        const { estado_encomenda, numero_encomenda, data_de_entrada_no_sistema, data_de_entrega_pretendida, tempo_limite_de_levantamento, tamanho, temperatura, observacoes } = this.state;
+        const { estado_encomenda, cacifo_id, cliente_id, numero_encomenda, data_de_entrada_no_sistema, data_de_entrega_pretendida, tempo_limite_de_levantamento, tamanho, temperatura, observacoes } = this.state;
 
         if (estado_encomenda === "") {
             this.setState({ errors: { estado_encomenda: "O estado da encomenda é requirido" } });
@@ -58,6 +59,14 @@ export default class AdicionarEncomenda extends Component {
             this.setState({ errors: { observacoes: "URL is required" } });
             return;
         }
+        if (cacifo_id === "") {
+            this.setState({ errors: { temperatura: "URL is required" } });
+            return;
+        }
+        if (cliente_id=== "") {
+            this.setState({ errors: { observacoes: "URL is required" } });
+            return;
+        }
 
         const newEncomenda = {
             estado_encomenda,
@@ -68,16 +77,25 @@ export default class AdicionarEncomenda extends Component {
             tamanho,
             observacoes,
             temperatura,
+            cacifo_id,
+            cliente_id
         };
 
         axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
             .then(res => console.log(res.statusText));
 
         this.setState({
-            title: "",
-            news: "",
-            resume: "",
-            img_url: ""
+            estado_encomenda: "",
+            numero_encomenda: "",
+            data_de_entrada_no_sistema: "",
+            data_de_entrega_pretendida: "",
+            tempo_limite_de_levantamento: "",
+            tamanho: "",
+            observacoes: "",
+            temperatura: "",
+            cacifo_id: "",
+            cliente_id: ""
+
         });
 
         this.props.history.push("/news");

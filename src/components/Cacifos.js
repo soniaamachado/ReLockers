@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col} from "reactstrap";
 import classnames from 'classnames';
-import {Link} from "react-router-dom";
 import CacifosLivres from "./CacifosLivres";
 import CacifosOcupados from "./CacifosOcupados";
 
