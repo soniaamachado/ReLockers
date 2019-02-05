@@ -13,7 +13,7 @@ class Detalhes_Estafeta extends Component {
         axios.get('http://167.99.202.225/api/users/ '+ this.props.match.params.id + '/encomendas')
             .then(response => {
                 this.setState({users: response.data.data});
-                console.log(this.state.users[0].estafeta[0].nome);
+                console.log(this.state.users);
             })
             .catch(function (error) {
                 console.log(error);
@@ -31,6 +31,9 @@ class Detalhes_Estafeta extends Component {
                         <div className="card-body">
                             <h1>Detalhes de Estafeta</h1>
                             <ol className="breadcrumb">
+                                <li><Link to={'/estafetas'}><i style={{width: '20%'}}
+                                                             className="material-icons md-24 nav_icon">arrow_back</i></Link>
+                                </li>
                                 <li className="breadcrumb-item"><Link to="/estafetas">Estafetas</Link>
                                 </li>
                                 <li className="breadcrumb-item"> <Link to={'#'}>Detalhes de Estafeta</Link>
