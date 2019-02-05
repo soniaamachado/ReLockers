@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
-import "../css/DetalheEncomenda.css";
+import "../css/DetalheEstafeta.css";
 import axios from 'axios';
-import {Col, Row} from "reactstrap";
+import {Link} from "react-router-dom";
 
-class Detalhes_Encomenda extends Component {
+class DetalhesEncomenda extends Component {
 
     state = {
-        encomendas: [],
+        encomendas: []
+
+
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/encomendas/' + this.props.match.params.id)
+        axios.get('http://167.99.202.225/api/encomendas/ '+ this.props.match.params.id )
             .then(response => {
                 this.setState({encomendas: response.data.data});
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -21,81 +24,117 @@ class Detalhes_Encomenda extends Component {
 
     render() {
 
-        const encomendas=this.state.encomendas;
-        if (this.state.encomendas.length === 0) {
-            return null;
-        }
-        else {
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div className="card-content collapse show">
+                        <div className="card-body">
+                            <h1>Detalhes de Encomenda</h1>
+                            <ol className="breadcrumb">
+                                <li><Link to={'/encomendas'}><i style={{width: '20%'}}
+                                                             className="material-icons md-24 nav_icon">arrow_back</i></Link>
+                                </li>
+                                <li className="breadcrumb-item"><Link to="/encomendas">Encomendas</Link>
+                                </li>
+                                <li className="breadcrumb-item"> <Link to={'#'}>Detalhes de Encomenda</Link>
+                                </li>
 
-                    <Row style={{height: '100px', marginTop: '50px'}}>
-                        <Col>
-                            <i style={{verticalAlign: 'middle'}} className="material-icons md-18">back</i>
-                            <p style={{color: '#5887F9', fontWeight: 'bold'}}>Detalhes da encomenda</p>
-                        </Col>
-                    </Row>
+                            </ol>
+                            <div className="table-responsive table_estafeta">
+                                <table className="table">
 
-                    <Row key={encomendas.id}>
-                        <Col xs="6" sm="4" style={{backgroundColor: 'white'}}>
-                            <div>
-                                <p style={{verticalAlign: 'middle'}}>
-                                    <i style={{verticalAlign: 'middle'}}
-                                       className="material-icons md-18">assignment</i>Encomenda
-                                </p>
-                                <h4>{encomendas.id}</h4>
+                                    <tr>
+                                        <th scope="row">Número de encomenda</th>
+                                        <td>{this.state.encomendas.numero_encomenda}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Localização</th>
+                                        <td>{this.state.encomendas.localizacao}</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Tamanho</th>
+                                        <td>{this.state.encomendas.tamanho}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Temperatura requirida</th>
+                                        <td>{this.state.encomendas.temperatura}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data pretendida pelo cliente</th>
+                                        <td>{this.state.encomendas.data_estimada}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data de entrega no cacifo</th>
+                                        <td>{this.state.encomendas.data_de_entrega}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data de levantamento da encomenda</th>
+                                        <td>{this.state.encomendas.data_de_levantamento}</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Estado da encomenda</th>
+                                        <td>{this.state.encomendas.estado_encomenda}</td>
+
+                                    </tr>
+
+
+
+
+                                </table>
                             </div>
                             <div>
-                                <p style={{verticalAlign: 'middle'}}>
-                                    <i style={{verticalAlign: 'middle'}}
-                                       className="material-icons md-18">
-                                        location_on
-                                    </i>
-                                    Localização</p>
-                                <p>{encomendas.cacifo.localizacao.nome}</p>
+                                <p>Estafeta associado</p>
                             </div>
-                        </Col>
-                        <Col xs="6" sm="4" style={{backgroundColor:'white'}}>
-                        <div>
-                        <p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}
-                        className="material-icons md-18">temperature</i>Encomenda
-                        </p>
-                        <p>{encomendas.temperatura}</p>
+
+                            <div className="table-responsive table_estafeta">
+                                <table className="table">
+
+                                    <tr>
+                                        <th scope="row">Nome</th>
+                                        <td>a</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email</th>
+                                        <td>a</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Telefone</th>
+                                        <td>a</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Local de trabalho</th>
+                                        <td>a</td>
+
+                                    </tr>
+
+
+
+
+                                </table>
+                            </div>
                         </div>
-                        <div>
-                        <p style={{verticalAlign: 'middle'}}>
-                        <i style={{verticalAlign: 'middle'}}
-                        className="material-icons md-18">
-                        location_on
-                        </i>
-                        Localização</p>
-                        <p>{encomendas.tamanho}</p>
-                        </div>
-                        </Col>
-                        <Col sm="4" style={{backgroundColor:'white'}}>
-                        <div>
-                        <p style={{verticalAlign: 'middle'}}><i style={{verticalAlign: 'middle'}}
-                        className="material-icons md-18">assignment</i>Encomenda
-                        </p>
-                        <h4>XFF45{encomendas.id}</h4>
-                        </div>
-                        <div>
-                        <p style={{verticalAlign: 'middle'}}>
-                        <i style={{verticalAlign: 'middle'}}
-                        className="material-icons md-18">
-                        location_on
-                        </i>
-                        Localização</p>
-                        <p>{encomendas.id}</p>
-                        </div>
-                        </Col>
-                    </Row>
+                    </div>
+
+
+
 
                 </main>
             );
         }
     }
-}
 
-export default Detalhes_Encomenda;
+
+export default DetalhesEncomenda;
 

@@ -15,7 +15,7 @@ class Detalhes_Estafeta extends Component {
         axios.get('http://167.99.202.225/api/cacifos/ ' + this.props.match.params.id)
             .then(response => {
                 this.setState({cacifos: response.data.data});
-                console.log(this.state.cacifos[0].estafeta[0].nome);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -24,7 +24,7 @@ class Detalhes_Estafeta extends Component {
 
     render() {
         const cacifos = this.state.cacifos;
-        console.log('efef', (this.state.cacifos));
+
 
         if (cacifos.length === 0) {
             return null;
@@ -72,7 +72,7 @@ class Detalhes_Estafeta extends Component {
 
                             <div className="table-responsive table_estafeta">
                                 <table className='table'>
-                                    <tbody>
+
                                     <tr>
                                         <th scope="row">Temperatura</th>
                                         <td>{cacifos.temperatura}</td>
@@ -86,12 +86,14 @@ class Detalhes_Estafeta extends Component {
                                     <tr>
                                         <th scope="row">Disponibilidade</th>
                                         <td>{cacifos.estado.estado}</td>
-                                        <td></td>
+
 
                                     </tr>
                                     <tr>
-                                        <th scope="row">Localização
-                                            <li style={{display: 'block', marginTop: '20px'}}>
+                                        <th scope="row">Localização</th>
+                                    </tr>
+                                    <tr style={{ textAlign:'center'}}>
+                                            <div style={{ margin: 'auto'}}>
                                                 <div className="view view-cascade gradient-card-header peach-gradient">
                                                 </div>
                                                 <div className="card-body card-body-cascade text-center">
@@ -104,10 +106,10 @@ class Detalhes_Estafeta extends Component {
                                                         </iframe>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </th>
+                                            </div>
+
                                     </tr>
-                                    </tbody>
+
                                 </table>
                             </div>
 

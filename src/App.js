@@ -30,6 +30,7 @@ class App extends Component {
                         <Route exact path='/detail/:id' component={DetalhesEncomenda}/>
                         <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta}/>
                         <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo}/>
+                        <Route exact path='/detalheEncomenda/:id' component={DetalhesEncomenda}/>
                         <Route exact path='/' component={Inicio}/>
                         <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda}/>
 
