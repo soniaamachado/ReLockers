@@ -4,14 +4,14 @@
     background: white;
     border-color: transparent;
     border-radius: 0.5rem;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 }
 
 .coluna_cacifo{
 
-    height: 200px;
-    width: 200px;
+    height: 180px;
+    width: 180px;
     box-shadow: 7px 7px 30px -5px rgba(0,0,0,0.1);
     display: inline-block;
     background: white;
@@ -25,7 +25,6 @@
     background-color: #5887F9;
     border: none;
     color: white;
-    margin-top: 20px;
     border-radius: 0.3rem;
     text-align: center;
 }
