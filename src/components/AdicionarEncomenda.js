@@ -8,6 +8,9 @@ export default class AdicionarEncomenda extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            users:[],
+            estafetas:[],
+            administradores:[],
             estado_encomenda: 0,
             numero_encomenda: 0,
             data_de_entrada_no_sistema: "",
@@ -25,6 +28,34 @@ export default class AdicionarEncomenda extends Component {
         this.handleDataDeEntregaChange = this.handleDataDeEntregaChange.bind(this);
         this.handletempoLimiteDeLevantamento = this.handletempoLimiteDeLevantamento.bind(this);
         this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('http://167.99.202.225/api/users')
+            .then(response => {
+                this.setState({users: response.data.data});
+                this.stateOfOrder(this.state.users);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    stateOfOrder() {
+
+        this.state.users.map((user, index) => {
+            if (user.tipo.tipo === 'Estafeta') {
+                this.setState(prevState => ({
+                    estafetas: [...prevState.estafetas, user]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    administradores: [...prevState.administradores, user]
+                }))
+            }
+        });
     }
 
     getCurrentDate() {
@@ -90,7 +121,8 @@ export default class AdicionarEncomenda extends Component {
 
         console.log(newEncomenda);
 
-        axios.post('http://localhost:80/api/encomendas', newEncomenda)
+
+        axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
             .then(res => console.log(res.statusText))
             .catch(error => console.log(error));
 
@@ -103,6 +135,7 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "",
             observacoes: "",
             temperatura: 20,
+
             //     cacifo_id: "",
             //     cliente_id: ""
 
@@ -119,6 +152,10 @@ export default class AdicionarEncomenda extends Component {
 
     handleTamanhoChange(event) {
         this.setState({ tamanho: event.target.value });
+    }
+
+    handleEstafetaChange(event) {
+        this.setState({ estafetas: event.target.value });
     }
 
     handleDataDeEntregaChange(event) {
@@ -198,6 +235,19 @@ export default class AdicionarEncomenda extends Component {
                             <option value="L">L</option>
                             <option value="XL">XL</option>
                         </Input>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="estafeta">Tamanho da encomenda</Label>
+
+                        <Input type="select" name="estafeta" id="estafeta">
+                            {this.state.estafetas.map(user=>{
+                                return (
+                                    <option value={user.id}>{user.nome}</option>
+                                )
+                            })}
+                        </Input>
+
                     </FormGroup>
 
                     <FormGroup>
