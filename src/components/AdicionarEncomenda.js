@@ -145,25 +145,25 @@ export default class AdicionarEncomenda extends Component {
         });
     };
 
-    handleTamanhoChange(event) {
+    handleTamanhoChange = (event) =>{
         this.setState({ tamanho: event.target.value });
-    }
+    };
 
 
-    handleDataDeEntregaChange(event) {
+    handleDataDeEntregaChange = (event) => {
         this.setState({ data_de_entrega_pretendida: event.target.value });
         console.log(this.state.data_de_entrega_pretendida);
 
-    }
+    };
 
-    handletempoLimiteDeLevantamento(event) {
+    handletempoLimiteDeLevantamento = (event) => {
         console.log(this.state.tempo_limite_de_levantamento);
         this.setState({ tempo_limite_de_levantamento: event.target.value });
-    }
+    };
 
-    handleTemperaturaChange(event) {
+    handleTemperaturaChange = (event) => {
         this.setState({ temperatura: event.target.value });
-    }
+    };
 
     render() {
         const {

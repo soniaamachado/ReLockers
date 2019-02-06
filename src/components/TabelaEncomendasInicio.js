@@ -66,7 +66,7 @@ export default class TabelaEncomendasInicio extends React.Component {
 
                 {this.state.encomendas_nao_entregues.slice(0, 5).map(encomenda => {
 
-                    let {id, numero_encomenda, data_de_entrega, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo} = encomenda;
+                    let {id, numero_encomenda, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo} = encomenda;
 
 
                     const data_entrega = data_de_entrega_pretendida.split(" ");
@@ -104,7 +104,7 @@ export default class TabelaEncomendasInicio extends React.Component {
 
                     return (
                     <tr key={id}>
-                    <th scope="row">{numero_encomenda}</th>
+                    <th scope="row">{id}</th>
                     <td>{data_entrega[0]}</td>
                     <td>{data_entrega[1]}</td>
                     {<td>{cacifo.localizacao.nome === null ? "" : cacifo.localizacao.nome} </td>}

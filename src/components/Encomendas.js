@@ -162,12 +162,15 @@ class Encomendas extends Component {
                                         const now = moment(data_split[0]); //todays date
                                         const end = moment(prazo_levantamento[0]); // another date
                                         const duration = moment.duration(now.diff(end));
+
                                         let days = duration.asDays();
+
 
                                         if (days <= 0) {
                                             days =
                                                 null
                                         }
+
                                         else if (days > 0) {
                                             days =
                                                 <Alert color="warning">
@@ -176,39 +179,56 @@ class Encomendas extends Component {
                                         }
 
 
-                                            return (
-                                                <tr key={id}>
-                                                    <th scope="row">{id}</th>
-                                                    <td>{data_entrega[0]}</td>
-                                                    <td>{data_entrega[1]}</td>
-                                                    <td>{cacifo.localizacao.nome} </td>
-                                                    <td>{temperatura}ºC</td>
-                                                    <td>{tamanho}</td>
-                                                    <td>{cliente.nome}</td>
-                                                    {encomenda.estafeta.map(estafeta =>
-                                                        <td key={id}><Link to={{
-                                                            pathname: `detalheEstafeta/${id}`,
-                                                            query: {id: id}
-                                                        }}> {estafeta.nome}</Link></td>
-                                                    )}
-                                                    <td><Link to={{
-                                                        pathname: `detalheCacifo/${cacifo.id}`,
-                                                        query: {id: id}
-                                                    }}>{cacifo.numero} </Link></td>
+                                        return (
+                                            <tr key={id}>
+                                                <th scope="row">{id}</th>
+                                                <td>{data_entrega[0]}</td>
+                                                <td>{data_entrega[1]}</td>
+                                                <td>{cacifo.localizacao.nome} </td>
+                                                <td>{temperatura}ºC</td>
+                                                <td>{tamanho}</td>
+                                                <td>{cliente.nome}</td>
+                                                {encomenda.estafeta.map(estafeta =>
+                                                    <td key={id}>
+                                                        <Link
+                                                            to={{
+                                                                pathname: `detalheEstafeta/${id}`,
+                                                                query: {id: id}
+                                                            }}>
+                                                            {estafeta.nome}
+                                                        </Link>
+                                                    </td>
+                                                )}
+                                                <td>
+                                                    <Link to={{
+                                                    pathname: `detalheCacifo/${cacifo.id}`,
+                                                    query: {id: id}
+                                                }}>{cacifo.numero} </Link>
+                                                </td>
 
-                                                    <td>{days}</td>
-                                                    <td>
+                                                <td>{days}</td>
+                                                <td>
                                 <span className="dropdown">
-				                        <button id="btnSearchDrop2"
-                                                style={{backgroundColor: '#b5a0fb', border: 'none', width: '68px'}}
-                                                type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false"
-                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
-                                            <i className="material-icons md-18" style={{
-                                                color: 'white',
-                                                verticalAlign: 'middle',
-                                                marginRight: '5px'
-                                            }}>settings</i>
+				                        <button
+                                            id="btnSearchDrop2"
+                                            style={{
+                                                backgroundColor: '#b5a0fb',
+                                                border: 'none',
+                                                width: '68px'
+                                            }}
+                                            type="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            className="btn btn-dark dropdown-toggle dropdown-menu-right">
+
+                                            <i className="material-icons md-18"
+                                               style={{
+                                                   color: 'white',
+                                                   verticalAlign: 'middle',
+                                                   marginRight: '5px'
+                                               }}>settings</i>
+
                                         </button>
 				                        <span aria-labelledby="btnSearchDrop2"
                                               className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
@@ -222,11 +242,11 @@ class Encomendas extends Component {
                                                 className="material-icons md-18 icon">delete</i> Remover</Link>
 				                        </span>
 				                    </span>
-                                                    </td>
+                                                </td>
 
-                                                </tr>
+                                            </tr>
 
-                                            );
+                                        );
                                     })}
 
                                     </tbody>
