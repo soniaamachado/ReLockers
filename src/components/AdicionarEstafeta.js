@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 
 import TextInputGroup from "./forms/TextInput";
@@ -19,47 +20,95 @@ export default class AdicionarEstafeta extends Component {
             supervisor_id: 1,
             img_url: "",
 
+            users: [],
+            utilizadores: [],
             errors: {}
         };
 
-        this.handleTamanhoChange = this.handleTamanhoChange.bind(this);
+        this.handleTipoChange = this.handleTipoChange.bind(this);
+        this.handleTelefoneChange = this.handleTelefoneChange.bind(this);
+        this.handleNascimento = this.handleNascimento.bind(this);
+        this.handleSupervisorChange = this.handleSupervisorChange.bind(this);
 
     }
 
+    componentDidMount() {
+        axios.get('http://167.99.202.225/api/users')
+            .then(response => {
+                this.setState({ users: response.data.data });
+                this.stateOfOrder(this.state.users);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    stateOfOrder() {
+
+        this.state.users.map((user, index) => {
+            if (user.tipo.tipo !== 'Estafeta') {
+                this.setState(prevState => ({
+                    utilizadores: [...prevState.utilizadores, user]
+                }))
+            }
+        });
+    }
 
     onSubmit = e => {
         e.preventDefault();
 
         const {
-            estado_encomenda, cacifo_id, cliente_id,
-            temperatura, observacoes, tamanho
+            nome, email, password, password_confirmation, telefone, data_nascimento,
+            local_de_trabalho, tipo_id, supervisor_id
         } = this.state;
 
+        if (nome == "") {
+            this.setState({ errors: { nome: "Insira o nome do utilizador" } });
+            return;
+        }
+        if (email == "") {
+            this.setState({ errors: { email: "Insira um e-mail válido" } });
+            return;
+        }
+        if (!(email.includes("@") && email.includes("."))) {
+            this.setState({ errors: { email: "Insira um e-mail válido!" } });
+            return;
+        }
+        if (password.length < 5) {
+            this.setState({ errors: { password: "A password deve conter no mínimo 6 caracteres" } });
+            return;
+        }
+        if (password_confirmation != password) {
+            this.setState({ errors: { password_confirmation: "As passwords não são iguais" } });
+            return;
+        }
 
-        // if (cacifo_id === "") {
-        //     this.setState({ errors: { temperatura: "URL is required" } });
-        //     return;
-        // }
-        // if (cliente_id == "") {
-        //     this.setState({ errors: { observacoes: "URL is required" } });
-        //     return;
-        // }
-
-        const newEncomenda = {
-            // cacifo_id,
-            // cliente_id
+        const newUtilizador = {
+            nome, email, password, password_confirmation, telefone, data_nascimento,
+            local_de_trabalho, tipo_id, supervisor_id
         };
 
-        console.log(newEncomenda);
+        console.log(newUtilizador);
 
-        // axios.post('http://localhost:80/api/encomendas', newEncomenda)
-        //     .then(res => console.log(res.statusText))
-        //     .catch(error => console.log(error));
+        axios.post('http://167.99.202.225/api/users', newUtilizador)
+            .then(res => console.log(res.statusText))
+            .catch(error => console.log(error));
 
         this.setState({
-            //     cacifo_id: "",
-            //     cliente_id: ""
+            nome: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            telefone: "",
+            data_nascimento: "",
+            local_de_trabalho: "TDIStore",
+            tipo_id: 2,
+            supervisor_id: 1,
+            img_url: "",
 
+            users: [],
+            errors: {}
         });
 
         //this.props.history.push("/news");
@@ -71,13 +120,25 @@ export default class AdicionarEstafeta extends Component {
         });
     };
 
-    handleTamanhoChange(event) {
-        this.setState({ tamanho: event.target.value });
+    handleTipoChange = (event) => {
+        this.setState({ tipo: event.target.value });
+    }
+
+    handleTelefoneChange = (event) => {
+        this.setState({ telefone: event.target.value });
+    }
+
+    handleNascimento = (event) => {
+        this.setState({ data_nascimento: event.target.value });
+    }
+
+    handleSupervisorChange = (event) => {
+        this.setState({ supervisor_id: event.target.value });
     }
 
     render() {
         const {
-            nome, email, telefone, observacoes, errors
+            nome, email, password, password_confirmation, errors
         } = this.state;
         return (
             <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -119,12 +180,60 @@ export default class AdicionarEstafeta extends Component {
                             name="telefone"
                             id="telefone"
                             pattern="[0-9]{9}"
-                            value={this.state.temperatura}
-                            onChange={this.handleTemperaturaChange}
+                            value={this.state.telefone}
+                            onChange={this.handleTelefoneChange}
                             placeholder="Introduza um telefone..."
                             required
                         />
                     </FormGroup>
+
+                    <FormGroup>
+                        <Label for="data_nascimento">Data de nascimento</Label>
+                        <Input
+                            type="date"
+                            name="data_nascimento"
+                            id="data_nascimento"
+                            placeholder="Data de nascimento"
+                            onChange={this.handleNascimento}
+                        />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="estafeta">Supervisor</Label>
+
+                        <Input type="select" name="supervisor_id" id="supervisor_id" onChange={this.handleSupervisorChange}>
+                            {
+                                this.state.utilizadores.map(
+                                    user => {
+                                        return (
+                                            <option value={user.id}>{user.nome}</option>
+                                        )
+                                    }
+                                )
+                            }
+                        </Input>
+
+                    </FormGroup>
+
+                    <TextInputGroup
+                        label="Password"
+                        name="password"
+                        placeholder="6 caracteres no mínimo..."
+                        type={"password"}
+                        value={password}
+                        onChange={this.onChange}
+                        error={errors.password}
+                    />
+
+                    <TextInputGroup
+                        label="Confirmar password"
+                        name="password_confirmation"
+                        placeholder="Confirmar password..."
+                        type={"password"}
+                        value={password_confirmation}
+                        onChange={this.onChange}
+                        error={errors.password_confirmation}
+                    />
 
                     <Button
                         style={{
