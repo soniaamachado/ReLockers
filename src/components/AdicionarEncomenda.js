@@ -8,11 +8,10 @@ export default class AdicionarEncomenda extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users:[],
-            estafetas:[],
-            administradores:[],
+            users: [],
+            estafetas: [],
+            administradores: [],
             estado_encomenda: 0,
-            numero_encomenda: 0,
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
             tempo_limite_de_levantamento: "",
@@ -33,7 +32,7 @@ export default class AdicionarEncomenda extends Component {
     componentDidMount() {
         axios.get('http://167.99.202.225/api/users')
             .then(response => {
-                this.setState({users: response.data.data});
+                this.setState({ users: response.data.data });
                 this.stateOfOrder(this.state.users);
 
             })
@@ -78,7 +77,7 @@ export default class AdicionarEncomenda extends Component {
         e.preventDefault();
 
         const {
-            estado_encomenda, cacifo_id, cliente_id, numero_encomenda,
+            estado_encomenda, cacifo_id, cliente_id,
             temperatura, observacoes, tamanho
         } = this.state;
 
@@ -108,7 +107,6 @@ export default class AdicionarEncomenda extends Component {
 
         const newEncomenda = {
             estado_encomenda,
-            numero_encomenda,
             data_de_entrada_no_sistema,
             data_de_entrega_pretendida,
             tempo_limite_de_levantamento,
@@ -128,7 +126,6 @@ export default class AdicionarEncomenda extends Component {
 
         this.setState({
             estado_encomenda: 0,
-            numero_encomenda: "",
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
             tempo_limite_de_levantamento: "",
@@ -175,7 +172,7 @@ export default class AdicionarEncomenda extends Component {
 
     render() {
         const {
-            numero_encomenda, observacoes, errors
+            observacoes, errors
         } = this.state;
         return (
             <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -191,16 +188,6 @@ export default class AdicionarEncomenda extends Component {
                     <a href={'/definicoes'} style={{ marginLeft: '5px', fontSize: '10px', display: 'inline', verticalAlign: 'middle' }}>Alterar</a>
                 </div>
                 <form onSubmit={this.onSubmit}>
-
-                    <TextInputGroup
-                        label="Número da encomenda *"
-                        name="numero_encomenda"
-                        placeholder="0"
-                        value={numero_encomenda}
-                        onChange={this.onChange}
-                        type={"number"}
-                        error={errors.numero_encomenda}
-                    />
 
                     {/* <TextInputGroup
                         label="Temperatura da encomenda [0°C - 20°C]"
@@ -241,7 +228,7 @@ export default class AdicionarEncomenda extends Component {
                         <Label for="estafeta">Tamanho da encomenda</Label>
 
                         <Input type="select" name="estafeta" id="estafeta">
-                            {this.state.estafetas.map(user=>{
+                            {this.state.estafetas.map(user => {
                                 return (
                                     <option value={user.id}>{user.nome}</option>
                                 )

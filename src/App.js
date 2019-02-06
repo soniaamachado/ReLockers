@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Navbar from "./components/Navbar";
 import Encomendas from "./components/Encomendas";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Estafetas from "./components/Estafetas";
 import Inicio from "./components/Inicio";
 import Cacifos from "./components/Cacifos";
@@ -14,8 +14,9 @@ import DetalhesCacifo from "./components/DetalhesCacifo";
 import AdicionarEncomenda from "./components/AdicionarEncomenda";
 import ApagarEncomenda from "./components/ApagarEncomenda";
 
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from './store';
+import AdicionarEstafeta from './components/AdicionarEstafeta';
 
 
 class App extends Component {
@@ -25,19 +26,20 @@ class App extends Component {
                 <Router>
                     <Switch>
                         <div>
-                            <Navbar/>
-                            <Route exact path='/encomendas' component={Encomendas}/>
-                            <Route exact path='/encomendas/entregues' component={EncomendasEntregues}/>
-                            <Route exact path='/estafetas' component={Estafetas}/>
-                            <Route exact path='/cacifos' component={Cacifos}/>
-                            <Route exact path='/definicoes' component={Definicoes}/>
-                            <Route exact path='/detail/:id' component={DetalhesEncomenda}/>
-                            <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta}/>
-                            <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo}/>
-                            <Route exact path='/detalheEncomenda/:id' component={DetalhesEncomenda}/>
-                            <Route exact path='/' component={Inicio}/>
-                            <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda}/>
-                            <Route exact path='/apagarEncomenda/:id' component={ApagarEncomenda}/>
+                            <Navbar />
+                            <Route exact path='/encomendas' component={Encomendas} />
+                            <Route exact path='/encomendas/entregues' component={EncomendasEntregues} />
+                            <Route exact path='/estafetas' component={Estafetas} />
+                            <Route exact path='/cacifos' component={Cacifos} />
+                            <Route exact path='/definicoes' component={Definicoes} />
+                            <Route exact path='/detail/:id' component={DetalhesEncomenda} />
+                            <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta} />
+                            <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo} />
+                            <Route exact path='/detalheEncomenda/:id' component={DetalhesEncomenda} />
+                            <Route exact path='/' component={Inicio} />
+                            <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda} />
+                            <Route exact path='/adicionar_estafeta' component={AdicionarEstafeta} />
+                            <Route exact path='/apagarEncomenda/:id' component={ApagarEncomenda} />
                         </div>
                     </Switch>
                 </Router>
