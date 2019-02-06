@@ -11,6 +11,9 @@ export default class AdicionarEncomenda extends Component {
             users: [],
             estafetas: [],
             administradores: [],
+            cacifos:[],
+            cacifos_livres:[],
+            cacifos_ocupados:[],
             estado_encomenda: 0,
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
@@ -29,19 +32,28 @@ export default class AdicionarEncomenda extends Component {
         this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://167.99.202.225/api/users')
             .then(response => {
                 this.setState({ users: response.data.data });
-                this.stateOfOrder(this.state.users);
+                this.splitArrayEncomendas(this.state.users);
 
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }
 
-    stateOfOrder() {
+        axios.get('http://167.99.202.225/api/cacifos')
+            .then(response => {
+                this.setState({cacifos: response.data.data });
+                this.splitArrayCacifos(this.state.users);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    splitArrayEncomendas = () => {
 
         this.state.users.map((user, index) => {
             if (user.tipo.tipo === 'Estafeta') {
@@ -52,6 +64,22 @@ export default class AdicionarEncomenda extends Component {
             } else {
                 this.setState(prevState => ({
                     administradores: [...prevState.administradores, user]
+                }))
+            }
+        });
+    };
+
+    splitArrayCacifos() {
+
+        this.state.cacifos.map((cacifo, index) => {
+            if (cacifo.estado.id === 1) {
+                this.setState(prevState => ({
+                    cacifos_livres: [...prevState.cacifos_livres, cacifo]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    cacifos_ocupados: [...prevState.cacifos_ocupados, cacifo]
                 }))
             }
         });
@@ -212,10 +240,23 @@ export default class AdicionarEncomenda extends Component {
                     <FormGroup>
                         <Label for="estafeta">Atribuir estafeta</Label>
 
-                        <Input type="select" name="estafeta" id="estafeta" value={this.state.estafetas}>
+                        <Input type="select" name="estafeta" id="estafeta">
                             {this.state.estafetas.map(user => {
                                 return (
-                                    <option value={user.id}>{user.nome}</option>
+                                    <option key={user.id} value={user.id}>{user.nome}</option>
+                                )
+                            })}
+                        </Input>
+
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="cacifo">Atribuir cacifo</Label>
+
+                        <Input type="select" name="cacifo" id="cacifo">
+                            {this.state.cacifos_livres.map(cacifo => {
+                                return (
+                                    <option key={cacifo.id} value={cacifo.id}>{cacifo.id}</option>
                                 )
                             })}
                         </Input>

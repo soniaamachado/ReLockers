@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import store from './store';
 import AdicionarEstafeta from './components/AdicionarEstafeta';
 import Search from "./components/Search";
+import ApagarEstafeta from "./components/ApagarEstafeta";
 
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
                             <Route exact path='/adicionar_encomenda' component={AdicionarEncomenda} />
                             <Route exact path='/adicionar_estafeta' component={AdicionarEstafeta} />
                             <Route exact path='/apagarEncomenda/:id' component={ApagarEncomenda} />
-                            <Route exact path={'/search'} component={Search}/>
+                            <Route exact path='/apagarEstafeta/:id' component={ApagarEstafeta} />
                         </div>
                     </Switch>
                 </Router>
