@@ -3,24 +3,49 @@ import "../css/Estafetas.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
+
 class Estafetas extends Component {
     state = {
-        users: []
+        users: [],
+        estafetas:[],
+        administradores:[]
     };
 
     componentDidMount() {
         axios.get('http://167.99.202.225/api/users')
             .then(response => {
                 this.setState({ users: response.data.data })
+                this.stateOfOrder(this.state.users);
+
             })
             .catch(function (error) {
                 console.log(error);
             })
     }
 
+    stateOfOrder() {
+
+        this.state.users.map((user, index) => {
+            if (user.tipo.tipo === 'Estafeta') {
+                this.setState(prevState => ({
+                    estafetas: [...prevState.estafetas, user]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    administradores: [...prevState.administradores, user]
+                }))
+            }
+        });
+    }
+
+
+
     render() {
 
-        const users = this.state.users;
+
+
+        const estafetas = this.state.estafetas;
 
         return (
 
@@ -63,8 +88,8 @@ class Estafetas extends Component {
                     <tbody>
 
 
-                        {users.map(user => {
-                            const { id, nome, telefone, email, local_de_trabalho } = user;
+                        {estafetas.map(estafeta => {
+                            const { id, nome, telefone, email, local_de_trabalho } = estafeta;
                             return (
                                 <tr key={id}>
                                     <th scope="row">{id}</th>

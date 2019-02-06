@@ -8,7 +8,6 @@ import Inicio from "./components/Inicio";
 import Cacifos from "./components/Cacifos";
 import Definicoes from "./components/Definicoes";
 import DetalhesEncomenda from "./components/DetalhesEncomenda";
-import EncomendasEntregues from "./components/EncomendasEntregues";
 import DetalhesEstafeta from "./components/DetalhesEstafeta";
 import DetalhesCacifo from "./components/DetalhesCacifo";
 import AdicionarEncomenda from "./components/AdicionarEncomenda";
@@ -29,7 +28,6 @@ class App extends Component {
                         <div>
                             <Navbar />
                             <Route exact path='/encomendas' component={Encomendas} />
-                            <Route exact path='/encomendas/entregues' component={EncomendasEntregues} />
                             <Route exact path='/estafetas' component={Estafetas} />
                             <Route exact path='/cacifos' component={Cacifos} />
                             <Route exact path='/definicoes' component={Definicoes} />

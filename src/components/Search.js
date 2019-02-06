@@ -1,47 +1,41 @@
 import React, { Component } from 'react'
-import axios from "axios/index";
 
 class Search extends Component {
     state = {
-        query: '',
-        results:[]
+        initialItem:[
+            "Bruno",
+            "Sónia"
+        ],
+        items:[]
     };
 
-    getInfo = () => {
-        axios.get('http://167.99.202.225/api/users')
-            .then(response => {
-                this.setState({ results: response.data.data })
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
-        const results= this.state.results;
+    searchEstafetas = (event) => {
+
+        let  updatedList = this.state.initialItem;
+        updatedList = updatedList.filter(function (item) {
+            return item.toLowerCase().search(
+                event.target.value.toLowerCase()
+            ) !== -1;
+        });
+        this.setState({items:updatedList})
     };
 
-    handleInputChange = () => {
-        this.setState({
-            query:this.search.valueOf()}, () =>{
-            if(this.state.query && this.state.query.length>1){
-
-                if(this.state.query.lenght % 2 ===0){
-                    this.getInfo()
-                }
-            }
-        })
+    componentWillMount= () => {
+      this.setState({items:this.state.initialItem})
     };
+
 
     render() {
+        const items= this.state.items;
         return (
             <main>
-            <form style={{marginTop:'30%',marginLeft:'30%'}}>
                 <input
                     placeholder="Search for..."
                     ref={input => this.search = input}
-                    onChange={this.handleInputChange}
+                    onChange={this.searchEstafetas}
                 />
-                <p>{this.state.results}</p>
-            </form>
+
             </main>
         )
     }

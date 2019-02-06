@@ -107,7 +107,7 @@ export default class TabelaEncomendasInicio extends React.Component {
                     <th scope="row">{numero_encomenda}</th>
                     <td>{data_entrega[0]}</td>
                     <td>{data_entrega[1]}</td>
-                    {<td>{cacifo.localizacao.nome == null ? "" : cacifo.localizacao.nome} </td>}
+                    {<td>{cacifo.localizacao.nome === null ? "" : cacifo.localizacao.nome} </td>}
                     <td>{days}</td>
                     <td>
                     <span className="dropdown">
