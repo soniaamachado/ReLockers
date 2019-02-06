@@ -15,7 +15,7 @@ import AdicionarEncomenda from "./components/AdicionarEncomenda";
 import Login from "./components/Login";
 
 import {Provider} from "react-redux";
-import store from './store';
+import store from './components/Redux/store';
 
 
 class App extends Component {
