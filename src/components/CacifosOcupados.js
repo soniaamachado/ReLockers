@@ -5,15 +5,15 @@ import {Badge, Button, Card, CardBody} from "reactstrap";
 import {Link} from "react-router-dom";
 
 
-export default class CacifosLivres extends Component {
+export default class CacifosOcupados extends Component {
     state = {
-        cacifos: []
+        encomendas_cacifos: []
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/cacifos')
+        axios.get('http://167.99.202.225/api/encomendas')
             .then(response => {
-                this.setState({cacifos: response.data.data})
+                this.setState({encomendas_cacifos: response.data.data})
             })
             .catch(function (error) {
                 console.log(error);
@@ -22,45 +22,48 @@ export default class CacifosLivres extends Component {
 
     render() {
 
-        const cacifos = this.state.cacifos;
+        const encomendas_cacifos = this.state.encomendas_cacifos;
 
         return (
             <div style={{margin:'auto'}}>
 
-                {cacifos.map(cacifo => {
-                    const {temperatura, estado, id, numero, tamanho} = cacifo;
+                {encomendas_cacifos.map(cacifos => {
+                    const {id, cacifo} = cacifos;
 
-                    if (estado.id === 1) {
+                    if (cacifo.estado.id === 2) {
                         return (
                             null
                         );
                     }
-                    else
-                    return (
-                        <div className="coluna_cacifo" >
-                            <Card key={id} style={{display:'inline-block'}} className='card_cacifo'>
-                                <CardBody>
-                                    <h4>{numero}</h4>
-                                    <div style={{display: 'inline', marginBottom: '10px'}}>
-                                        <p>
-                                            Temperatura
-                                            <Badge className='badge'>{temperatura}ºC</Badge>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Tamanho
-                                            <Badge className='badge'>{tamanho.tamanho}</Badge>
-                                        </p>
-                                    </div>
 
-                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
-                                        detalhes</Link>
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    );
+
+
+                    else
+                        return (
+                            <div className="coluna_cacifo" >
+                                <Card key={id} style={{display:'inline-block'}} className='card_cacifo'>
+                                    <CardBody>
+                                        <h4>{cacifo.numero}</h4>
+                                        <div style={{display: 'inline', marginBottom: '10px'}}>
+                                            <p>
+                                                Temperatura
+                                                <Badge className='badge'>{cacifo.temperatura}ºC</Badge>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Tamanho
+                                                <Badge className='badge'>{cacifo.tamanho.tamanho}</Badge>
+                                            </p>
+                                        </div>
+
+                                        <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
+                                            detalhes</Link>
+                                        </Button>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        );
 
                 })}
 

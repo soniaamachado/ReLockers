@@ -47,7 +47,7 @@ class Encomendas extends Component {
                             float: 'right',
                             width: 'auto',
                             margin: 'auto',
-                            backgroundColor: 'rgb(181, 160, 251)',
+                            backgroundColor: '#967ADC',
                             border: 'none'
                         }} size="sm">
                             <i style={{verticalAlign: 'middle'}} className="material-icons md-24">add</i>

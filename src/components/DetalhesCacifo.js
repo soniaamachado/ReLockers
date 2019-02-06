@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "../css/DetalheCacifo.css";
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import {Button, Col} from "reactstrap";
 
 class Detalhes_Estafeta extends Component {
 
@@ -27,7 +28,24 @@ class Detalhes_Estafeta extends Component {
 
 
         if (cacifos.length === 0) {
-            return null;
+            return (
+                <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div style={{verticalAlign:'middle', height:'100%'}}>
+                        <div className="card-header bg-transparent border-0">
+                            <h2 className="error-code">404</h2>
+                            <h3 className="text-uppercase text-center">A página que procurou não existe</h3>
+
+                        </div>
+
+                    <Col>
+                        <Button style={{backgroundColor:'#5887F9', border:'none',display:'block',margin:'auto'}}>
+                            <Link style={{color:'white'}} to="/" >
+                                <i style={{verticalAlign:'middle'}} className="material-icons m-18 ">home</i> Página Inicial</Link>
+                        </Button>
+                    </Col>
+                    </div>
+                </main>
+            )
         }
         else {
             return (

@@ -21,7 +21,7 @@ export default class Navbar extends React.Component {
                 <div className="sidebar-sticky">
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <NavLink activeClassName={'NavSelected'} exact className="nav-link" to={'/'}>
+                            <NavLink activeClassName={'NavSelected'} exact className="nav-link" to={'/inicio'}>
                                 <i className="material-icons md-24 nav_icon">home</i>
                                 <span className={'navbar_title'}>Início</span>
                             </NavLink>

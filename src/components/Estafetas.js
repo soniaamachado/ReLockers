@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "../css/Estafetas.css";
 import axios from 'axios';
 import {Link} from "react-router-dom";
-import {Button, Col, Row, Table} from "reactstrap";
+import {Button, Table} from "reactstrap";
 class Estafetas extends Component {
     state = {
         users: []
@@ -20,17 +20,11 @@ class Estafetas extends Component {
 
     render() {
 
-        let pesquisaEstafetas=this.state.users.filter(
-            (user)=>{
-                return user.nome.indexOf(this.state.search) !==-1;
-            }
-        );
-
         const users = this.state.users;
 
         return (
 
-            <main style={{zIndex: '-15555px'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Estafetas</h1>
@@ -47,7 +41,7 @@ class Estafetas extends Component {
                         float: 'right',
                         width: 'auto',
                         margin: 'auto',
-                        backgroundColor: 'rgb(181, 160, 251)',
+                        backgroundColor: '#967ADC',
                         border: 'none'
                     }} size="sm">
                         <i style={{verticalAlign: 'middle'}} className="material-icons md-24">add</i>
