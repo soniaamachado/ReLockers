@@ -92,11 +92,8 @@ class Estafetas extends Component {
                                             </span>
                                         </span>
                                     </td>
-
                                 </tr>
-
                             );
-
                         })}
                     </tbody>
                 </Table>

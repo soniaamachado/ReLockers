@@ -95,7 +95,6 @@ export default class AdicionarEncomenda extends Component {
         const tempo_limite_de_levantamento = this.state.tempo_limite_de_levantamento.replace("T", " ") + ":00";
         const data_de_entrada_no_sistema = this.getCurrentDate();
 
-
         // if (cacifo_id === "") {
         //     this.setState({ errors: { temperatura: "URL is required" } });
         //     return;
@@ -114,7 +113,7 @@ export default class AdicionarEncomenda extends Component {
             observacoes,
             temperatura,
             // cacifo_id,
-            // cliente_id
+            //cliente_id
         };
 
         console.log(newEncomenda);
@@ -132,7 +131,6 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "",
             observacoes: "",
             temperatura: 20,
-
             //     cacifo_id: "",
             //     cliente_id: ""
 
@@ -151,9 +149,6 @@ export default class AdicionarEncomenda extends Component {
         this.setState({ tamanho: event.target.value });
     }
 
-    handleEstafetaChange(event) {
-        this.setState({ estafetas: event.target.value });
-    }
 
     handleDataDeEntregaChange(event) {
         this.setState({ data_de_entrega_pretendida: event.target.value });
@@ -189,16 +184,6 @@ export default class AdicionarEncomenda extends Component {
                 </div>
                 <form onSubmit={this.onSubmit}>
 
-                    {/* <TextInputGroup
-                        label="Temperatura da encomenda [0°C - 20°C]"
-                        name="temperatura"
-                        placeholder="20°"
-                        value={temperatura}
-                        onChange={this.onChange}
-                        type={"number"}
-                        error={errors.temperatura}
-                    /> */}
-
                     <FormGroup>
                         <Label for="tamanho">Temperatura da encomenda</Label>
                         <Input type="number" name="temperatura" id="temperatura" min="0" max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
@@ -225,9 +210,9 @@ export default class AdicionarEncomenda extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="estafeta">Tamanho da encomenda</Label>
+                        <Label for="estafeta">Atribuir estafeta</Label>
 
-                        <Input type="select" name="estafeta" id="estafeta">
+                        <Input type="select" name="estafeta" id="estafeta" value={this.state.estafetas}>
                             {this.state.estafetas.map(user => {
                                 return (
                                     <option value={user.id}>{user.nome}</option>
