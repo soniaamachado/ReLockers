@@ -10,10 +10,9 @@ export default class ApagarEstafeta extends Component {
     };
 
     componentDidMount() {
-        axios.delete('http://167.99.202.225/api/users/' + this.props.match.params.id)
+        axios.delete('http://167.99.202.225/api/encomendas/' + this.props.match.params.id)
             .then(response => {
                 this.setState({users: response.data.data});
-
             })
             .catch(function (error) {
                 console.log(error);
@@ -23,7 +22,7 @@ export default class ApagarEstafeta extends Component {
 
     render() {
         return (
-            <Redirect to='/estafetas'/>
+            <Redirect to='/encomendas'/>
         )
     }
 }

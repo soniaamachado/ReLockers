@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../css/Encomendas.css';
 import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table} from "reactstrap";
 import classnames from 'classnames';
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import axios from "axios/index";
 import moment from "moment/moment";
 
@@ -59,7 +59,6 @@ class Encomendas extends Component {
 
     render() {
 
-
         const encomendas_entregues = this.state.encomendas_entregues;
         const encomendas_por_entregar = this.state.encomendas_por_entregar;
 
@@ -72,6 +71,9 @@ class Encomendas extends Component {
             ("0" + m.getUTCMinutes()).slice(-2) + ":" +
             ("0" + m.getUTCSeconds()).slice(-2);
         const prazo_levantamento = new_timestamp.split(" ");
+
+        console.log(m.getUTCFullYear());
+
 
         return (
             <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -350,6 +352,7 @@ class Encomendas extends Component {
                                                 className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
 				                            <Link to="#" className="dropdown-item"><i
                                                 className="material-icons md-18 icon">create</i> Editar</Link>
+
                                             <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
                                                   className="dropdown-item"><i
                                                 className="material-icons md-18 icon">delete</i> Remover</Link>
