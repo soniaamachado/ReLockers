@@ -306,7 +306,6 @@ export default class AdicionarEncomenda extends Component {
                         </Col>
                     </Row>
 
-
                     <Button style={{
                         display: 'block',
                         float: 'center',
@@ -318,7 +317,6 @@ export default class AdicionarEncomenda extends Component {
                     }} size="sm">
                         Adicionar encomenda
                     </Button>
-
 
                     {/*<FormGroup>*/}
                     {/*<Label for="estafeta">Atribuir estafeta</Label>*/}
@@ -345,8 +343,6 @@ export default class AdicionarEncomenda extends Component {
                     {/*</Input>*/}
 
                     {/*</FormGroup>*/}
-
-
                 </Form>
             </main>
         );

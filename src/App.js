@@ -12,11 +12,9 @@ import DetalhesEstafeta from "./components/DetalhesEstafeta";
 import DetalhesCacifo from "./components/DetalhesCacifo";
 import AdicionarEncomenda from "./components/AdicionarEncomenda";
 import ApagarEncomenda from "./components/ApagarEncomenda";
-
 import { Provider } from "react-redux";
 import store from './store';
 import AdicionarEstafeta from './components/AdicionarEstafeta';
-import Search from "./components/Search";
 import ApagarEstafeta from "./components/ApagarEstafeta";
 import Confirmacao from "./components/Confirmacao";
 
