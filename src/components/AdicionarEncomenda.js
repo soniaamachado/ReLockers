@@ -14,6 +14,7 @@ export default class AdicionarEncomenda extends Component {
             cacifos: [],
             cacifos_livres: [],
             cacifos_ocupados: [],
+            clientes: [],
             estado_encomenda: 0,
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
@@ -46,6 +47,14 @@ export default class AdicionarEncomenda extends Component {
             .then(response => {
                 this.setState({cacifos: response.data.data});
                 this.splitArrayCacifos(this.state.users);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        axios.get('http://167.99.202.225/api/clientes')
+            .then(response => {
+                this.setState({clientes: response.data.data});
             })
             .catch(function (error) {
                 console.log(error);
@@ -214,17 +223,17 @@ export default class AdicionarEncomenda extends Component {
 
                 <Form onSubmit={this.onSubmit}>
 
-                    <Row style={{marginBottom:'30px'}}>
+                    <Row style={{marginBottom: '30px'}}>
                         <Col>
+
                             <Label for="tamanho">Temperatura</Label>
-                            <Input style={{width: '65px'}} className='input-encomenda' type="number" name="temperatura" id="temperatura" min="0"
+                            <Input style={{width: '65px', display:'inline', marginLeft:'20px'}} className='input-encomenda' type="number" name="temperatura"
+                                   id="temperatura" min="0"
                                    max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
                             </Input>
-                        </Col>
 
-                        <Col>
-                            <Label for="tamanho" >Tamanho</Label>
-                            <Input style={{width: '65px'}} type="select" name="tamanho" id="tamanho"
+                            <Label style={{marginLeft:'20px'}} for="tamanho">Tamanho</Label>
+                            <Input style={{width: '65px', display:'inline',marginLeft:'20px'}} type="select" name="tamanho" id="tamanho"
                                    value={this.state.tamanho} onChange={this.handleTamanhoChange}>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
@@ -232,10 +241,9 @@ export default class AdicionarEncomenda extends Component {
                                 <option value="XL">XL</option>
                             </Input>
 
-                        </Col>
-                        <Col>
-                            <Label for="data_de_entrega_pretendida">Data e hora de entrega</Label>
+                            <Label style={{ display:'block',marginTop:'20px'}} for="data_de_entrega_pretendida">Data e hora de entrega</Label>
                             <Input
+                                style={{width: '250px', display:'block'}}
                                 type="datetime-local"
                                 name="data_de_entrega_pretendida"
                                 id="data_de_entrega_pretendida"
@@ -244,28 +252,43 @@ export default class AdicionarEncomenda extends Component {
                             >
                             </Input>
                         </Col>
-
                     </Row>
 
                     <Row form>
-                        <Col md={6}>
+                        <Col md={4}>
                             <FormGroup>
-                                <Label for="exampleCity">Cidade</Label>
-                                <Input type="text" name="city" id="exampleCity"/>
+                                <Label for="localizacao">Localização</Label>
+                                <Input type="select" name="localizacao" id="localizacao"
+                                       value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
+                                    {this.state.cacifos_livres.map(cacifo => {
+
+                                        return (
+                                            <option value={cacifo.localizacao.id}>
+                                                {cacifo.localizacao.nome}
+                                            </option>
+                                        )
+                                    })}
+                                </Input>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="exampleState">Rua</Label>
-                                <Input type="text" name="state" id="exampleState"/>
+                                <Label for="localizacao">Cacifo</Label>
+                                <Input type="select" name="localizacao" id="localizacao"
+                                       value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
+                                    {this.state.cacifos_livres.map(cacifo => {
+
+                                        return (
+                                            <option value={cacifo.id}>
+                                                {cacifo.id}
+                                            </option>
+                                        )
+                                    })}
+                                </Input>
                             </FormGroup>
                         </Col>
-                        <Col md={2}>
-                            <FormGroup>
-                                <Label for="exampleZip">Código postal</Label>
-                                <Input type="text" name="zip" id="exampleZip"/>
-                            </FormGroup>
-                        </Col>
+
+
                     </Row>
 
                     <Row>
@@ -287,7 +310,8 @@ export default class AdicionarEncomenda extends Component {
                         display: 'block',
                         float: 'center',
                         width: 'auto',
-                        margin: 'auto',
+                        marginTop: '20px',
+                        marginRight: 'auto',
                         backgroundColor: 'rgb(181, 160, 251)',
                         border: 'none'
                     }} size="sm">

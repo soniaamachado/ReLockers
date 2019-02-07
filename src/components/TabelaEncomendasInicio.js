@@ -53,9 +53,7 @@ export default class TabelaEncomendasInicio extends React.Component {
 
 
     render() {
-        console.log(this.state.encomendas_nao_entregues);
         const encomendas = this.state.encomendas;
-        console.log(encomendas);
 
         return (
             <Table className='table_in table-hover' responsive>
@@ -73,7 +71,7 @@ export default class TabelaEncomendasInicio extends React.Component {
 
                     {this.state.encomendas_nao_entregues.slice(0, 5).map(encomenda => {
 
-                        let { id, numero_encomenda, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo } = encomenda;
+                        let { id, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo } = encomenda;
 
 
                         const data_entrega = data_de_entrega_pretendida.split(" ");

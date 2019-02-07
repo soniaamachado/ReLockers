@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../css/Encomendas.css';
 import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table} from "reactstrap";
 import classnames from 'classnames';
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios/index";
 import moment from "moment/moment";
 
@@ -62,6 +62,7 @@ class Encomendas extends Component {
         const encomendas_entregues = this.state.encomendas_entregues;
         const encomendas_por_entregar = this.state.encomendas_por_entregar;
 
+
         const m = new Date();
         const new_timestamp =
             m.getUTCFullYear() + "-" +
@@ -70,7 +71,11 @@ class Encomendas extends Component {
             ("0" + m.getUTCHours()).slice(-2) + ":" +
             ("0" + m.getUTCMinutes()).slice(-2) + ":" +
             ("0" + m.getUTCSeconds()).slice(-2);
+
+
         const prazo_levantamento = new_timestamp.split(" ");
+        console.log(prazo_levantamento);
+
 
         console.log(m.getUTCFullYear());
 
