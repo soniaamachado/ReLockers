@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../css/Encomendas.css';
 import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table} from "reactstrap";
 import classnames from 'classnames';
-import {Link, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios/index";
 import moment from "moment/moment";
 
