@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table} from "reactstrap";
+import { Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table } from "reactstrap";
 import classnames from 'classnames';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios/index";
 import moment from "moment/moment";
+import * as header from './constants/HeaderConstant';
 
 
 class Encomendas extends Component {
@@ -29,9 +30,9 @@ class Encomendas extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/encomendas')
+        axios.get('http://167.99.202.225/api/encomendas', { headers: header.HEADER })
             .then(response => {
-                this.setState({encomendas: response.data.data});
+                this.setState({ encomendas: response.data.data });
                 this.stateOfOrder(this.state.encomendas);
 
             })
@@ -77,16 +78,16 @@ class Encomendas extends Component {
 
 
         return (
-            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Encomendas</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
-                <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                    <i className="material-icons md-24" style={{verticalAlign: 'middle'}}>location_on</i>
-                    <h6 style={{display: 'inline', verticalAlign: 'middle'}}>Aveiro, Portugal</h6>
+                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                    <i className="material-icons md-24" style={{ verticalAlign: 'middle' }}>location_on</i>
+                    <h6 style={{ display: 'inline', verticalAlign: 'middle' }}>Aveiro, Portugal</h6>
                     <a href={'/definicoes'} style={{
                         marginLeft: '5px',
                         fontSize: '10px',
@@ -105,14 +106,14 @@ class Encomendas extends Component {
                             backgroundColor: '#967ADC',
                             border: 'none'
                         }} size="sm">
-                            <i style={{verticalAlign: 'middle'}} className="material-icons md-24">add</i>
+                            <i style={{ verticalAlign: 'middle' }} className="material-icons md-24">add</i>
                             Adicionar encomenda
                         </Button> </Link>
 
                     <Nav tabs>
                         <NavItem>
                             <NavLink
-                                className={classnames({active: this.state.activeTab === '1'})}
+                                className={classnames({ active: this.state.activeTab === '1' })}
                                 id={'tab_encomendas'}
                                 onClick={() => {
                                     this.toggle('1');
@@ -123,7 +124,7 @@ class Encomendas extends Component {
                         </NavItem>
                         <NavItem>
                             <NavLink
-                                className={classnames({active: this.state.activeTab === '2'})}
+                                className={classnames({ active: this.state.activeTab === '2' })}
                                 id={'tab_encomendas'}
                                 onClick={() => {
                                     this.toggle('2');
@@ -138,121 +139,121 @@ class Encomendas extends Component {
                             <Row>
                                 <Table className='table_in table-hover' responsive>
                                     <thead>
-                                    <tr>
-                                        <th>Número</th>
-                                        <th>Data</th>
-                                        <th>Hora</th>
-                                        <th>Local</th>
-                                        <th>Temperatura</th>
-                                        <th>Tamanho</th>
-                                        <th>Cliente</th>
-                                        <th>Estafeta</th>
-                                        <th>Cacifo</th>
-                                        <th>Recolha</th>
-                                        <th>Ações</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Número</th>
+                                            <th>Data</th>
+                                            <th>Hora</th>
+                                            <th>Local</th>
+                                            <th>Temperatura</th>
+                                            <th>Tamanho</th>
+                                            <th>Cliente</th>
+                                            <th>Estafeta</th>
+                                            <th>Cacifo</th>
+                                            <th>Recolha</th>
+                                            <th>Ações</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
 
-                                    {encomendas_por_entregar.map(encomenda => {
+                                        {encomendas_por_entregar.map(encomenda => {
 
-                                        let {id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
+                                            let { id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo } = encomenda;
 
-                                        const data_entrega = data_de_entrega_pretendida.split(" ");
+                                            const data_entrega = data_de_entrega_pretendida.split(" ");
 
-                                        const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
-                                        const timeStamp = new_timestamp.split(" ").join(",");
+                                            const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+                                            const timeStamp = new_timestamp.split(" ").join(",");
 
-                                        const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
-                                        const hoje = moment(timeStamp); // Data de hoje
-                                        const duration = moment.duration(levantamento.diff(hoje));
+                                            const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
+                                            const hoje = moment(timeStamp); // Data de hoje
+                                            const duration = moment.duration(levantamento.diff(hoje));
 
-                                        let hours = duration.asHours();
-                                        let minutes = duration.asMinutes();
-
-
-                                        if (hours <= 0 && minutes<=0) {
-                                            tempo_limite_de_levantamento =
-                                                <td> </td>
-                                        }
-                                        else {
-                                            tempo_limite_de_levantamento =
-                                                <Alert color="warning">
-                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
-                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
-                                                </Alert>
-                                        }
+                                            let hours = duration.asHours();
+                                            let minutes = duration.asMinutes();
 
 
-                                        return (
-                                            <tr key={id}>
-                                                <th scope="row">{id}</th>
-                                                <td>{data_entrega[0]}</td>
-                                                <td>{data_entrega[1]}</td>
-                                                <td>{cacifo.localizacao.nome} </td>
-                                                <td>{temperatura}ºC</td>
-                                                <td>{tamanho}</td>
-                                                <td>{cliente.nome}</td>
-                                                {encomenda.estafeta.map(estafeta =>
-                                                    <td key={id}>
-                                                        <Link
-                                                            to={{
-                                                                pathname: `detalheEstafeta/${id}`,
-                                                                query: {id: id}
-                                                            }}>
-                                                            {estafeta.nome}
-                                                        </Link>
+                                            if (hours <= 0 && minutes <= 0) {
+                                                tempo_limite_de_levantamento =
+                                                    <td> </td>
+                                            }
+                                            else {
+                                                tempo_limite_de_levantamento =
+                                                    <Alert color="warning">
+                                                        {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
+                                                    {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
+                                                    </Alert>
+                                            }
+
+
+                                            return (
+                                                <tr key={id}>
+                                                    <th scope="row">{id}</th>
+                                                    <td>{data_entrega[0]}</td>
+                                                    <td>{data_entrega[1]}</td>
+                                                    <td>{cacifo.localizacao.nome} </td>
+                                                    <td>{temperatura}ºC</td>
+                                                    <td>{tamanho}</td>
+                                                    <td>{cliente.nome}</td>
+                                                    {encomenda.estafeta.map(estafeta =>
+                                                        <td key={id}>
+                                                            <Link
+                                                                to={{
+                                                                    pathname: `detalheEstafeta/${id}`,
+                                                                    query: { id: id }
+                                                                }}>
+                                                                {estafeta.nome}
+                                                            </Link>
+                                                        </td>
+                                                    )}
+                                                    <td>
+                                                        <Link to={{
+                                                            pathname: `detalheCacifo/${cacifo.id}`,
+                                                            query: { id: id }
+                                                        }}>{cacifo.numero} </Link>
                                                     </td>
-                                                )}
-                                                <td>
-                                                    <Link to={{
-                                                    pathname: `detalheCacifo/${cacifo.id}`,
-                                                    query: {id: id}
-                                                }}>{cacifo.numero} </Link>
-                                                </td>
 
-                                                <td>{tempo_limite_de_levantamento}</td>
-                                                <td>
-                                <span className="dropdown">
-				                        <button
-                                            id="btnSearchDrop2"
-                                            style={{
-                                                backgroundColor: '#b5a0fb',
-                                                border: 'none',
-                                                width: '68px'
-                                            }}
-                                            type="button"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                            className="btn btn-dark dropdown-toggle dropdown-menu-right">
+                                                    <td>{tempo_limite_de_levantamento}</td>
+                                                    <td>
+                                                        <span className="dropdown">
+                                                            <button
+                                                                id="btnSearchDrop2"
+                                                                style={{
+                                                                    backgroundColor: '#b5a0fb',
+                                                                    border: 'none',
+                                                                    width: '68px'
+                                                                }}
+                                                                type="button"
+                                                                data-toggle="dropdown"
+                                                                aria-haspopup="true"
+                                                                aria-expanded="false"
+                                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
 
-                                            <i className="material-icons md-18"
-                                               style={{
-                                                   color: 'white',
-                                                   verticalAlign: 'middle',
-                                                   marginRight: '5px'
-                                               }}>settings</i>
+                                                                <i className="material-icons md-18"
+                                                                    style={{
+                                                                        color: 'white',
+                                                                        verticalAlign: 'middle',
+                                                                        marginRight: '5px'
+                                                                    }}>settings</i>
 
-                                        </button>
-				                        <span aria-labelledby="btnSearchDrop2"
-                                              className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}}
-                                                  className="dropdown-item"> <i
-                                                className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-				                            <Link to="#" className="dropdown-item"><i
-                                                className="material-icons md-18 icon">create</i> Editar</Link>
-				                            <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
-                                                  className="dropdown-item"><i
-                                                className="material-icons md-18 icon">delete</i> Remover</Link>
-				                        </span>
-				                    </span>
-                                                </td>
+                                                            </button>
+                                                            <span aria-labelledby="btnSearchDrop2"
+                                                                className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
+                                                                <Link to={{ pathname: `detalheEncomenda/${id}`, query: { id: id } }}
+                                                                    className="dropdown-item"> <i
+                                                                        className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+                                                                <Link to="#" className="dropdown-item"><i
+                                                                    className="material-icons md-18 icon">create</i> Editar</Link>
+                                                                <Link to={{ pathname: `apagarEncomenda/${id}`, query: { id: id } }}
+                                                                    className="dropdown-item"><i
+                                                                        className="material-icons md-18 icon">delete</i> Remover</Link>
+                                                            </span>
+                                                        </span>
+                                                    </td>
 
-                                            </tr>
+                                                </tr>
 
-                                        );
-                                    })}
+                                            );
+                                        })}
 
                                     </tbody>
                                 </Table>
@@ -262,118 +263,118 @@ class Encomendas extends Component {
                             <Row>
                                 <Table className='table_in table-hover' responsive>
                                     <thead>
-                                    <tr>
-                                        <th>Número</th>
-                                        <th>Data</th>
-                                        <th>Hora</th>
-                                        <th>Local</th>
-                                        <th>Temperatura</th>
-                                        <th>Tamanho</th>
-                                        <th>Cliente</th>
-                                        <th>Estafeta</th>
-                                        <th>Cacifo</th>
-                                        <th>Recolha</th>
-                                        <th>Ações</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Número</th>
+                                            <th>Data</th>
+                                            <th>Hora</th>
+                                            <th>Local</th>
+                                            <th>Temperatura</th>
+                                            <th>Tamanho</th>
+                                            <th>Cliente</th>
+                                            <th>Estafeta</th>
+                                            <th>Cacifo</th>
+                                            <th>Recolha</th>
+                                            <th>Ações</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
 
 
-                                    {encomendas_entregues.map(encomenda => {
+                                        {encomendas_entregues.map(encomenda => {
 
 
-                                        let {id, temperatura,data_de_levantamento, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
+                                            let { id, temperatura, data_de_levantamento, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo } = encomenda;
 
-                                        const data_entrega = data_de_entrega_pretendida.split(" ");
+                                            const data_entrega = data_de_entrega_pretendida.split(" ");
 
-                                        const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
-                                        const timeStamp = new_timestamp.split(" ").join(",");
+                                            const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+                                            const timeStamp = new_timestamp.split(" ").join(",");
 
-                                        const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
-                                        const hoje = moment(timeStamp); // Data de hoje
-                                        const duration = moment.duration(levantamento.diff(hoje));
+                                            const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
+                                            const hoje = moment(timeStamp); // Data de hoje
+                                            const duration = moment.duration(levantamento.diff(hoje));
 
-                                        let hours = duration.asHours();
-                                        let minutes = duration.asMinutes();
+                                            let hours = duration.asHours();
+                                            let minutes = duration.asMinutes();
 
 
-                                        if (hours <= 0 && minutes<=0) {
-                                            tempo_limite_de_levantamento =
-                                                <Alert color="danger">
-                                                    Prazo excedido
+                                            if (hours <= 0 && minutes <= 0) {
+                                                tempo_limite_de_levantamento =
+                                                    <Alert color="danger">
+                                                        Prazo excedido
                                                 </Alert>
-                                        }
-                                        else if (data_de_levantamento !=null){
+                                            }
+                                            else if (data_de_levantamento != null) {
 
-                                            const data_levantamento = data_de_levantamento.split(" ");
-                                            tempo_limite_de_levantamento =
-                                                <Alert color="success">
-                                                    Levantada em {data_levantamento[0]}
-                                                </Alert>;
-                                        }
-                                        else {
-                                            tempo_limite_de_levantamento =
-                                                <Alert color="warning">
-                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
-                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
-                                                </Alert>
-                                        }
+                                                const data_levantamento = data_de_levantamento.split(" ");
+                                                tempo_limite_de_levantamento =
+                                                    <Alert color="success">
+                                                        Levantada em {data_levantamento[0]}
+                                                    </Alert>;
+                                            }
+                                            else {
+                                                tempo_limite_de_levantamento =
+                                                    <Alert color="warning">
+                                                        {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
+                                                    {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
+                                                    </Alert>
+                                            }
 
 
 
-                                        return (
-                                            <tr key={id}>
-                                                <th scope="row">{id}</th>
-                                                <td>{data_entrega[0]}</td>
-                                                <td>{data_entrega[1]}</td>
-                                                <td>{cacifo.localizacao.nome}</td>
-                                                <td>{temperatura}ºC</td>
-                                                <td>{tamanho}</td>
-                                                <td>{cliente.nome}</td>
-                                                {encomenda.estafeta.map(estafeta =>
-                                                    <td key={id}><Link to={{
-                                                        pathname: `detalheEstafeta/${id}`,
-                                                        query: {id: id}
-                                                    }}> {estafeta.nome}</Link></td>
-                                                )}
-                                                <td><Link to={{
-                                                    pathname: `detalheCacifo/${cacifo.id}`,
-                                                    query: {id: id}
-                                                }}>{cacifo.numero} </Link></td>
+                                            return (
+                                                <tr key={id}>
+                                                    <th scope="row">{id}</th>
+                                                    <td>{data_entrega[0]}</td>
+                                                    <td>{data_entrega[1]}</td>
+                                                    <td>{cacifo.localizacao.nome}</td>
+                                                    <td>{temperatura}ºC</td>
+                                                    <td>{tamanho}</td>
+                                                    <td>{cliente.nome}</td>
+                                                    {encomenda.estafeta.map(estafeta =>
+                                                        <td key={id}><Link to={{
+                                                            pathname: `detalheEstafeta/${id}`,
+                                                            query: { id: id }
+                                                        }}> {estafeta.nome}</Link></td>
+                                                    )}
+                                                    <td><Link to={{
+                                                        pathname: `detalheCacifo/${cacifo.id}`,
+                                                        query: { id: id }
+                                                    }}>{cacifo.numero} </Link></td>
 
-                                                <td>{tempo_limite_de_levantamento}</td>
-                                                <td>
-                                <span className="dropdown">
-				                        <button id="btnSearchDrop2"
-                                                style={{backgroundColor: '#b5a0fb', border: 'none', width: '68px'}}
-                                                type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false"
-                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
-                                            <i className="material-icons md-18" style={{
-                                                color: 'white',
-                                                verticalAlign: 'middle',
-                                                marginRight: '5px'
-                                            }}>settings</i>
-                                        </button>
-				                        <span aria-labelledby="btnSearchDrop2"
-                                              className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}}
-                                                  className="dropdown-item"> <i
-                                                className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-				                            <Link to="#" className="dropdown-item"><i
-                                                className="material-icons md-18 icon">create</i> Editar</Link>
+                                                    <td>{tempo_limite_de_levantamento}</td>
+                                                    <td>
+                                                        <span className="dropdown">
+                                                            <button id="btnSearchDrop2"
+                                                                style={{ backgroundColor: '#b5a0fb', border: 'none', width: '68px' }}
+                                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false"
+                                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
+                                                                <i className="material-icons md-18" style={{
+                                                                    color: 'white',
+                                                                    verticalAlign: 'middle',
+                                                                    marginRight: '5px'
+                                                                }}>settings</i>
+                                                            </button>
+                                                            <span aria-labelledby="btnSearchDrop2"
+                                                                className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
+                                                                <Link to={{ pathname: `detalheEncomenda/${id}`, query: { id: id } }}
+                                                                    className="dropdown-item"> <i
+                                                                        className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+                                                                <Link to="#" className="dropdown-item"><i
+                                                                    className="material-icons md-18 icon">create</i> Editar</Link>
 
-                                            <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
-                                                  className="dropdown-item"><i
-                                                className="material-icons md-18 icon">delete</i> Remover</Link>
+                                                                <Link to={{ pathname: `apagarEncomenda/${id}`, query: { id: id } }}
+                                                                    className="dropdown-item"><i
+                                                                        className="material-icons md-18 icon">delete</i> Remover</Link>
 
-				                        </span>
-				                    </span>
-                                                </td>
-                                            </tr>
-                                        );
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            );
 
-                                    })}
+                                        })}
 
                                     </tbody>
                                 </Table>

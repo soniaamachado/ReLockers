@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Badge, Button, Card, CardBody} from "reactstrap";
-import {Link} from "react-router-dom";
+import { Badge, Button, Card, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
+import * as header from './constants/HeaderConstant';
 
 
 export default class CacifosOcupados extends Component {
@@ -11,9 +12,9 @@ export default class CacifosOcupados extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/encomendas')
+        axios.get('http://167.99.202.225/api/encomendas', { headers: header.HEADER })
             .then(response => {
-                this.setState({encomendas_cacifos: response.data.data})
+                this.setState({ encomendas_cacifos: response.data.data })
             })
             .catch(function (error) {
                 console.log(error);
@@ -25,10 +26,10 @@ export default class CacifosOcupados extends Component {
         const encomendas_cacifos = this.state.encomendas_cacifos;
 
         return (
-            <div style={{margin:'auto'}}>
+            <div style={{ margin: 'auto' }}>
 
                 {encomendas_cacifos.map(cacifos => {
-                    const {id, cacifo} = cacifos;
+                    const { id, cacifo } = cacifos;
 
                     if (cacifo.estado.id === 2) {
                         return (
@@ -41,10 +42,10 @@ export default class CacifosOcupados extends Component {
                     else
                         return (
                             <div className="coluna_cacifo" >
-                                <Card key={id} style={{display:'inline-block'}} className='card_cacifo'>
+                                <Card key={id} style={{ display: 'inline-block' }} className='card_cacifo'>
                                     <CardBody>
                                         <h4>{cacifo.numero}</h4>
-                                        <div style={{display: 'inline', marginBottom: '10px'}}>
+                                        <div style={{ display: 'inline', marginBottom: '10px' }}>
                                             <p>
                                                 Temperatura
                                                 <Badge className='badge'>{cacifo.temperatura}ºC</Badge>
@@ -57,7 +58,7 @@ export default class CacifosOcupados extends Component {
                                             </p>
                                         </div>
 
-                                        <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
+                                        <Button className='btn_detalhes' size="sm"> <Link to={{ pathname: `detalheCacifo/${id}`, query: { id: id } }} >Ver
                                             detalhes</Link>
                                         </Button>
                                     </CardBody>

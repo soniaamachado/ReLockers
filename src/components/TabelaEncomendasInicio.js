@@ -4,14 +4,7 @@ import { Alert, Table } from "reactstrap";
 import axios from "axios/index";
 import moment from "moment";
 import { Link } from "react-router-dom";
-
-const HEADER = {
-    "Accept": "application/json",
-    "Authorization": `Bearer ${localStorage.getItem("access_token")}`
-};
-
-//adicionar 
-//axios.get('http://localhost:80/api/encomendas', { headers: HEADER })
+import * as header from './constants/HeaderConstant';
 
 export default class TabelaEncomendasInicio extends React.Component {
     constructor(props) {
@@ -25,7 +18,7 @@ export default class TabelaEncomendasInicio extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/encomendas')
+        axios.get('http://167.99.202.225/api/encomendas', { headers: header.HEADER })
             .then(response => {
                 this.setState({ encomendas: response.data.data });
                 this.stateOfOrder(this.state.encomendas);
@@ -84,7 +77,7 @@ export default class TabelaEncomendasInicio extends React.Component {
 
                     {this.state.encomendas_nao_entregues.slice(0, 5).map(encomenda => {
 
-                        let {id, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo} = encomenda;
+                        let { id, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo } = encomenda;
 
                         const data_entrega = data_de_entrega_pretendida.split(" ");
 
@@ -99,15 +92,15 @@ export default class TabelaEncomendasInicio extends React.Component {
                         let minutes = duration.asMinutes();
 
 
-                        if (hours <= 0 && minutes<=0) {
+                        if (hours <= 0 && minutes <= 0) {
                             tempo_limite_de_levantamento =
                                 <td> </td>
                         }
                         else {
                             tempo_limite_de_levantamento =
                                 <Alert color="warning">
-                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
-                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
+                                    {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
+                                    {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
                                 </Alert>
                         }
 

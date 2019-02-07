@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "../css/DetalheEstafeta.css";
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import * as header from './constants/HeaderConstant';
 
 class Detalhes_Estafeta extends Component {
 
@@ -10,9 +11,9 @@ class Detalhes_Estafeta extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/users/ '+ this.props.match.params.id + '/encomendas')
+        axios.get('http://167.99.202.225/api/users/ ' + this.props.match.params.id + '/encomendas', { headers: header.HEADER })
             .then(response => {
-                this.setState({users: response.data.data});
+                this.setState({ users: response.data.data });
                 console.log(this.state.users[0].estafeta[0].nome);
             })
             .catch(function (error) {
@@ -77,36 +78,37 @@ class Detalhes_Estafeta extends Component {
                             <div className="table-responsive table estafeta">
                                 <table className="table">
                                     <thead>
-                                    <tr>
-                                        <th>Número de Encomenda</th>
-                                        <th>Localização de entrega</th>
-                                        <th>Data de entrega</th>
-                                        <th>Número de Cacifo</th>
+                                        <tr>
+                                            <th>Número de Encomenda</th>
+                                            <th>Localização de entrega</th>
+                                            <th>Data de entrega</th>
+                                            <th>Número de Cacifo</th>
 
-                                    </tr>
+                                        </tr>
                                     </thead>
 
                                     <tbody>
 
 
-                                    {this.state.users.map((user, key) => {
+                                        {this.state.users.map((user, key) => {
 
-                                        return (
+                                            return (
 
-                                    <tr>
-                                        <th scope="row">{this.state.users[key].id}</th>
+                                                <tr>
+                                                    <th scope="row">{this.state.users[key].id}</th>
 
-                                        <td>{this.state.users[key].cacifo.localizacao.nome}</td>
-                                        <td>{this.state.users[key].data_de_entrega}</td>
-                                        <td>{this.state.users[key].cacifo.numero}</td>
-                                    </tr>
-                                            )})}
+                                                    <td>{this.state.users[key].cacifo.localizacao.nome}</td>
+                                                    <td>{this.state.users[key].data_de_entrega}</td>
+                                                    <td>{this.state.users[key].cacifo.numero}</td>
+                                                </tr>
+                                            )
+                                        })}
 
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
                         </div>
+                    </div>
 
                 </main>
             );

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 
 import TextInputGroup from "./forms/TextInput";
+import * as header from './constants/HeaderConstant';
 
 export default class AdicionarEstafeta extends Component {
 
@@ -33,7 +34,7 @@ export default class AdicionarEstafeta extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:80/api/users')
+        axios.get('http://localhost:80/api/users', { headers: header.HEADER })
             .then(response => {
                 this.setState({ users: response.data.data });
                 this.stateOfOrder(this.state.users);

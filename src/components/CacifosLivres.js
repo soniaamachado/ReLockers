@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "../css/Cacifos.css";
 import axios from 'axios';
-import {Badge, Button, Card, CardBody} from "reactstrap";
-import {Link} from "react-router-dom";
+import { Badge, Button, Card, CardBody } from "reactstrap";
+import { Link } from "react-router-dom";
+import * as header from './constants/HeaderConstant';
 
 
 export default class CacifosLivres extends Component {
@@ -11,9 +12,9 @@ export default class CacifosLivres extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/cacifos')
+        axios.get('http://167.99.202.225/api/cacifos', { headers: header.HEADER })
             .then(response => {
-                this.setState({cacifos: response.data.data})
+                this.setState({ cacifos: response.data.data })
             })
             .catch(function (error) {
                 console.log(error);
@@ -26,9 +27,9 @@ export default class CacifosLivres extends Component {
 
         return (
 
-            <div style={{margin:'auto', display:'block'}}>
+            <div style={{ margin: 'auto', display: 'block' }}>
                 {cacifos.map(cacifo => {
-                    const {temperatura, id, numero, tamanho, estado} = cacifo;
+                    const { temperatura, id, numero, tamanho, estado } = cacifo;
 
 
                     if (estado.id === 2) {
@@ -38,31 +39,31 @@ export default class CacifosLivres extends Component {
                     }
                     else
 
-                    return (
-                        <div className="coluna_cacifo" >
-                            <Card key={id} style={{display:'inline-block'}} className='card_cacifo'>
-                                <CardBody>
-                                    <h4>{numero}</h4>
-                                    <div style={{display: 'inline', marginBottom: '10px'}}>
-                                        <p>
-                                            Temperatura
+                        return (
+                            <div className="coluna_cacifo" >
+                                <Card key={id} style={{ display: 'inline-block' }} className='card_cacifo'>
+                                    <CardBody>
+                                        <h4>{numero}</h4>
+                                        <div style={{ display: 'inline', marginBottom: '10px' }}>
+                                            <p>
+                                                Temperatura
                                             <Badge className='badge'>{temperatura}ºC</Badge>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Tamanho
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Tamanho
                                             <Badge className='badge'>{tamanho.tamanho}</Badge>
-                                        </p>
-                                    </div>
+                                            </p>
+                                        </div>
 
-                                    <Button className='btn_detalhes' size="sm"> <Link to={{pathname: `detalheCacifo/${id}`, query: {id: id}}} >Ver
+                                        <Button className='btn_detalhes' size="sm"> <Link to={{ pathname: `detalheCacifo/${id}`, query: { id: id } }} >Ver
                                         detalhes</Link>
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    );
+                                        </Button>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        );
 
                 })}
 
