@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
 import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
-import moment from "moment";
 
 export default class AdicionarEncomenda extends Component {
 
@@ -22,8 +21,8 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "S",
             observacoes: "",
             temperatura: 20,
-            cacifo_id: "",
-            cliente_id: "",
+            // cacifo_id: "",
+            // cliente_id: "",
             errors: {}
         };
 
@@ -129,11 +128,15 @@ export default class AdicionarEncomenda extends Component {
         e.preventDefault();
 
         const {
-            estado_encomenda, cacifo_id, cliente_id,
-            temperatura, observacoes, tamanho
+            estado_encomenda,
+            // cacifo_id,
+            // cliente_id,
+            temperatura,
+            observacoes,
+            tamanho
         } = this.state;
 
-        if (this.state.data_de_entrega_pretendida == "") {
+        if (this.state.data_de_entrega_pretendida === "") {
             this.setState({errors: {data_de_entrega_pretendida: "URL is required"}});
             return;
         }
@@ -181,12 +184,10 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "",
             observacoes: "",
             temperatura: 20,
-            //     cacifo_id: "",
-            //     cliente_id: ""
+
 
         });
 
-        //this.props.history.push("/news");
     };
 
     onChange = e => {
