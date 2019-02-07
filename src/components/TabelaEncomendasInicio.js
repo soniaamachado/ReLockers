@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const HEADER = {
     "Accept": "application/json",
     "Authorization": `Bearer ${localStorage.getItem("access_token")}`
-}
+};
 
 //adicionar 
 //axios.get('http://localhost:80/api/encomendas', { headers: HEADER })
@@ -55,6 +55,19 @@ export default class TabelaEncomendasInicio extends React.Component {
     render() {
         const encomendas = this.state.encomendas;
 
+
+        const m = new Date();
+        const new_timestamp =
+            m.getUTCFullYear() + "-" +
+            ("0" + (m.getUTCMonth() + 1)).slice(-2) + "-" +
+            ("0" + m.getUTCDate()).slice(-2) + " " +
+            ("0" + m.getUTCHours()).slice(-2) + ":" +
+            ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+            ("0" + m.getUTCSeconds()).slice(-2);
+
+
+        const prazo_levantamento = new_timestamp.split(" ");
+
         return (
             <Table className='table_in table-hover' responsive>
                 <thead>
@@ -71,41 +84,33 @@ export default class TabelaEncomendasInicio extends React.Component {
 
                     {this.state.encomendas_nao_entregues.slice(0, 5).map(encomenda => {
 
-                        let { id, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo } = encomenda;
-
+                        let {id, tempo_limite_de_levantamento, data_de_entrega_pretendida, cacifo} = encomenda;
 
                         const data_entrega = data_de_entrega_pretendida.split(" ");
 
-                        const m = new Date();
-                        const new_timestamp =
-                            m.getUTCFullYear() + "-" +
-                            ("0" + (m.getUTCMonth() + 1)).slice(-2) + "-" +
-                            ("0" + m.getUTCDate()).slice(-2) + " " +
-                            ("0" + m.getUTCHours()).slice(-2) + ":" +
-                            ("0" + m.getUTCMinutes()).slice(-2) + ":" +
-                            ("0" + m.getUTCSeconds()).slice(-2);
-                        const prazo_levantamento = new_timestamp.split(" ");
+                        const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+                        const timeStamp = new_timestamp.split(" ").join(",");
+
+                        const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
+                        const hoje = moment(timeStamp); // Data de hoje
+                        const duration = moment.duration(levantamento.diff(hoje));
+
+                        let hours = duration.asHours();
+                        let minutes = duration.asMinutes();
 
 
-                        const data_split = tempo_limite_de_levantamento.split(" ");
-                        const now = moment(data_split[0]); //todays date
-                        const end = moment(prazo_levantamento[0]); // another date
-                        const duration = moment.duration(now.diff(end));
-                        let days = duration.asDays();
-
-                        if (days <= 0) {
-                            days =
-                                <Alert color="danger" style={{ height: '35px', verticalAlign: 'middle' }}>
-                                    <i style={{ verticalAlign: 'middle', fontSize: '18px', marginBottom: '12px' }}
-                                        className='material-icons m-16'>warning</i>
+                        if (hours <= 0 && minutes<=0) {
+                            tempo_limite_de_levantamento =
+                                <td> </td>
+                        }
+                        else {
+                            tempo_limite_de_levantamento =
+                                <Alert color="warning">
+                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
+                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
                                 </Alert>
                         }
-                        else if (days > 0) {
-                            days =
-                                <Alert color="warning">
-                                    Levantamento em {parseInt(days)} dias
-                    </Alert>
-                        }
+
 
                         return (
                             <tr key={id}>
@@ -113,7 +118,7 @@ export default class TabelaEncomendasInicio extends React.Component {
                                 <td>{data_entrega[0]}</td>
                                 <td>{data_entrega[1]}</td>
                                 {<td>{cacifo.localizacao.nome === null ? "" : cacifo.localizacao.nome} </td>}
-                                <td>{days}</td>
+                                <td>{tempo_limite_de_levantamento}</td>
                                 <td>
                                     <span className="dropdown">
                                         <button id="btnSearchDrop2"

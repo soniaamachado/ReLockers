@@ -170,7 +170,6 @@ class Encomendas extends Component {
                                         let hours = duration.asHours();
                                         let minutes = duration.asMinutes();
 
-                                        // hours = hours < 10 ? '0' + hours : hours;
 
                                         if (hours <= 0 && minutes<=0) {
                                             tempo_limite_de_levantamento =
@@ -179,8 +178,8 @@ class Encomendas extends Component {
                                         else {
                                             tempo_limite_de_levantamento =
                                                 <Alert color="warning">
-                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }:
-                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}h
+                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
+                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
                                                 </Alert>
                                         }
 
@@ -283,36 +282,43 @@ class Encomendas extends Component {
                                     {encomendas_entregues.map(encomenda => {
 
 
-                                        const {id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_levantamento, data_de_entrega_pretendida, data_de_entrega, cliente, cacifo} = encomenda;
+                                        let {id, temperatura,data_de_levantamento, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
 
                                         const data_entrega = data_de_entrega_pretendida.split(" ");
-                                        const data_levantamento = data_de_levantamento.split(" ");
 
-                                        const data_split = tempo_limite_de_levantamento.split(" ");
-                                        const now = moment(data_split[0]); //todays date
-                                        const end = moment(prazo_levantamento[0]); // another date
-                                        const duration = moment.duration(now.diff(end));
-                                        let days = duration.asDays();
+                                        const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+                                        const timeStamp = new_timestamp.split(" ").join(",");
 
-                                        if (days <= 0) {
-                                            days =
+                                        const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
+                                        const hoje = moment(timeStamp); // Data de hoje
+                                        const duration = moment.duration(levantamento.diff(hoje));
+
+                                        let hours = duration.asHours();
+                                        let minutes = duration.asMinutes();
+
+
+                                        if (hours <= 0 && minutes<=0) {
+                                            tempo_limite_de_levantamento =
                                                 <Alert color="danger">
                                                     Prazo excedido
                                                 </Alert>
                                         }
-                                        else if (days > 0) {
-                                            days =
-                                                <Alert color="warning">
-                                                    Levantamento em {parseInt(days)} dias
-                                                </Alert>;
+                                        else if (data_de_levantamento !=null){
 
-                                            if (data_de_levantamento != null) {
-                                                days =
-                                                    <Alert color="success">
-                                                        Levantada em {data_levantamento[0]}
-                                                    </Alert>;
-                                            }
+                                            const data_levantamento = data_de_levantamento.split(" ");
+                                            tempo_limite_de_levantamento =
+                                                <Alert color="success">
+                                                    Levantada em {data_levantamento[0]}
+                                                </Alert>;
                                         }
+                                        else {
+                                            tempo_limite_de_levantamento =
+                                                <Alert color="warning">
+                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
+                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
+                                                </Alert>
+                                        }
+
 
 
                                         return (
@@ -335,7 +341,7 @@ class Encomendas extends Component {
                                                     query: {id: id}
                                                 }}>{cacifo.numero} </Link></td>
 
-                                                <td>{days}</td>
+                                                <td>{tempo_limite_de_levantamento}</td>
                                                 <td>
                                 <span className="dropdown">
 				                        <button id="btnSearchDrop2"
