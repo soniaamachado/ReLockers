@@ -1,11 +1,8 @@
 import React from 'react';
-import {Label, Input, Button} from 'reactstrap';
-import {Link} from "react-router-dom";
+import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import axios from "axios";
 
-
-export default class Definicoes extends React.Component {
-
+export default class definicoes extends React.Component {
 
     state = {
         userinfo: []
@@ -23,106 +20,43 @@ export default class Definicoes extends React.Component {
     }
 
 
-
-
-
     render() {
-
         return (
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Definições</h1>
-                </div>
-
-                <div style={{margin:'0 auto' , height:'auto'}}>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-                    <Label for="nome">Nome Completo</Label>
-                    <Input
-                        type="nome"
-                        name="nome"
-                        id="nome"
-                        placeholder={this.state.userinfo.nome}
-                     />
-                </div>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-                    <Label for="email">Email</Label>
-                    <Input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder={this.state.userinfo.email}
-                        />
-
-                </div>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-                    <Label for="telefone">Telefone</Label>
-                    <Input
-                        type="telefone"
-                        name="telefone"
-                        id="telefone"
-                        placeholder={this.state.userinfo.telefone}
-                        />
-
-                </div>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-                    <Label for="data_nascimento">Data de nascimento</Label>
-                    <Input
-                        type="data_nascimento"
-                        name="data_nascimento"
-                        id="data_nascimento"
-                        placeholder={this.state.userinfo.data_nascimento}
-                        />
-
-                </div>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-
-                    <form>
-                        <Label for="tipo">Password</Label>
-                        <div className="form-row">
-                            <div className="col" style={{display:'inline' , float:'left'}}>
-                                <input disabled style ={{outline:'none' , border:'none'}}type="text" className="form-control" placeholder="***********"></input>
-                            </div>
-                            <div style={{display:'inline' , float:'right'}} >
-                                <Button color="link"> <Link to={{}}
-
-                                >Alterar password</Link>
-                                </Button>
-
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-                <div style={{margin:'0 auto 20px auto' , width:'70%'}}>
-                    <div style={{marginBottom: '20px '}}>
-                    <Label for="tipo">Função</Label>
-                    <Input
-                        type="tipo"
-                        name="tipo"
-                        id="tipo"
-                        placeholder={this.state.userinfo.tipo}
-                    />
-                        </div>
-                    <Button style={{padding: '0'}}color="link"> <Link to={{}}
-
-                    >Apagar conta</Link>
-                    </Button>
-
-                    <div style={{margin:'0 auto 20px auto'}}>
-                    <Button style={{marginRight:'20px'}} className='btn_detalhes' color="link" size="m" ><Link to="/"
-
-                    >Cancelar</Link></Button>
-
-
-                    <Button className='btn_detalhes' size="m"> <Link to={{}}
-
-                    >Guardar alterações</Link>
-                    </Button>
+                    <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
-
-            </div>
+                <Form>
+                    <FormGroup>
+                        <Label for="name">Nome Completo</Label>
+                        <Input type="text" name="name" id="name" placeholder={this.state.userinfo.nome} disabled/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="contact">Contacto telefónico</Label>
+                        <Input type="text" name="contact" id="contact" placeholder={this.state.userinfo.telefone}
+                               disabled/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="email">Email</Label>
+                        <Input type="email" name="email" id="email" placeholder={this.state.userinfo.email} disabled/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="function">Função</Label>
+                        <Input type="text" name="function" id="function" placeholder={this.state.userinfo.tipo}
+                               disabled/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Alterar password</Label>
+                        <Input type="password" name="password" id="password" placeholder="Insira uma nova password!"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Input type="password" name="password" id="password" placeholder="Confirme a nova password!"/>
+                    </FormGroup>
+                    <Button>Submit</Button>
+                </Form>
             </main>
         );
     }
