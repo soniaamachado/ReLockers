@@ -127,19 +127,19 @@ export default class AdicionarEstafeta extends Component {
 
     handleTipoChange = (event) => {
         this.setState({ tipo: event.target.value });
-    }
+    };
 
     handleTelefoneChange = (event) => {
         this.setState({ telefone: event.target.value });
-    }
+    };
 
     handleNascimento = (event) => {
         this.setState({ data_nascimento: event.target.value });
-    }
+    };
 
     handleSupervisorChange = (event) => {
         this.setState({ supervisor_id: event.target.value });
-    }
+    };
 
     render() {
         const {

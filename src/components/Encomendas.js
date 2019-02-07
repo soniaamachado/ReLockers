@@ -166,7 +166,7 @@ class Encomendas extends Component {
 
                                         const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
                                         const hoje = moment(timeStamp); // Data de hoje
-                                        const duration = moment.duration(hoje.diff(levantamento));
+                                        const duration = moment.duration(levantamento.diff(hoje));
 
                                         let hours = duration.asHours();
                                         let minutes = duration.asMinutes();
@@ -176,13 +176,14 @@ class Encomendas extends Component {
                                             tempo_limite_de_levantamento =
                                                 <td> </td>
                                         }
-                                        else {
+                                        else{
                                             tempo_limite_de_levantamento =
                                                 <Alert color="warning">
                                                     {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
                                                     {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
                                                 </Alert>
                                         }
+
 
 
                                         return (

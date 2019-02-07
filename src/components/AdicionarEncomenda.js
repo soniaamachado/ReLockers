@@ -137,7 +137,7 @@ export default class AdicionarEncomenda extends Component {
             tamanho
         } = this.state;
 
-        if (this.state.data_de_entrega_pretendida === "") {
+        if (this.state.data_de_entrega_pretendida == "") {
             this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
             return;
         }
@@ -149,11 +149,18 @@ export default class AdicionarEncomenda extends Component {
 
         const tempo_limite_de_levantamento = this.data_final(data_de_entrega_pretendida);
 
-        console.log(tempo_limite_de_levantamento);
+
+
+        if (data_de_entrega_pretendida == null) {
+            this.setState({ errors: { email: "Insira uma data" } });
+            return;
+        }
+
         if (cacifo_id === "") {
             this.setState({ errors: { temperatura: "URL is required" } });
             return;
         }
+
         if (cliente_id === "") {
             this.setState({ errors: { observacoes: "URL is required" } });
             return;
@@ -170,8 +177,6 @@ export default class AdicionarEncomenda extends Component {
             cacifo_id,
             cliente_id
         };
-
-        console.log(newEncomenda);
 
 
         axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
@@ -340,6 +345,7 @@ export default class AdicionarEncomenda extends Component {
                     {/*</Input>*/}
 
                     {/*</FormGroup>*/}
+
 
                 </Form>
             </main>
