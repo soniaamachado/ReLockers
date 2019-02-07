@@ -34,7 +34,7 @@ class Login extends Component {
             password
         };
 
-        axios.post('http://localhost:80/oauth/token', login).then(res => {
+        axios.post('http://167.99.202.225/oauth/token', login).then(res => {
             localStorage.setItem("access_token", res.data.access_token);
             localStorage.setItem("refresh_token", res.data.refresh_token);
             this.props.history.push("/inicio");

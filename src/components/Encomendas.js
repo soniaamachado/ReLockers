@@ -74,10 +74,6 @@ class Encomendas extends Component {
 
 
         const prazo_levantamento = new_timestamp.split(" ");
-        console.log(prazo_levantamento);
-
-
-        console.log(m.getUTCFullYear());
 
 
         return (
@@ -162,26 +158,29 @@ class Encomendas extends Component {
 
                                         let {id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
 
-
                                         const data_entrega = data_de_entrega_pretendida.split(" ");
 
-                                        const data_split = tempo_limite_de_levantamento.split(" ");
-                                        const now = moment(data_split[0]); //todays date
-                                        const end = moment(prazo_levantamento[0]); // another date
-                                        const duration = moment.duration(now.diff(end));
+                                        const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+                                        const timeStamp = new_timestamp.split(" ").join(",");
 
-                                        let days = duration.asDays();
+                                        const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
+                                        const hoje = moment(timeStamp); // Data de hoje
+                                        const duration = moment.duration(levantamento.diff(hoje));
 
+                                        let hours = duration.asHours();
+                                        let minutes = duration.asMinutes();
 
-                                        if (days <= 0) {
-                                            days =
-                                                null
+                                        // hours = hours < 10 ? '0' + hours : hours;
+
+                                        if (hours <= 0 && minutes<=0) {
+                                            tempo_limite_de_levantamento =
+                                                <td> </td>
                                         }
-
-                                        else if (days > 0) {
-                                            days =
+                                        else {
+                                            tempo_limite_de_levantamento =
                                                 <Alert color="warning">
-                                                    Levantamento em {parseInt(days)} dias
+                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }:
+                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}h
                                                 </Alert>
                                         }
 
@@ -213,7 +212,7 @@ class Encomendas extends Component {
                                                 }}>{cacifo.numero} </Link>
                                                 </td>
 
-                                                <td>{days}</td>
+                                                <td>{tempo_limite_de_levantamento}</td>
                                                 <td>
                                 <span className="dropdown">
 				                        <button
