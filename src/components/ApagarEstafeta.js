@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import axios from "axios/index";
-import {Redirect} from "react-router-dom";
-
+import { Redirect } from "react-router-dom";
+import * as header from './constants/HeaderConstant';
 
 export default class ApagarEstafeta extends Component {
 
-    state={
-        users:[]
+    state = {
+        users: []
     };
 
     componentDidMount() {
-        axios.delete('http://167.99.202.225/api/encomendas/' + this.props.match.params.id)
+        axios.delete('http://167.99.202.225/api/encomendas/' + this.props.match.params.id, { headers: header.HEADER })
             .then(response => {
-                this.setState({users: response.data.data});
+                this.setState({ users: response.data.data });
             })
             .catch(function (error) {
                 console.log(error);
@@ -22,7 +22,7 @@ export default class ApagarEstafeta extends Component {
 
     render() {
         return (
-            <Redirect to='/encomendas'/>
+            <Redirect to='/encomendas' />
         )
     }
 }

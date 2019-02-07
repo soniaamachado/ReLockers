@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
+import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import * as header from './constants/HeaderConstant';
 
 export default class AdicionarEncomenda extends Component {
 
@@ -32,9 +33,9 @@ export default class AdicionarEncomenda extends Component {
     }
 
     componentDidMount = () => {
-        axios.get('http://167.99.202.225/api/users')
+        axios.get('http://167.99.202.225/api/users', { headers: header.HEADER })
             .then(response => {
-                this.setState({users: response.data.data});
+                this.setState({ users: response.data.data });
                 this.splitArrayEncomendas(this.state.users);
 
             })
@@ -42,18 +43,18 @@ export default class AdicionarEncomenda extends Component {
                 console.log(error);
             });
 
-        axios.get('http://167.99.202.225/api/cacifos')
+        axios.get('http://167.99.202.225/api/cacifos', { headers: header.HEADER })
             .then(response => {
-                this.setState({cacifos: response.data.data});
+                this.setState({ cacifos: response.data.data });
                 this.splitArrayCacifos(this.state.users);
             })
             .catch(function (error) {
                 console.log(error);
             });
 
-        axios.get('http://167.99.202.225/api/clientes')
+        axios.get('http://167.99.202.225/api/clientes', { headers: header.HEADER })
             .then(response => {
-                this.setState({clientes: response.data.data});
+                this.setState({ clientes: response.data.data });
             })
             .catch(function (error) {
                 console.log(error);
@@ -137,7 +138,7 @@ export default class AdicionarEncomenda extends Component {
         } = this.state;
 
         if (this.state.data_de_entrega_pretendida === "") {
-            this.setState({errors: {data_de_entrega_pretendida: "URL is required"}});
+            this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
             return;
         }
 
@@ -197,16 +198,16 @@ export default class AdicionarEncomenda extends Component {
     };
 
     handleTamanhoChange = (event) => {
-        this.setState({tamanho: event.target.value});
+        this.setState({ tamanho: event.target.value });
     };
 
 
     handleDataDeEntregaChange = (event) => {
-        this.setState({data_de_entrega_pretendida: event.target.value});
+        this.setState({ data_de_entrega_pretendida: event.target.value });
     };
 
     handleTemperaturaChange = (event) => {
-        this.setState({temperatura: event.target.value});
+        this.setState({ temperatura: event.target.value });
     };
 
     render() {
@@ -214,7 +215,7 @@ export default class AdicionarEncomenda extends Component {
             observacoes, errors
         } = this.state;
         return (
-            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                     <h1 className="h2">Adicionar encomenda</h1>
@@ -224,27 +225,27 @@ export default class AdicionarEncomenda extends Component {
 
                 <Form onSubmit={this.onSubmit}>
 
-                    <Row style={{marginBottom: '30px'}}>
+                    <Row style={{ marginBottom: '30px' }}>
                         <Col>
 
                             <Label for="tamanho">Temperatura</Label>
-                            <Input style={{width: '65px', display:'inline', marginLeft:'20px'}} className='input-encomenda' type="number" name="temperatura"
-                                   id="temperatura" min="0"
-                                   max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
+                            <Input style={{ width: '65px', display: 'inline', marginLeft: '20px' }} className='input-encomenda' type="number" name="temperatura"
+                                id="temperatura" min="0"
+                                max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
                             </Input>
 
-                            <Label style={{marginLeft:'20px'}} for="tamanho">Tamanho</Label>
-                            <Input style={{width: '65px', display:'inline',marginLeft:'20px'}} type="select" name="tamanho" id="tamanho"
-                                   value={this.state.tamanho} onChange={this.handleTamanhoChange}>
+                            <Label style={{ marginLeft: '20px' }} for="tamanho">Tamanho</Label>
+                            <Input style={{ width: '65px', display: 'inline', marginLeft: '20px' }} type="select" name="tamanho" id="tamanho"
+                                value={this.state.tamanho} onChange={this.handleTamanhoChange}>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
                             </Input>
 
-                            <Label style={{ display:'block',marginTop:'20px'}} for="data_de_entrega_pretendida">Data e hora de entrega</Label>
+                            <Label style={{ display: 'block', marginTop: '20px' }} for="data_de_entrega_pretendida">Data e hora de entrega</Label>
                             <Input
-                                style={{width: '250px', display:'block'}}
+                                style={{ width: '250px', display: 'block' }}
                                 type="datetime-local"
                                 name="data_de_entrega_pretendida"
                                 id="data_de_entrega_pretendida"
@@ -260,7 +261,7 @@ export default class AdicionarEncomenda extends Component {
                             <FormGroup>
                                 <Label for="localizacao">Localização</Label>
                                 <Input type="select" name="localizacao" id="localizacao"
-                                       value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
+                                    value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
                                     {this.state.cacifos_livres.map(cacifo => {
 
                                         return (
@@ -276,7 +277,7 @@ export default class AdicionarEncomenda extends Component {
                             <FormGroup>
                                 <Label for="localizacao">Cacifo</Label>
                                 <Input type="select" name="localizacao" id="localizacao"
-                                       value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
+                                    value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
                                     {this.state.cacifos_livres.map(cacifo => {
 
                                         return (

@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "../css/Inicio.css";
-import {Card, CardBody, CardText, CardTitle} from "reactstrap";
+import { Card, CardBody, CardText, CardTitle } from "reactstrap";
 import TabelaEncomendasInicio from "./TabelaEncomendasInicio";
 import TabelaEstafetasInicio from "./TabelaEstafetasInicio";
 import axios from "axios/index";
 import CountUp from 'react-countup';
+import * as header from './constants/HeaderConstant';
 
 
 class Inicio extends Component {
@@ -22,9 +23,9 @@ class Inicio extends Component {
 
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/encomendas')
+        axios.get('http://167.99.202.225/api/encomendas', { headers: header.HEADER })
             .then(response => {
-                this.setState({encomendas: response.data.data});
+                this.setState({ encomendas: response.data.data });
                 this.stateOfOrder(this.state.encomendas);
 
             })
@@ -58,11 +59,11 @@ class Inicio extends Component {
 
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div style={{margin: 'auto'}}>
+                <div style={{ margin: 'auto' }}>
 
-                    <div style={{textAlign: 'center', marginBottom: '50px', marginTop: '50px'}}>
-                        <i className="material-icons md-24" style={{verticalAlign: 'middle'}}>location_on</i>
-                        <h6 style={{display: 'inline', verticalAlign: 'middle'}}>Aveiro, Portugal</h6>
+                    <div style={{ textAlign: 'center', marginBottom: '50px', marginTop: '50px' }}>
+                        <i className="material-icons md-24" style={{ verticalAlign: 'middle' }}>location_on</i>
+                        <h6 style={{ display: 'inline', verticalAlign: 'middle' }}>Aveiro, Portugal</h6>
                         <a href={'/definicoes'} style={{
                             marginLeft: '5px',
                             fontSize: '10px',
@@ -75,7 +76,7 @@ class Inicio extends Component {
                         <Card className="wrap col">
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3"><CountUp
-                                    start={0} end={encomendas_por_entregar.length} duration={5}/></h1>
+                                    start={0} end={encomendas_por_entregar.length} duration={5} /></h1>
                                 </CardTitle>
                                 <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas
                                     por entregar</CardText>
@@ -84,7 +85,7 @@ class Inicio extends Component {
                         <Card className="wrap col">
                             <CardBody className='text-wrap'>
                                 <CardTitle><h1 className="mbr-fonts-style mbr-bold mbr-section-title3"><CountUp
-                                    start={0} end={encomendas_entregues.length} duration={5}/></h1>
+                                    start={0} end={encomendas_entregues.length} duration={5} /></h1>
                                 </CardTitle>
                                 <CardText className="mbr-fonts-style text1 mbr-text display-6 texto_cards">Encomendas
                                     entregues</CardText>
@@ -115,7 +116,7 @@ class Inicio extends Component {
                                         }
                                         if (index < 1) {
                                             return (
-                                                <CountUp start={0} end={tempo_limite_de_levantamento} duration={5}/>
+                                                <CountUp start={0} end={tempo_limite_de_levantamento} duration={5} />
                                             )
                                         }
                                     })}
@@ -129,14 +130,14 @@ class Inicio extends Component {
                     </div>
 
                     {/*Tabela encomendas por entregar*/}
-                    <div className='col-6' style={{display: 'inline-block', margin: 'auto'}}>
-                        <TabelaEncomendasInicio/>
+                    <div className='col-6' style={{ display: 'inline-block', margin: 'auto' }}>
+                        <TabelaEncomendasInicio />
                     </div>
 
 
                     {/*Tabela estafetas*/}
-                    <div className='col-6' style={{display: 'inline-block', margin: 'auto'}}>
-                        <TabelaEstafetasInicio/>
+                    <div className='col-6' style={{ display: 'inline-block', margin: 'auto' }}>
+                        <TabelaEstafetasInicio />
                     </div>
                 </div>
 
