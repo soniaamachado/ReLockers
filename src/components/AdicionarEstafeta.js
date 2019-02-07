@@ -33,7 +33,7 @@ export default class AdicionarEstafeta extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/users')
+        axios.get('http://localhost:80/api/users')
             .then(response => {
                 this.setState({ users: response.data.data });
                 this.stateOfOrder(this.state.users);
@@ -91,7 +91,11 @@ export default class AdicionarEstafeta extends Component {
 
         console.log(newUtilizador);
 
-        axios.post('http://167.99.202.225/api/users', newUtilizador)
+        const header = {
+            'Authorization': `Bearer " + ${localStorage.getItem("access_token")}`
+        }
+
+        axios.post('http://localhost:80/api/users', newUtilizador, { headers: header })
             .then(res => console.log(res.statusText))
             .catch(error => console.log(error));
 
