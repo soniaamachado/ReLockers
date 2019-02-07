@@ -22,8 +22,8 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "S",
             observacoes: "",
             temperatura: 20,
-            // cacifo_id: "",
-            // cliente_id: "",
+            cacifo_id: "",
+            cliente_id: "",
             errors: {}
         };
 
@@ -130,8 +130,8 @@ export default class AdicionarEncomenda extends Component {
 
         const {
             estado_encomenda,
-            // cacifo_id,
-            // cliente_id,
+            cacifo_id,
+            cliente_id,
             temperatura,
             observacoes,
             tamanho
@@ -149,14 +149,14 @@ export default class AdicionarEncomenda extends Component {
 
         const tempo_limite_de_levantamento = this.data_final(data_de_entrega_pretendida);
 
-        // if (cacifo_id === "") {
-        //     this.setState({ errors: { temperatura: "URL is required" } });
-        //     return;
-        // }
-        // if (cliente_id == "") {
-        //     this.setState({ errors: { observacoes: "URL is required" } });
-        //     return;
-        // }
+        if (cacifo_id === "") {
+            this.setState({ errors: { temperatura: "URL is required" } });
+            return;
+        }
+        if (cliente_id == "") {
+            this.setState({ errors: { observacoes: "URL is required" } });
+            return;
+        }
 
         const newEncomenda = {
             estado_encomenda,
@@ -166,8 +166,8 @@ export default class AdicionarEncomenda extends Component {
             tamanho,
             observacoes,
             temperatura,
-            // cacifo_id,
-            //cliente_id
+            cacifo_id,
+            cliente_id
         };
 
         console.log(newEncomenda);
@@ -185,7 +185,8 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "",
             observacoes: "",
             temperatura: 20,
-
+            cacifo_id:1,
+            cliente_id:1,
 
         });
 
@@ -199,6 +200,14 @@ export default class AdicionarEncomenda extends Component {
 
     handleTamanhoChange = (event) => {
         this.setState({ tamanho: event.target.value });
+    };
+
+    handleCacifoChange = (event) => {
+        this.setState({ cacifo_id: event.target.value });
+    };
+
+    handleClienteChange = (event) => {
+        this.setState({ cliente_id: event.target.value });
     };
 
 
@@ -259,14 +268,14 @@ export default class AdicionarEncomenda extends Component {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="localizacao">Localização</Label>
-                                <Input type="select" name="localizacao" id="localizacao"
-                                    value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
+                                <Label for="cacifo">Cacifo</Label>
+                                <Input type="select" name="cacifo" id="localizacao"
+                                    value={this.state.cacifo_id} onChange={this.handleCacifoChange}>
                                     {this.state.cacifos_livres.map(cacifo => {
 
                                         return (
-                                            <option value={cacifo.localizacao.id}>
-                                                {cacifo.localizacao.nome}
+                                            <option value={cacifo.id}>
+                                                {cacifo.id}
                                             </option>
                                         )
                                     })}
@@ -275,14 +284,14 @@ export default class AdicionarEncomenda extends Component {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label for="localizacao">Cacifo</Label>
-                                <Input type="select" name="localizacao" id="localizacao"
-                                    value={this.state.localizacao} onChange={this.handleLocalizacaoChange}>
-                                    {this.state.cacifos_livres.map(cacifo => {
+                                <Label for="cliente">Cliente</Label>
+                                <Input type="select" name="cliente" id="cliente"
+                                    value={this.state.cliente_id} onChange={this.handleClienteChange}>
+                                    {this.state.clientes.map(cliente => {
 
                                         return (
-                                            <option value={cacifo.id}>
-                                                {cacifo.id}
+                                            <option value={cliente.id}>
+                                                {cliente.nome}
                                             </option>
                                         )
                                     })}
@@ -332,18 +341,6 @@ export default class AdicionarEncomenda extends Component {
 
                     {/*</FormGroup>*/}
 
-                    {/*<FormGroup>*/}
-                    {/*<Label for="cacifo">Atribuir cacifo</Label>*/}
-
-                    {/*<Input type="select" name="cacifo" id="cacifo">*/}
-                    {/*{this.state.cacifos_livres.map(cacifo => {*/}
-                    {/*return (*/}
-                    {/*<option key={cacifo.id} value={cacifo.id}>{cacifo.id}</option>*/}
-                    {/*)*/}
-                    {/*})}*/}
-                    {/*</Input>*/}
-
-                    {/*</FormGroup>*/}
                 </Form>
             </main>
         );
