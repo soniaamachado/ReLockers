@@ -1,51 +1,49 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../css/Login.css';
 import {
-    Button,
-    Card,
-    CardBody,
-    CardGroup,
-    Col,
-    Container,
-    Form,
-    Input,
+    Button, Card, CardBody, CardGroup, Col, Container, Form, Input,
     InputGroup,
     Row
 } from 'reactstrap';
-import {connect} from 'react-redux';
-import {login} from './Redux/reducer';
+import { connect } from 'react-redux';
+import { login } from './Redux/reducer';
 
 import axios from 'axios';
 
 class Login extends Component {
 
-
     constructor(props) {
         super(props);
-        {/* this.state = {
-            grant_type: "password",
-            client_id: "4",
-            client_secret: "DA57SbxNGJvH1oQB95v9lB9A8hE8KnA0Q8cYQOLf",
-            username: '',
-            password: ''
-
-        } */
+        {
+            this.state = {
+                grant_type: "password",
+                client_id: "1",
+                client_secret: "t7NW65czhUV1Up2kOqGgMG21T3h58fMu9LVjTHCS",
+                username: '',
+                password: ''
+            }
         }
-        this.state = {};
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    /* signIn() {
-            console.log('this.state', this.state);
-            {/* axios.post('localhost/Oauth/token', this.state)
+    signIn() {
+        console.log('this.state', this.state);
+        {
+            axios.post('http://localhost:80/oauth/token', this.state)
                 .then(res => {
-                    console.log(this.state);
+                    console.log(res);
+                    console.log(res.data.access_token);
+                    console.log(res.data.refresh_token);
+
+                    localStorage.setItem("access_token", res.data.access_token);
+                    localStorage.setItem("refresh_token", res.data.refresh_token);
                 })
-                .catch(error => console.log(error))*/
+                .catch(error => console.log(error))
+        }
+    }
 
     render() {
-        let {username, password} = this.state;
-        let {isLoginPending, isLoginSuccess, loginError} = this.props;
+        let { username, password } = this.state;
+        let { isLoginPending, isLoginSuccess, loginError } = this.props;
         return (
             <Container>
                 <Row className="justify-content-center">
@@ -53,34 +51,32 @@ class Login extends Component {
                         <CardGroup className='login_form'>
                             <Card className="p-4">
                                 <CardBody>
-                                    <Form onSubmit={this.onSubmit}>
+                                    <Form>
                                         <h1>Login</h1>
                                         <p className="text-muted">Insere as tuas credenciais</p>
                                         <InputGroup className="mb-3">
                                             <Input type="text" placeholder="Username" autoComplete="username"
-                                                   onChange={e => this.setState({username: e.target.value})}
-                                                   value={username}
-                                                /*onChange={event => this.setState({username: event.target.value})}*/
+                                                onChange={e => this.setState({ username: e.target.value })}
+                                                value={username}
                                             />
                                         </InputGroup>
                                         <InputGroup className="mb-4">
                                             <Input type="password" placeholder="Password"
-                                                   autoComplete="current-password"
-                                                   onChange={e => this.setState({password: e.target.value})}
-                                                   value={password}
-                                                /*onChange={event => this.setState({password: event.target.value})}*/
+                                                autoComplete="current-password"
+                                                onChange={e => this.setState({ password: e.target.value })}
+                                                value={password}
                                             />
                                         </InputGroup>
                                         <Row>
                                             <Col xs="6">
                                                 <Button color="primary" className="px-4"
-                                                    /*onClick={() => this.signIn()}*/>Login</Button>
+                                                    onClick={() => this.signIn()}>Login</Button>
                                             </Col>
                                         </Row>
                                         <div className="message">
-                                            { isLoginPending && <div>Please wait...</div> }
-                                            { isLoginSuccess && <div>Success.</div> }
-                                            { loginError && <div>{loginError.message}</div> }
+                                            {isLoginPending && <div>Please wait...</div>}
+                                            {isLoginSuccess && <div>Success.</div>}
+                                            {loginError && <div>{loginError.message}</div>}
                                         </div>
                                     </Form>
                                 </CardBody>
@@ -101,32 +97,7 @@ class Login extends Component {
             </Container>
         );
     }
-
-    onSubmit(e) {
-        e.preventDefault();
-        let { username, password } = this.state;
-        this.props.login(username, password);
-        this.setState({
-            username: '',
-            password: ''
-        });
-        console.log('this.state', this.state);
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        isLoginPending: state.isLoginPending,
-        isLoginSuccess: state.isLoginSuccess,
-        loginError: state.loginError
-    };
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        login: (username, password) => dispatch(login(username, password))
-    };
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
