@@ -166,17 +166,11 @@ class Encomendas extends Component {
 
                                         const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
                                         const hoje = moment(timeStamp); // Data de hoje
-                                        const duration = moment.duration(levantamento.diff(hoje));
+                                        const duration = moment.duration(hoje.diff(levantamento));
 
                                         let hours = duration.asHours();
                                         let minutes = duration.asMinutes();
 
-                                        console.log(hours);
-                                        console.log(minutes);
-
-                                        if(encomenda.cacifo===null){
-                                            cacifo='Cacifo não atribuido'
-                                        }
 
                                         if (hours <= 0 && minutes <= 0) {
                                             tempo_limite_de_levantamento =
@@ -322,12 +316,6 @@ class Encomendas extends Component {
                                                 <td>{temperatura}ºC</td>
                                                 <td>{tamanho}</td>
                                                 <td>{cliente.nome}</td>
-                                                {encomenda.estafeta.map(estafeta =>
-                                                    <td key={id}><Link to={{
-                                                        pathname: `detalheEstafeta/${id}`,
-                                                        query: {id: id}
-                                                    }}> {estafeta.nome}</Link></td>
-                                                )}
                                                 <td><Link to={{
                                                     pathname: `detalheCacifo/${cacifo.id}`,
                                                     query: {id: id}
