@@ -268,7 +268,7 @@ export default class AdicionarEncomenda extends Component {
                         </Col>
                     </Row>
 
-                    <Row style={{marginTop={'20px'}}}>
+                    <Row>
                         <Col>
                             <Input
                                 type="textarea"
