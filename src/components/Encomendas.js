@@ -171,15 +171,15 @@ class Encomendas extends Component {
                                         let minutes = duration.asMinutes();
 
 
-                                        if (hours <= 0 && minutes<=0) {
+                                        if (hours <= 0 && minutes <= 0) {
                                             tempo_limite_de_levantamento =
-                                                <td> </td>
+                                                <td></td>
                                         }
                                         else {
                                             tempo_limite_de_levantamento =
                                                 <Alert color="warning">
-                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
-                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
+                                                    {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
+                                                    {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
                                                 </Alert>
                                         }
 
@@ -206,9 +206,9 @@ class Encomendas extends Component {
                                                 )}
                                                 <td>
                                                     <Link to={{
-                                                    pathname: `detalheCacifo/${cacifo.id}`,
-                                                    query: {id: id}
-                                                }}>{cacifo.numero} </Link>
+                                                        pathname: `detalheCacifo/${cacifo.id}`,
+                                                        query: {id: id}
+                                                    }}>{cacifo.numero} </Link>
                                                 </td>
 
                                                 <td>{tempo_limite_de_levantamento}</td>
@@ -282,7 +282,7 @@ class Encomendas extends Component {
                                     {encomendas_entregues.map(encomenda => {
 
 
-                                        let {id, temperatura,data_de_levantamento, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
+                                        let {id, temperatura, data_de_levantamento, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
 
                                         const data_entrega = data_de_entrega_pretendida.split(" ");
 
@@ -296,14 +296,7 @@ class Encomendas extends Component {
                                         let hours = duration.asHours();
                                         let minutes = duration.asMinutes();
 
-
-                                        if (hours <= 0 && minutes<=0) {
-                                            tempo_limite_de_levantamento =
-                                                <Alert color="danger">
-                                                    Prazo excedido
-                                                </Alert>
-                                        }
-                                        else if (data_de_levantamento !=null){
+                                        if (data_de_levantamento != null) {
 
                                             const data_levantamento = data_de_levantamento.split(" ");
                                             tempo_limite_de_levantamento =
@@ -311,15 +304,19 @@ class Encomendas extends Component {
                                                     Levantada em {data_levantamento[0]}
                                                 </Alert>;
                                         }
-                                        else {
+                                        else if (hours > 0 && minutes > 0) {
                                             tempo_limite_de_levantamento =
                                                 <Alert color="warning">
-                                                    {parseInt(hours) < 10 ? '0'+parseInt(hours) : parseInt(hours) }h
-                                                    {parseInt(minutes) < 10 ? '0'+parseInt(minutes) : parseInt(minutes)}
+                                                    {parseInt(hours) < 10 ? '0' + parseInt(hours) : parseInt(hours)}h
+                                                    {parseInt(minutes) < 10 ? '0' + parseInt(minutes) : parseInt(minutes)}
                                                 </Alert>
                                         }
-
-
+                                        else {
+                                            tempo_limite_de_levantamento =
+                                                <Alert color="danger">
+                                                    Prazo excedido
+                                                </Alert>
+                                        }
 
                                         return (
                                             <tr key={id}>
@@ -343,8 +340,8 @@ class Encomendas extends Component {
 
                                                 <td>{tempo_limite_de_levantamento}</td>
                                                 <td>
-                                <span className="dropdown">
-				                        <button id="btnSearchDrop2"
+                                                    <span className="dropdown">
+                                                        <button id="btnSearchDrop2"
                                                 style={{backgroundColor: '#b5a0fb', border: 'none', width: '68px'}}
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"
