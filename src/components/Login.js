@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import '../css/Login.css';
 import {
-    Button, Card, CardBody, CardGroup, Col, Container, Form, Input,
-    InputGroup,
-    Row
+    Button, Card, CardBody, CardGroup, Col, Container,
+    Form, Input, InputGroup, Row, Alert
 } from 'reactstrap';
-import { connect } from 'react-redux';
-import { login } from './Redux/reducer';
+
+import '../css/Login.css';
+import * as loginConstant from "./constants/LoginConstants";
+
 
 import axios from 'axios';
 
@@ -16,34 +16,35 @@ class Login extends Component {
         super(props);
         {
             this.state = {
-                grant_type: "password",
-                client_id: "1",
-                client_secret: "t7NW65czhUV1Up2kOqGgMG21T3h58fMu9LVjTHCS",
                 username: '',
-                password: ''
+                password: '',
+                loginError: ""
             }
         }
     }
 
-    signIn() {
-        console.log('this.state', this.state);
-        {
-            axios.post('http://localhost:80/oauth/token', this.state)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data.access_token);
-                    console.log(res.data.refresh_token);
+    signIn = () => {
+        const { username, password } = this.state;
 
-                    localStorage.setItem("access_token", res.data.access_token);
-                    localStorage.setItem("refresh_token", res.data.refresh_token);
-                })
-                .catch(error => console.log(error))
-        }
+        const login = {
+            grant_type: loginConstant.GRANT_TYPE,
+            client_id: loginConstant.CLIENT_ID,
+            client_secret: loginConstant.CLIENT_SECRET,
+            username,
+            password
+        };
+
+        axios.post('http://localhost:80/oauth/token', login).then(res => {
+            localStorage.setItem("access_token", res.data.access_token);
+            localStorage.setItem("refresh_token", res.data.refresh_token);
+            this.props.history.push("/inicio");
+        }).catch(error => {
+            this.setState({ loginError: "Login inválido" })
+        })
     }
 
     render() {
-        let { username, password } = this.state;
-        let { isLoginPending, isLoginSuccess, loginError } = this.props;
+        let { username, password, loginError } = this.state;
         return (
             <Container>
                 <Row className="justify-content-center">
@@ -69,14 +70,16 @@ class Login extends Component {
                                         </InputGroup>
                                         <Row>
                                             <Col xs="6">
-                                                <Button color="primary" className="px-4"
-                                                    onClick={() => this.signIn()}>Login</Button>
+                                                <Button color="primary" className="px-4" onClick={() => this.signIn()}>
+                                                    Login
+                                                </Button>
                                             </Col>
                                         </Row>
-                                        <div className="message">
-                                            {isLoginPending && <div>Please wait...</div>}
-                                            {isLoginSuccess && <div>Success.</div>}
-                                            {loginError && <div>{loginError.message}</div>}
+                                        <div className="message" style={{ marginTop: "10px" }} >
+                                            {
+                                                loginError.length == 0 ? "" :
+                                                    <Alert color="danger">Login inválido</Alert>
+                                            }
                                         </div>
                                     </Form>
                                 </CardBody>
@@ -94,7 +97,7 @@ class Login extends Component {
                         </CardGroup>
                     </Col>
                 </Row>
-            </Container>
+            </Container >
         );
     }
 }

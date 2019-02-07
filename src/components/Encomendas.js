@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import '../css/Encomendas.css';
-import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button} from "reactstrap";
+import {Nav, NavItem, Row, TabContent, TabPane, NavLink, Col, Button, Alert, Table} from "reactstrap";
 import classnames from 'classnames';
-import EncomendasPorEntregar from "./EncomendasPorEntregar";
-import EncomendasEntregues from "./EncomendasEntregues";
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
+import axios from "axios/index";
+import moment from "moment/moment";
 
 
 class Encomendas extends Component {
@@ -13,7 +13,10 @@ class Encomendas extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            activeTab: '1'
+            activeTab: '1',
+            encomendas: [],
+            encomendas_entregues: [],
+            encomendas_por_entregar: []
         };
     }
 
@@ -25,7 +28,53 @@ class Encomendas extends Component {
         }
     }
 
+    componentDidMount() {
+        axios.get('http://167.99.202.225/api/encomendas')
+            .then(response => {
+                this.setState({encomendas: response.data.data});
+                this.stateOfOrder(this.state.encomendas);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    stateOfOrder() {
+
+        this.state.encomendas.map((encomenda, index) => {
+            if (encomenda.data_de_entrega == null) {
+                this.setState(prevState => ({
+                    encomendas_por_entregar: [...prevState.encomendas_por_entregar, encomenda]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    encomendas_entregues: [...prevState.encomendas_entregues, encomenda]
+                }))
+            }
+        });
+    }
+
+
     render() {
+
+        const encomendas_entregues = this.state.encomendas_entregues;
+        const encomendas_por_entregar = this.state.encomendas_por_entregar;
+
+        const m = new Date();
+        const new_timestamp =
+            m.getUTCFullYear() + "-" +
+            ("0" + (m.getUTCMonth() + 1)).slice(-2) + "-" +
+            ("0" + m.getUTCDate()).slice(-2) + " " +
+            ("0" + m.getUTCHours()).slice(-2) + ":" +
+            ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+            ("0" + m.getUTCSeconds()).slice(-2);
+        const prazo_levantamento = new_timestamp.split(" ");
+
+        console.log(m.getUTCFullYear());
+
+
         return (
             <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
@@ -35,9 +84,14 @@ class Encomendas extends Component {
                     </div>
                 </div>
                 <div style={{textAlign: 'center', marginBottom: '50px'}}>
-                    <i className="material-icons md-24" style={{verticalAlign:'middle'}}>location_on</i>
-                <h6 style={{display: 'inline', verticalAlign:'middle'}}>Aveiro, Portugal</h6>
-                <a href={'/definicoes'} style={{marginLeft: '5px', fontSize: '10px', display: 'inline',verticalAlign:'middle'}}>Alterar</a>
+                    <i className="material-icons md-24" style={{verticalAlign: 'middle'}}>location_on</i>
+                    <h6 style={{display: 'inline', verticalAlign: 'middle'}}>Aveiro, Portugal</h6>
+                    <a href={'/definicoes'} style={{
+                        marginLeft: '5px',
+                        fontSize: '10px',
+                        display: 'inline',
+                        verticalAlign: 'middle'
+                    }}>Alterar</a>
                 </div>
 
                 <Col>
@@ -81,12 +135,238 @@ class Encomendas extends Component {
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
                             <Row>
-                                <EncomendasPorEntregar/>
+                                <Table className='table_in table-hover' responsive>
+                                    <thead>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Data</th>
+                                        <th>Hora</th>
+                                        <th>Local</th>
+                                        <th>Temperatura</th>
+                                        <th>Tamanho</th>
+                                        <th>Cliente</th>
+                                        <th>Estafeta</th>
+                                        <th>Cacifo</th>
+                                        <th>Recolha</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {encomendas_por_entregar.map(encomenda => {
+
+                                        let {id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_entrega_pretendida, cliente, cacifo} = encomenda;
+
+
+                                        const data_entrega = data_de_entrega_pretendida.split(" ");
+
+                                        const data_split = tempo_limite_de_levantamento.split(" ");
+                                        const now = moment(data_split[0]); //todays date
+                                        const end = moment(prazo_levantamento[0]); // another date
+                                        const duration = moment.duration(now.diff(end));
+
+                                        let days = duration.asDays();
+
+
+                                        if (days <= 0) {
+                                            days =
+                                                null
+                                        }
+
+                                        else if (days > 0) {
+                                            days =
+                                                <Alert color="warning">
+                                                    Levantamento em {parseInt(days)} dias
+                                                </Alert>
+                                        }
+
+
+                                        return (
+                                            <tr key={id}>
+                                                <th scope="row">{id}</th>
+                                                <td>{data_entrega[0]}</td>
+                                                <td>{data_entrega[1]}</td>
+                                                <td>{cacifo.localizacao.nome} </td>
+                                                <td>{temperatura}ºC</td>
+                                                <td>{tamanho}</td>
+                                                <td>{cliente.nome}</td>
+                                                {encomenda.estafeta.map(estafeta =>
+                                                    <td key={id}>
+                                                        <Link
+                                                            to={{
+                                                                pathname: `detalheEstafeta/${id}`,
+                                                                query: {id: id}
+                                                            }}>
+                                                            {estafeta.nome}
+                                                        </Link>
+                                                    </td>
+                                                )}
+                                                <td>
+                                                    <Link to={{
+                                                    pathname: `detalheCacifo/${cacifo.id}`,
+                                                    query: {id: id}
+                                                }}>{cacifo.numero} </Link>
+                                                </td>
+
+                                                <td>{days}</td>
+                                                <td>
+                                <span className="dropdown">
+				                        <button
+                                            id="btnSearchDrop2"
+                                            style={{
+                                                backgroundColor: '#b5a0fb',
+                                                border: 'none',
+                                                width: '68px'
+                                            }}
+                                            type="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            className="btn btn-dark dropdown-toggle dropdown-menu-right">
+
+                                            <i className="material-icons md-18"
+                                               style={{
+                                                   color: 'white',
+                                                   verticalAlign: 'middle',
+                                                   marginRight: '5px'
+                                               }}>settings</i>
+
+                                        </button>
+				                        <span aria-labelledby="btnSearchDrop2"
+                                              className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
+				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}}
+                                                  className="dropdown-item"> <i
+                                                className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+				                            <Link to="#" className="dropdown-item"><i
+                                                className="material-icons md-18 icon">create</i> Editar</Link>
+				                            <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
+                                                  className="dropdown-item"><i
+                                                className="material-icons md-18 icon">delete</i> Remover</Link>
+				                        </span>
+				                    </span>
+                                                </td>
+
+                                            </tr>
+
+                                        );
+                                    })}
+
+                                    </tbody>
+                                </Table>
                             </Row>
                         </TabPane>
                         <TabPane tabId="2">
                             <Row>
-                                <EncomendasEntregues/>
+                                <Table className='table_in table-hover' responsive>
+                                    <thead>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Data</th>
+                                        <th>Hora</th>
+                                        <th>Local</th>
+                                        <th>Temperatura</th>
+                                        <th>Tamanho</th>
+                                        <th>Cliente</th>
+                                        <th>Estafeta</th>
+                                        <th>Cacifo</th>
+                                        <th>Recolha</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    {encomendas_entregues.map(encomenda => {
+
+
+                                        const {id, temperatura, tamanho, tempo_limite_de_levantamento, data_de_levantamento, data_de_entrega_pretendida, data_de_entrega, cliente, cacifo} = encomenda;
+
+                                        const data_entrega = data_de_entrega_pretendida.split(" ");
+                                        const data_levantamento = data_de_levantamento.split(" ");
+
+                                        const data_split = tempo_limite_de_levantamento.split(" ");
+                                        const now = moment(data_split[0]); //todays date
+                                        const end = moment(prazo_levantamento[0]); // another date
+                                        const duration = moment.duration(now.diff(end));
+                                        let days = duration.asDays();
+
+                                        if (days <= 0) {
+                                            days =
+                                                <Alert color="danger">
+                                                    Prazo excedido
+                                                </Alert>
+                                        }
+                                        else if (days > 0) {
+                                            days =
+                                                <Alert color="warning">
+                                                    Levantamento em {parseInt(days)} dias
+                                                </Alert>;
+
+                                            if (data_de_levantamento != null) {
+                                                days =
+                                                    <Alert color="success">
+                                                        Levantada em {data_levantamento[0]}
+                                                    </Alert>;
+                                            }
+                                        }
+
+
+                                        return (
+                                            <tr key={id}>
+                                                <th scope="row">{id}</th>
+                                                <td>{data_entrega[0]}</td>
+                                                <td>{data_entrega[1]}</td>
+                                                <td>{cacifo.localizacao.nome}</td>
+                                                <td>{temperatura}ºC</td>
+                                                <td>{tamanho}</td>
+                                                <td>{cliente.nome}</td>
+                                                {encomenda.estafeta.map(estafeta =>
+                                                    <td key={id}><Link to={{
+                                                        pathname: `detalheEstafeta/${id}`,
+                                                        query: {id: id}
+                                                    }}> {estafeta.nome}</Link></td>
+                                                )}
+                                                <td><Link to={{
+                                                    pathname: `detalheCacifo/${cacifo.id}`,
+                                                    query: {id: id}
+                                                }}>{cacifo.numero} </Link></td>
+
+                                                <td>{days}</td>
+                                                <td>
+                                <span className="dropdown">
+				                        <button id="btnSearchDrop2"
+                                                style={{backgroundColor: '#b5a0fb', border: 'none', width: '68px'}}
+                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false"
+                                                className="btn btn-dark dropdown-toggle dropdown-menu-right">
+                                            <i className="material-icons md-18" style={{
+                                                color: 'white',
+                                                verticalAlign: 'middle',
+                                                marginRight: '5px'
+                                            }}>settings</i>
+                                        </button>
+				                        <span aria-labelledby="btnSearchDrop2"
+                                              className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
+				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}}
+                                                  className="dropdown-item"> <i
+                                                className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
+				                            <Link to="#" className="dropdown-item"><i
+                                                className="material-icons md-18 icon">create</i> Editar</Link>
+
+                                            <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
+                                                  className="dropdown-item"><i
+                                                className="material-icons md-18 icon">delete</i> Remover</Link>
+
+				                        </span>
+				                    </span>
+                                                </td>
+                                            </tr>
+                                        );
+
+                                    })}
+
+                                    </tbody>
+                                </Table>
                             </Row>
                         </TabPane>
                     </TabContent>

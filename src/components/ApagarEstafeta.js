@@ -3,16 +3,16 @@ import axios from "axios/index";
 import {Redirect} from "react-router-dom";
 
 
-export default class ApagarEncomenda extends Component {
+export default class ApagarEstafeta extends Component {
 
     state={
-        encomendas:[]
+        users:[]
     };
 
     componentDidMount() {
         axios.delete('http://167.99.202.225/api/encomendas/' + this.props.match.params.id)
             .then(response => {
-                this.setState({encomendas: response.data.data});
+                this.setState({users: response.data.data});
             })
             .catch(function (error) {
                 console.log(error);
@@ -22,12 +22,7 @@ export default class ApagarEncomenda extends Component {
 
     render() {
         return (
-
-            <Redirect to='/encomendas' />
+            <Redirect to='/encomendas'/>
         )
     }
 }
-
-
-
-

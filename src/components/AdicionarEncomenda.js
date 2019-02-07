@@ -1,15 +1,20 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import axios from "axios";
-import TextInputGroup from "./forms/TextInput";
-import { Button, FormGroup, Input, Label } from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
+import moment from "moment";
 
 export default class AdicionarEncomenda extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            users: [],
+            estafetas: [],
+            administradores: [],
+            cacifos: [],
+            cacifos_livres: [],
+            cacifos_ocupados: [],
             estado_encomenda: 0,
-            numero_encomenda: 0,
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
             tempo_limite_de_levantamento: "",
@@ -23,48 +28,113 @@ export default class AdicionarEncomenda extends Component {
 
         this.handleTamanhoChange = this.handleTamanhoChange.bind(this);
         this.handleDataDeEntregaChange = this.handleDataDeEntregaChange.bind(this);
-        this.handletempoLimiteDeLevantamento = this.handletempoLimiteDeLevantamento.bind(this);
         this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
     }
 
-    getCurrentDate() {
+    componentDidMount = () => {
+        axios.get('http://167.99.202.225/api/users')
+            .then(response => {
+                this.setState({users: response.data.data});
+                this.splitArrayEncomendas(this.state.users);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        axios.get('http://167.99.202.225/api/cacifos')
+            .then(response => {
+                this.setState({cacifos: response.data.data});
+                this.splitArrayCacifos(this.state.users);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    splitArrayEncomendas = () => {
+
+        this.state.users.map((user, index) => {
+            if (user.tipo.tipo === 'Estafeta') {
+                this.setState(prevState => ({
+                    estafetas: [...prevState.estafetas, user]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    administradores: [...prevState.administradores, user]
+                }))
+            }
+        });
+    };
+
+    splitArrayCacifos() {
+
+        this.state.cacifos.map((cacifo, index) => {
+            if (cacifo.estado.id === 1) {
+                this.setState(prevState => ({
+                    cacifos_livres: [...prevState.cacifos_livres, cacifo]
+
+                }))
+            } else {
+                this.setState(prevState => ({
+                    cacifos_ocupados: [...prevState.cacifos_ocupados, cacifo]
+                }))
+            }
+        });
+    }
+
+    getCurrentDate = () => {
 
         const fullDate = new Date();
 
         const year = fullDate.getFullYear();
-        const mouth = ("0" + (fullDate.getMonth() + 1)).slice(-2);
+        const month = ("0" + (fullDate.getMonth() + 1)).slice(-2);
         const day = ("0" + fullDate.getDate()).slice(-2);
 
-        const hour = fullDate.getHours();
+        const hour = (fullDate.getHours() < 10 ? '0' : '') + fullDate.getHours();
         const min = (fullDate.getMinutes() < 10 ? '0' : '') + fullDate.getMinutes();
         const sec = (fullDate.getSeconds() < 10 ? '0' : '') + fullDate.getSeconds();
 
-        return `${year}-${mouth}-${day} ${hour}:${min}:${sec}`;
+        return `${year}-${month}-${day} ${hour}:${min}:${sec}`;
 
-    }
+    };
 
-    onSubmit = e => {
+    data_final = (data_de_entrega_pretendida) => {
+
+        const data_final = new Date(new Date(data_de_entrega_pretendida).getTime() + 60 * 60 * 24 * 1000);
+
+        const year = data_final.getFullYear();
+        const month = ("0" + (data_final.getMonth() + 1)).slice(-2);
+        const day = ("0" + data_final.getDate()).slice(-2);
+
+        const hour = (data_final.getHours() < 10 ? '0' : '') + data_final.getUTCHours();
+        const min = (data_final.getMinutes() < 10 ? '0' : '') + data_final.getMinutes();
+        const sec = (data_final.getSeconds() < 10 ? '0' : '') + data_final.getSeconds();
+
+        return `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+
+    };
+
+    onSubmit = (e) => {
         e.preventDefault();
 
         const {
-            estado_encomenda, cacifo_id, cliente_id, numero_encomenda,
+            estado_encomenda, cacifo_id, cliente_id,
             temperatura, observacoes, tamanho
         } = this.state;
 
         if (this.state.data_de_entrega_pretendida == "") {
-            this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
+            this.setState({errors: {data_de_entrega_pretendida: "URL is required"}});
             return;
         }
 
-        if (this.state.tempo_limite_de_levantamento == "") {
-            this.setState({ errors: { tempo_limite_de_levantamento: "URL is required" } });
-            return;
-        }
-
-        const data_de_entrega_pretendida = this.state.data_de_entrega_pretendida.replace("T", " ") + ":00";
-        const tempo_limite_de_levantamento = this.state.tempo_limite_de_levantamento.replace("T", " ") + ":00";
         const data_de_entrada_no_sistema = this.getCurrentDate();
 
+
+        const data_de_entrega_pretendida = this.state.data_de_entrega_pretendida.replace("T", " ") + ":00";
+
+        const tempo_limite_de_levantamento = this.data_final(data_de_entrega_pretendida);
 
         // if (cacifo_id === "") {
         //     this.setState({ errors: { temperatura: "URL is required" } });
@@ -77,7 +147,6 @@ export default class AdicionarEncomenda extends Component {
 
         const newEncomenda = {
             estado_encomenda,
-            numero_encomenda,
             data_de_entrada_no_sistema,
             data_de_entrega_pretendida,
             tempo_limite_de_levantamento,
@@ -85,18 +154,18 @@ export default class AdicionarEncomenda extends Component {
             observacoes,
             temperatura,
             // cacifo_id,
-            // cliente_id
+            //cliente_id
         };
 
         console.log(newEncomenda);
 
-        axios.post('http://localhost:80/api/encomendas', newEncomenda)
+
+        axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
             .then(res => console.log(res.statusText))
             .catch(error => console.log(error));
 
         this.setState({
             estado_encomenda: 0,
-            numero_encomenda: "",
             data_de_entrada_no_sistema: "",
             data_de_entrega_pretendida: "",
             tempo_limite_de_levantamento: "",
@@ -117,110 +186,102 @@ export default class AdicionarEncomenda extends Component {
         });
     };
 
-    handleTamanhoChange(event) {
-        this.setState({ tamanho: event.target.value });
-    }
+    handleTamanhoChange = (event) => {
+        this.setState({tamanho: event.target.value});
+    };
 
-    handleDataDeEntregaChange(event) {
-        this.setState({ data_de_entrega_pretendida: event.target.value });
-        console.log(this.state.data_de_entrega_pretendida);
 
-    }
+    handleDataDeEntregaChange = (event) => {
+        this.setState({data_de_entrega_pretendida: event.target.value});
+    };
 
-    handletempoLimiteDeLevantamento(event) {
-        console.log(this.state.tempo_limite_de_levantamento);
-        this.setState({ tempo_limite_de_levantamento: event.target.value });
-    }
-
-    handleTemperaturaChange(event) {
-        this.setState({ temperatura: event.target.value });
-    }
+    handleTemperaturaChange = (event) => {
+        this.setState({temperatura: event.target.value});
+    };
 
     render() {
         const {
-            numero_encomenda, observacoes, errors
+            observacoes, errors
         } = this.state;
         return (
-            <main style={{ height: '100%' }} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <h1 className="h2">Encomendas</h1>
+                    <h1 className="h2">Adicionar encomenda</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>
-                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                    <i className="material-icons md-24" style={{ verticalAlign: 'middle' }}>location_on</i>
-                    <h6 style={{ display: 'inline', verticalAlign: 'middle' }}>Aveiro, Portugal</h6>
-                    <a href={'/definicoes'} style={{ marginLeft: '5px', fontSize: '10px', display: 'inline', verticalAlign: 'middle' }}>Alterar</a>
-                </div>
-                <form onSubmit={this.onSubmit}>
 
-                    <TextInputGroup
-                        label="Número da encomenda *"
-                        name="numero_encomenda"
-                        placeholder="0"
-                        value={numero_encomenda}
-                        onChange={this.onChange}
-                        type={"number"}
-                        error={errors.numero_encomenda}
-                    />
+                <Form onSubmit={this.onSubmit}>
 
-                    {/* <TextInputGroup
-                        label="Temperatura da encomenda [0°C - 20°C]"
-                        name="temperatura"
-                        placeholder="20°"
-                        value={temperatura}
-                        onChange={this.onChange}
-                        type={"number"}
-                        error={errors.temperatura}
-                    /> */}
+                    <Row style={{marginBottom:'30px'}}>
+                        <Col>
+                            <Label for="tamanho">Temperatura</Label>
+                            <Input style={{width: '65px'}} className='input-encomenda' type="number" name="temperatura" id="temperatura" min="0"
+                                   max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
+                            </Input>
+                        </Col>
 
-                    <FormGroup>
-                        <Label for="tamanho">Temperatura da encomenda</Label>
-                        <Input type="number" name="temperatura" id="temperatura" min="0" max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
-                        </Input>
-                    </FormGroup>
+                        <Col>
+                            <Label for="tamanho" >Tamanho</Label>
+                            <Input style={{width: '65px'}} type="select" name="tamanho" id="tamanho"
+                                   value={this.state.tamanho} onChange={this.handleTamanhoChange}>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </Input>
 
-                    <TextInputGroup
-                        label="Observações"
-                        name="observacoes"
-                        placeholder="Introduza uma observação..."
-                        value={observacoes}
-                        onChange={this.onChange}
-                        error={errors.observacoes}
-                    />
+                        </Col>
+                        <Col>
+                            <Label for="data_de_entrega_pretendida">Data e hora de entrega</Label>
+                            <Input
+                                type="datetime-local"
+                                name="data_de_entrega_pretendida"
+                                id="data_de_entrega_pretendida"
+                                placeholder="Data de Entrega"
+                                onChange={this.handleDataDeEntregaChange}
+                            >
+                            </Input>
+                        </Col>
 
-                    <FormGroup>
-                        <Label for="tamanho">Tamanho da encomenda</Label>
-                        <Input type="select" name="tamanho" id="tamanho" value={this.state.tamanho} onChange={this.handleTamanhoChange}>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </Input>
-                    </FormGroup>
+                    </Row>
 
-                    <FormGroup>
-                        <Label for="data_de_entrega_pretendida">Data de entrega pretendida</Label>
-                        <Input
-                            type="datetime-local"
-                            name="data_de_entrega_pretendida"
-                            id="data_de_entrega_pretendida"
-                            placeholder="Data de Entrega"
-                            onChange={this.handleDataDeEntregaChange}
-                        />
-                    </FormGroup>
+                    <Row form>
+                        <Col md={6}>
+                            <FormGroup>
+                                <Label for="exampleCity">Cidade</Label>
+                                <Input type="text" name="city" id="exampleCity"/>
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="exampleState">Rua</Label>
+                                <Input type="text" name="state" id="exampleState"/>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <Label for="exampleZip">Código postal</Label>
+                                <Input type="text" name="zip" id="exampleZip"/>
+                            </FormGroup>
+                        </Col>
+                    </Row>
 
-                    <FormGroup>
-                        <Label for="tempo_limite_de_levantamento">Data limite para levantamento</Label>
-                        <Input
-                            type="datetime-local"
-                            name="tempo_limite_de_levantamento"
-                            id="tempo_limite_de_levantamento"
-                            placeholder="Data limite"
-                            onChange={this.handletempoLimiteDeLevantamento}
-                        />
-                    </FormGroup>
+                    <Row>
+                        <Col>
+                            <Input
+                                type="textarea"
+                                label="Observações"
+                                name="observacoes"
+                                placeholder="Introduza uma observação..."
+                                value={observacoes}
+                                onChange={this.onChange}
+                                error={errors.observacoes}
+                            />
+                        </Col>
+                    </Row>
+
 
                     <Button style={{
                         display: 'block',
@@ -231,10 +292,38 @@ export default class AdicionarEncomenda extends Component {
                         border: 'none'
                     }} size="sm">
                         Adicionar encomenda
-                        </Button>
+                    </Button>
 
-                </form>
-            </main >
+
+                    {/*<FormGroup>*/}
+                    {/*<Label for="estafeta">Atribuir estafeta</Label>*/}
+
+                    {/*<Input type="select" name="estafeta" id="estafeta">*/}
+                    {/*{this.state.estafetas.map(user => {*/}
+                    {/*return (*/}
+                    {/*<option key={user.id} value={user.id}>{user.nome}</option>*/}
+                    {/*)*/}
+                    {/*})}*/}
+                    {/*</Input>*/}
+
+                    {/*</FormGroup>*/}
+
+                    {/*<FormGroup>*/}
+                    {/*<Label for="cacifo">Atribuir cacifo</Label>*/}
+
+                    {/*<Input type="select" name="cacifo" id="cacifo">*/}
+                    {/*{this.state.cacifos_livres.map(cacifo => {*/}
+                    {/*return (*/}
+                    {/*<option key={cacifo.id} value={cacifo.id}>{cacifo.id}</option>*/}
+                    {/*)*/}
+                    {/*})}*/}
+                    {/*</Input>*/}
+
+                    {/*</FormGroup>*/}
+
+
+                </Form>
+            </main>
         );
     }
 }
