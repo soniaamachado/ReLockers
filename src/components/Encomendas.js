@@ -146,7 +146,6 @@ class Encomendas extends Component {
                                         <th>Temperatura</th>
                                         <th>Tamanho</th>
                                         <th>Cliente</th>
-                                        <th>Estafeta</th>
                                         <th>Cacifo</th>
                                         <th>Recolha</th>
                                         <th>Ações</th>
@@ -161,7 +160,9 @@ class Encomendas extends Component {
                                         const data_entrega = data_de_entrega_pretendida.split(" ");
 
                                         const tempoMaxLevantamento = tempo_limite_de_levantamento.split(" ").join(",");
+
                                         const timeStamp = new_timestamp.split(" ").join(",");
+
 
                                         const levantamento = moment(tempoMaxLevantamento); // Data máxima para levantamento do produto
                                         const hoje = moment(timeStamp); // Data de hoje
@@ -170,10 +171,16 @@ class Encomendas extends Component {
                                         let hours = duration.asHours();
                                         let minutes = duration.asMinutes();
 
+                                        console.log(hours);
+                                        console.log(minutes);
+
+                                        if(encomenda.cacifo===null){
+                                            cacifo='Cacifo não atribuido'
+                                        }
 
                                         if (hours <= 0 && minutes <= 0) {
                                             tempo_limite_de_levantamento =
-                                                <td></td>
+                                                <td> </td>
                                         }
                                         else {
                                             tempo_limite_de_levantamento =
@@ -193,17 +200,6 @@ class Encomendas extends Component {
                                                 <td>{temperatura}ºC</td>
                                                 <td>{tamanho}</td>
                                                 <td>{cliente.nome}</td>
-                                                {encomenda.estafeta.map(estafeta =>
-                                                    <td key={id}>
-                                                        <Link
-                                                            to={{
-                                                                pathname: `detalheEstafeta/${id}`,
-                                                                query: {id: id}
-                                                            }}>
-                                                            {estafeta.nome}
-                                                        </Link>
-                                                    </td>
-                                                )}
                                                 <td>
                                                     <Link to={{
                                                         pathname: `detalheCacifo/${cacifo.id}`,
@@ -270,7 +266,6 @@ class Encomendas extends Component {
                                         <th>Temperatura</th>
                                         <th>Tamanho</th>
                                         <th>Cliente</th>
-                                        <th>Estafeta</th>
                                         <th>Cacifo</th>
                                         <th>Recolha</th>
                                         <th>Ações</th>

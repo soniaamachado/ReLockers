@@ -30,6 +30,7 @@ export default class AdicionarEncomenda extends Component {
         this.handleTamanhoChange = this.handleTamanhoChange.bind(this);
         this.handleDataDeEntregaChange = this.handleDataDeEntregaChange.bind(this);
         this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
+        this.handleClienteChange=this.handleClienteChange.bind(this);
     }
 
     componentDidMount = () => {
@@ -112,7 +113,6 @@ export default class AdicionarEncomenda extends Component {
     data_final = (data_de_entrega_pretendida) => {
 
         const data_final = new Date(new Date(data_de_entrega_pretendida).getTime() + 60 * 60 * 24 * 1000);
-
         const year = data_final.getFullYear();
         const month = ("0" + (data_final.getMonth() + 1)).slice(-2);
         const day = ("0" + data_final.getDate()).slice(-2);
@@ -149,11 +149,12 @@ export default class AdicionarEncomenda extends Component {
 
         const tempo_limite_de_levantamento = this.data_final(data_de_entrega_pretendida);
 
+        console.log(tempo_limite_de_levantamento);
         if (cacifo_id === "") {
             this.setState({ errors: { temperatura: "URL is required" } });
             return;
         }
-        if (cliente_id == "") {
+        if (cliente_id === "") {
             this.setState({ errors: { observacoes: "URL is required" } });
             return;
         }
@@ -269,7 +270,7 @@ export default class AdicionarEncomenda extends Component {
                         <Col md={4}>
                             <FormGroup>
                                 <Label for="cacifo">Cacifo</Label>
-                                <Input type="select" name="cacifo" id="localizacao"
+                                <Input type="select" name="cacifo" id="cacifo"
                                     value={this.state.cacifo_id} onChange={this.handleCacifoChange}>
                                     {this.state.cacifos_livres.map(cacifo => {
 
@@ -288,7 +289,6 @@ export default class AdicionarEncomenda extends Component {
                                 <Input type="select" name="cliente" id="cliente"
                                     value={this.state.cliente_id} onChange={this.handleClienteChange}>
                                     {this.state.clientes.map(cliente => {
-
                                         return (
                                             <option value={cliente.id}>
                                                 {cliente.nome}
