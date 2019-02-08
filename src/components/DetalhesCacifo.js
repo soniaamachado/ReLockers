@@ -69,9 +69,6 @@ class Detalhes_Estafeta extends Component {
                         <div className="card-body">
 
                             <ol className="breadcrumb">
-                                <li><Link to={'/cacifos'}><i style={{width: '20%', fontStyle: 'none'}}
-                                                             className="material-icons md-24 nav_icon">arrow_back</i></Link>
-                                </li>
                                 <li className="breadcrumb-item"><Link to={'/cacifos'}>Cacifos</Link>
                                 </li>
                                 <li className="breadcrumb-item"><Link to={'#'}>Detalhes de Cacifo</Link>
@@ -101,16 +98,17 @@ class Detalhes_Estafeta extends Component {
                                             </form>
                                         </td>
                                     </tr>
+
                                     </tbody>
                                 </table>
                             </div>
                             <Button style={{
                                 display: 'block',
-                                float: 'center',
+                                float: 'left',
                                 width: 'auto',
                                 margin:'auto',
-                                marginBottom:'15px',
-                                marginTop:'15px',
+                                marginBottom:'20px',
+                                marginTop:'10px',
                                 backgroundColor: 'rgb(181, 160, 251)',
                                 border: 'none'
                             }} onClick={() => this.changeCode()} color='primary'>Alterar
@@ -119,6 +117,7 @@ class Detalhes_Estafeta extends Component {
                             <div className="table-responsive table_estafeta">
                                 <table className='table'>
 
+                                    <tbody>
                                     <tr>
                                         <th scope="row">Temperatura</th>
                                         <td style={{textAlign: 'center'}}>{cacifos.temperatura}</td>
@@ -133,10 +132,11 @@ class Detalhes_Estafeta extends Component {
                                         <th scope="row">Disponibilidade</th>
                                         <td style={{textAlign: 'center'}}>{cacifos.estado.estado}</td>
 
-
                                     </tr>
+                                    </tbody>
                                 </table>
                             </div>
+
                             <div className="table-responsive table_estafeta">
                                 <table className='table'>
 

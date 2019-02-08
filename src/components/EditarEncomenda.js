@@ -149,10 +149,6 @@ export default class EditarEncomenda extends Component {
             tamanho
         } = this.state;
 
-        if (this.state.data_de_entrega_pretendida === "") {
-            this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
-            return;
-        }
 
         const data_de_entrada_no_sistema = this.getCurrentDate();
 
@@ -161,22 +157,11 @@ export default class EditarEncomenda extends Component {
 
         const tempo_limite_de_levantamento = this.data_final(data_de_entrega_pretendida);
 
+        console.log(this.props.match.params.id);
 
-
-        if (data_de_entrega_pretendida == null) {
-            this.setState({ errors: { email: "Insira uma data" } });
-            return;
-        }
-
-        if (cacifo_id === "") {
-            this.setState({ errors: { temperatura: "URL is required" } });
-            return;
-        }
-
-        if (cliente_id === "") {
-            this.setState({ errors: { observacoes: "URL is required" } });
-            return;
-        }
+        axios.put('http://167.99.202.225/api/encomendas', + this.props.match.params.id, { headers: header.HEADER })
+            .then(res => console.log(res.statusText))
+            .catch(error => console.log(error));
 
         const newEncomenda = {
             estado_encomenda,
@@ -191,10 +176,6 @@ export default class EditarEncomenda extends Component {
         };
 
 
-
-        axios.put('http://167.99.202.225/api/encomendas', + this.props.match.params.id, { headers: header.HEADER })
-            .then(res => console.log(res.statusText))
-            .catch(error => console.log(error));
 
         this.setState({
             estado_encomenda: 0,

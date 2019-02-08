@@ -34,10 +34,6 @@ class DetalhesEncomenda extends Component {
                     <div className="card-body">
                         <h1>Detalhes de Encomenda</h1>
                         <ol className="breadcrumb">
-                            <li>
-                                <Link to={'/encomendas'}>
-                                    <i style={{ width: '20%' }} className="material-icons md-24 nav_icon">arrow_back</i></Link>
-                            </li>
                             <li className="breadcrumb-item"><Link to="/encomendas">Encomendas</Link>
                             </li>
                             <li className="breadcrumb-item"> <Link to={'#'}>Detalhes de Encomenda</Link>
