@@ -65,7 +65,7 @@ class Detalhes_Estafeta extends Component {
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-                    <div className="card-content collapse show">
+                    <div className="card-content collapse show" style={{marginTop:'20px'}}>
                         <div className="card-body">
 
                             <ol className="breadcrumb">

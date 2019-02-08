@@ -18,6 +18,7 @@ class Encomendas extends Component {
             encomendas_entregues: [],
             encomendas_por_entregar: []
         };
+
     }
 
     toggle(tab) {
@@ -29,6 +30,7 @@ class Encomendas extends Component {
     }
 
     componentDidMount() {
+
         axios.get('http://167.99.202.225/api/encomendas')
             .then(response => {
                 this.setState({encomendas: response.data.data});
@@ -59,6 +61,7 @@ class Encomendas extends Component {
 
     render() {
 
+
         const encomendas_entregues = this.state.encomendas_entregues;
         const encomendas_por_entregar = this.state.encomendas_por_entregar;
 
@@ -80,7 +83,6 @@ class Encomendas extends Component {
             <main style={{height: '100%'}} role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <h1 className="h2">Encomendas</h1>
                     <div className="btn-toolbar mb-2 mb-md-0">
                     </div>
                 </div>

@@ -11,6 +11,7 @@ class DetalhesEstafeta extends Component {
         this.state = {
             users: [],
         };
+
     }
 
     componentDidMount() {
@@ -29,13 +30,12 @@ class DetalhesEstafeta extends Component {
         }
         else {
             const { id, nome, email, telefone, data_nascimento } = this.state.users[0].estafeta[0];
-            console.log(this.state.users[0].estafeta[0])
+            console.log(this.state.users[0].estafeta[0]);
 
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                    <div className="card-content collapse show">
+                    <div className="card-content collapse show" style={{marginTop:'20px'}}>
                         <div className="card-body">
-                            <h1>Detalhes de Estafeta</h1>
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><Link to="/estafetas">Estafetas</Link>
                                 </li>
@@ -45,7 +45,6 @@ class DetalhesEstafeta extends Component {
                             </ol>
                             <div className="table-responsive table_estafeta">
                                 <table className="table">
-                                    <thead></thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">Identificador</th>

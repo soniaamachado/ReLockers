@@ -30,9 +30,8 @@ class DetalhesEncomenda extends Component {
 
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div className="card-content collapse show">
+                <div className="card-content collapse show" style={{marginTop:'20px'}}>
                     <div className="card-body">
-                        <h1>Detalhes de Encomenda</h1>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to="/encomendas">Encomendas</Link>
                             </li>

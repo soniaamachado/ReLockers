@@ -51,7 +51,6 @@ class Estafetas extends Component {
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
                     className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                    <h1 className="h2">Estafetas</h1>
                 </div>
                 <div style={{ textAlign: 'center', marginBottom: '50px' }}>
                     <i className="material-icons md-24" style={{ verticalAlign: 'middle' }}>location_on</i>
@@ -121,21 +120,9 @@ class Estafetas extends Component {
                                                         className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
                                                 <Link to={{ pathname: `editarEstafeta/${id}`, query: { id: id } }} className="dropdown-item"><i
                                                     className="material-icons md-18 icon">create</i> Editar</Link>
-                                                <Button className="dropdown-item">
-                                                    <i className="material-icons md-18 icon">delete</i>
-                                                    Remover
-                                                      <Modal isOpen={this.state.modal} toggle={this.toggle}
-                                                        className={this.props.className}>
-                                                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                                                        <ModalBody>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                                          </ModalBody>
-                                                        <ModalFooter>
-                                                            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                                                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                                                        </ModalFooter>
-                                                    </Modal>
-                                                </Button>
+                                               <Link to={{pathname: `apagarEstafeta/${id}`, query: {id: id}}}
+                                                     className="dropdown-item"><i
+                                                   className="material-icons md-18 icon">delete</i> Remover</Link>
                                             </span>
                                         </span>
                                     </td>
