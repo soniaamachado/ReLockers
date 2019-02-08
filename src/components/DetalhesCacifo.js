@@ -9,15 +9,12 @@ class Detalhes_Estafeta extends Component {
 
     state = {
         cacifos: []
-
-
     };
 
     componentDidMount() {
         axios.get('http://167.99.202.225/api/cacifos/ ' + this.props.match.params.id, {headers: header.HEADER})
             .then(response => {
                 this.setState({cacifos: response.data.data});
-
             })
             .catch(function (error) {
                 console.log(error);
@@ -47,16 +44,10 @@ class Detalhes_Estafeta extends Component {
     render() {
         const cacifos = this.state.cacifos;
 
-
         if (cacifos.length === 0) {
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                     <div style={{verticalAlign: 'middle', height: '100%'}}>
-                        {/*<div className="card-header bg-transparent border-0">
-                            <h2 className="error-code">404</h2>
-                            <h3 className="text-uppercase text-center">A página que procurou não existe</h3>
-
-                        </div>*/}
 
                         <Col>
                             <Button
@@ -93,46 +84,54 @@ class Detalhes_Estafeta extends Component {
                                     <tbody>
                                     <tr>
                                         <th scope="row">Identificador</th>
-                                        <td>{cacifos.id}</td>
+                                        <td style={{textAlign: 'center'}}>{cacifos.id}</td>
 
                                     </tr>
 
                                     <tr>
                                         <th scope="row">Número</th>
-                                        <td>{cacifos.numero}</td>
+                                        <td style={{textAlign: 'center'}}>{cacifos.numero}</td>
 
                                     </tr>
                                     <tr>
                                         <th scope="row">Código</th>
                                         <td>
-                                            <form name="randform">
-                                                <input type="text" name="randomfield" value={cacifos.codigo}/>
-                                                <Button onClick={() => this.changeCode()} color='primary'>Alterar
-                                                    Código</Button>
+                                            <form name="randform" style={{textAlign: 'center'}}>
+                                                <input style={{border:'none', textAlign:'center'}} type="text" name="randomfield" value={cacifos.codigo}/>
                                             </form>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-
-
                             </div>
+                            <Button style={{
+                                display: 'block',
+                                float: 'center',
+                                width: 'auto',
+                                margin:'auto',
+                                marginBottom:'15px',
+                                marginTop:'15px',
+                                backgroundColor: 'rgb(181, 160, 251)',
+                                border: 'none'
+                            }} onClick={() => this.changeCode()} color='primary'>Alterar
+                                Código
+                            </Button>
                             <div className="table-responsive table_estafeta">
                                 <table className='table'>
 
                                     <tr>
                                         <th scope="row">Temperatura</th>
-                                        <td>{cacifos.temperatura}</td>
+                                        <td style={{textAlign: 'center'}}>{cacifos.temperatura}</td>
 
                                     </tr>
                                     <tr>
                                         <th scope="row">Tamanho</th>
-                                        <td>{cacifos.tamanho.tamanho}</td>
+                                        <td style={{textAlign: 'center'}}>{cacifos.tamanho.tamanho}</td>
 
                                     </tr>
                                     <tr>
                                         <th scope="row">Disponibilidade</th>
-                                        <td>{cacifos.estado.estado}</td>
+                                        <td style={{textAlign: 'center'}}>{cacifos.estado.estado}</td>
 
 
                                     </tr>
