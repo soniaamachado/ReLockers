@@ -15,6 +15,8 @@ class DetalhesEncomenda extends Component {
         axios.get('http://167.99.202.225/api/encomendas/ ' + this.props.match.params.id, { headers: header.HEADER })
             .then(response => {
                 this.setState({ encomendas: response.data.data });
+                console.log(this.state.encomendas);
+
 
             })
             .catch(function (error) {
@@ -45,42 +47,44 @@ class DetalhesEncomenda extends Component {
                         <div className="table-responsive table_estafeta">
                             <table className="table">
 
-                                <tr>
-                                    <th scope="row">Número de encomenda</th>
-                                    <td>{encomendas.numero_encomenda}</td>
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Número de encomenda</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.id}</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Localização</th>
-                                    <td>{encomendas.localizacao}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Localização</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.id}</td>
 
-                                </tr>
+                                    </tr>
 
-                                <tr>
-                                    <th scope="row">Tamanho</th>
-                                    <td>{encomendas.tamanho}</td>
+                                    <tr>
+                                        <th scope="row">Tamanho</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.tamanho}</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Temperatura requirida</th>
-                                    <td>{encomendas.temperatura}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Temperatura requirida</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.temperatura}</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Data de entrega</th>
-                                    <td>{encomendas.data_estimada}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data de entrada do sistema</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.data_de_entrada_no_sistema == null ? "Ainda não foi entregue" : encomendas.data_de_entrada_no_sistema}</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Data de entrega no cacifo</th>
-                                    <td>{encomendas.data_de_entrega}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data de entrega no cacifo</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.data_de_entrega == null ? "Ainda não foi entregue" : encomendas.data_de_entrega}</td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">Data de levantamento da encomenda</th>
-                                    <td>{encomendas.data_de_levantamento}</td>
-
-                                </tr>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Data de levantamento da encomenda</th>
+                                        <td style={{ textAlign: "center" }}>{encomendas.data_de_levantamento == null ? "Ainda não foi entregue" : encomendas.data_de_levantamento}</td>
+                                    </tr>
+                                </tbody>
 
                             </table>
                         </div>

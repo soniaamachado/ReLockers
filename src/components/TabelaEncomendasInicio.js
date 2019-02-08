@@ -127,7 +127,7 @@ export default class TabelaEncomendasInicio extends React.Component {
                                         </button>
                                         <span aria-labelledby="btnSearchDrop2"
                                             className="btn_acoes dropdown-menu mt-1 dropdown-menu-right">
-                                            <Link to={{ pathname: `detail/${id}`, query: { id: id } }}
+                                            <Link to={{ pathname: `detalheEncomenda/${id}`, query: { id: id } }}
                                                 className="dropdown-item"> <i
                                                     className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
                                             <Link to="#" className="dropdown-item"><i

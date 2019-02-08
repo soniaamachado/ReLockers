@@ -32,7 +32,6 @@ class App extends Component {
                         <Route exact path='/estafetas' component={Estafetas} />
                         <Route exact path='/cacifos' component={Cacifos} />
                         <Route exact path='/definicoes' component={Definicoes} />
-                        <Route exact path='/detail/:id' component={DetalhesEncomenda} />
                         <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta} />
                         <Route exact path='/editarEstafeta/:id' component={EditarEstafeta} />
                         <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo} />
