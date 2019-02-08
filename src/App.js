@@ -39,7 +39,8 @@ class App extends Component {
                         <Route exact path='/adicionar_estafeta' component={AdicionarEstafeta} />
                         <Route exact path='/apagarEncomenda/:id' component={ApagarEncomenda} />
                         <Route exact path='/apagarEstafeta/:id' component={ApagarEstafeta} />
-                        <Route exact path='/confirmacao' component={Confirmacao} />
+                        <Route exact path='/editarEncomenda/:id' component={ApagarEncomenda} />
+
                     </div>
                 </Switch>
             </Router>

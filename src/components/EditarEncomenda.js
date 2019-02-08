@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import * as header from './constants/HeaderConstant';
 
-export default class AdicionarEncomenda extends Component {
+export default class EditarEncomenda extends Component {
 
     constructor(props) {
         super(props);
@@ -34,6 +34,18 @@ export default class AdicionarEncomenda extends Component {
     }
 
     componentDidMount = () => {
+
+        axios.get('http://167.99.202.225/api/encomendas', { headers: header.HEADER })
+            .then(response => {
+                this.setState({ encomendas: response.data.data });
+                this.splitArrayEncomendas(this.state.encomendas);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
         axios.get('http://167.99.202.225/api/users', { headers: header.HEADER })
             .then(response => {
                 this.setState({ users: response.data.data });
@@ -137,7 +149,7 @@ export default class AdicionarEncomenda extends Component {
             tamanho
         } = this.state;
 
-        if (this.state.data_de_entrega_pretendida == "") {
+        if (this.state.data_de_entrega_pretendida === "") {
             this.setState({ errors: { data_de_entrega_pretendida: "URL is required" } });
             return;
         }
@@ -179,7 +191,8 @@ export default class AdicionarEncomenda extends Component {
         };
 
 
-        axios.post('http://167.99.202.225/api/encomendas', newEncomenda)
+
+        axios.put('http://167.99.202.225/api/encomendas', + this.props.match.params.id, { headers: header.HEADER })
             .then(res => console.log(res.statusText))
             .catch(error => console.log(error));
 
@@ -196,7 +209,7 @@ export default class AdicionarEncomenda extends Component {
 
         });
 
-       console.log(this.state.mensagem)
+        console.log(this.state.mensagem)
 
     };
 
@@ -248,13 +261,13 @@ export default class AdicionarEncomenda extends Component {
 
                             <Label for="tamanho">Temperatura</Label>
                             <Input style={{ width: '65px', display: 'inline', marginLeft: '20px' }} className='input-encomenda' type="number" name="temperatura"
-                                id="temperatura" min="0"
-                                max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
+                                   id="temperatura" min="0"
+                                   max="20" value={this.state.temperatura} onChange={this.handleTemperaturaChange}>
                             </Input>
 
                             <Label style={{ marginLeft: '20px' }} for="tamanho">Tamanho</Label>
                             <Input style={{ width: '65px', display: 'inline', marginLeft: '20px' }} type="select" name="tamanho" id="tamanho"
-                                value={this.state.tamanho} onChange={this.handleTamanhoChange}>
+                                   value={this.state.tamanho} onChange={this.handleTamanhoChange}>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
@@ -279,7 +292,7 @@ export default class AdicionarEncomenda extends Component {
                             <FormGroup>
                                 <Label for="cacifo">Cacifo</Label>
                                 <Input type="select" name="cacifo" id="cacifo"
-                                    value={this.state.cacifo_id} onChange={this.handleCacifoChange}>
+                                       value={this.state.cacifo_id} onChange={this.handleCacifoChange}>
                                     {this.state.cacifos_livres.map(cacifo => {
 
                                         return (
@@ -295,7 +308,7 @@ export default class AdicionarEncomenda extends Component {
                             <FormGroup>
                                 <Label for="cliente">Cliente</Label>
                                 <Input type="select" name="cliente" id="cliente"
-                                    value={this.state.cliente_id} onChange={this.handleClienteChange}>
+                                       value={this.state.cliente_id} onChange={this.handleClienteChange}>
                                     {this.state.clientes.map(cliente => {
                                         return (
                                             <option value={cliente.id}>
@@ -326,14 +339,14 @@ export default class AdicionarEncomenda extends Component {
 
                     <Button
                         style={{
-                        display: 'block',
-                        float: 'center',
-                        width: 'auto',
-                        marginTop: '20px',
-                        marginRight: 'auto',
-                        backgroundColor: 'rgb(181, 160, 251)',
-                        border: 'none'
-                    }} size="sm">
+                            display: 'block',
+                            float: 'center',
+                            width: 'auto',
+                            marginTop: '20px',
+                            marginRight: 'auto',
+                            backgroundColor: 'rgb(181, 160, 251)',
+                            border: 'none'
+                        }} size="sm">
                         Adicionar encomenda
                     </Button>
 

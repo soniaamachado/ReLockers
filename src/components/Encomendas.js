@@ -173,8 +173,7 @@ class Encomendas extends Component {
 
 
                                         if (hours <= 0 && minutes <= 0) {
-                                            tempo_limite_de_levantamento =
-                                                <td> </td>
+                                            tempo_limite_de_levantamento = " "
                                         }
                                         else{
                                             tempo_limite_de_levantamento =
@@ -341,7 +340,7 @@ class Encomendas extends Component {
 				                            <Link to={{pathname: `detalheEncomenda/${id}`, query: {id: id}}}
                                                   className="dropdown-item"> <i
                                                 className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-				                            <Link to="#" className="dropdown-item"><i
+				                            <Link to={{pathname: `editarEncomenda/${id}`, query: {id: id}}} className="dropdown-item"><i
                                                 className="material-icons md-18 icon">create</i> Editar</Link>
 
                                             <Link to={{pathname: `apagarEncomenda/${id}`, query: {id: id}}}
