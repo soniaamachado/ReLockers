@@ -119,7 +119,7 @@ class Estafetas extends Component {
                                                 <Link to={{ pathname: `detalheEstafeta/${id}`, query: { id: id } }}
                                                     className="dropdown-item"> <i
                                                         className="material-icons md-18 icon">remove_red_eye</i> Abrir</Link>
-                                                <Link to="#" className="dropdown-item"><i
+                                                <Link to={{ pathname: `editarEstafeta/${id}`, query: { id: id } }} className="dropdown-item"><i
                                                     className="material-icons md-18 icon">create</i> Editar</Link>
                                                 <Button className="dropdown-item">
                                                     <i className="material-icons md-18 icon">delete</i>

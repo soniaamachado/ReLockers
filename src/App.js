@@ -17,6 +17,7 @@ import AdicionarEstafeta from './components/AdicionarEstafeta';
 import ApagarEstafeta from "./components/ApagarEstafeta";
 import Confirmacao from "./components/Confirmacao";
 import EditarEncomenda from "./components/EditarEncomenda";
+import EditarEstafeta from './components/EditarEstafeta';
 
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
                         <Route exact path='/definicoes' component={Definicoes} />
                         <Route exact path='/detail/:id' component={DetalhesEncomenda} />
                         <Route exact path='/detalheEstafeta/:id' component={DetalhesEstafeta} />
+                        <Route exact path='/editarEstafeta/:id' component={EditarEstafeta} />
                         <Route exact path='/detalheCacifo/:id' component={DetalhesCacifo} />
                         <Route exact path='/detalheEncomenda/:id' component={DetalhesEncomenda} />
                         <Route exact path='/inicio' component={Inicio} />
