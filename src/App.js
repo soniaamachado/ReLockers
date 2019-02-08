@@ -16,6 +16,7 @@ import ApagarEncomenda from "./components/ApagarEncomenda"
 import AdicionarEstafeta from './components/AdicionarEstafeta';
 import ApagarEstafeta from "./components/ApagarEstafeta";
 import Confirmacao from "./components/Confirmacao";
+import EditarEncomenda from "./components/EditarEncomenda";
 
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
                         <Route exact path='/adicionar_estafeta' component={AdicionarEstafeta} />
                         <Route exact path='/apagarEncomenda/:id' component={ApagarEncomenda} />
                         <Route exact path='/apagarEstafeta/:id' component={ApagarEstafeta} />
-                        <Route exact path='/editarEncomenda/:id' component={ApagarEncomenda} />
+                        <Route exact path='/editarEncomenda/:id' component={EditarEncomenda} />
 
                     </div>
                 </Switch>
