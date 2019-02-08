@@ -4,17 +4,19 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import * as header from './constants/HeaderConstant';
 
-class Detalhes_Estafeta extends Component {
+class DetalhesEstafeta extends Component {
 
-    state = {
-        users: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: [],
+        };
+    }
 
     componentDidMount() {
         axios.get('http://167.99.202.225/api/users/ ' + this.props.match.params.id + '/encomendas', { headers: header.HEADER })
             .then(response => {
                 this.setState({ users: response.data.data });
-                console.log(this.state.users[0].estafeta[0].nome);
             })
             .catch(function (error) {
                 console.log(error);
@@ -26,6 +28,9 @@ class Detalhes_Estafeta extends Component {
             return null;
         }
         else {
+            const { id, nome, email, telefone, data_nascimento } = this.state.users[0].estafeta[0];
+            console.log(this.state.users[0].estafeta[0])
+
             return (
                 <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
                     <div className="card-content collapse show">
@@ -40,35 +45,48 @@ class Detalhes_Estafeta extends Component {
                             </ol>
                             <div className="table-responsive table_estafeta">
                                 <table className="table">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Identificador</th>
+                                            <td style={{ textAlign: "center" }}>
+                                                {id}
+                                            </td>
 
-                                    <tr>
-                                        <th scope="row">Identificador</th>
-                                        <td>{this.state.users[0].estafeta[0].id}</td>
+                                        </tr>
 
-                                    </tr>
+                                        <tr>
+                                            <th scope="row">Nome</th>
+                                            <td style={{ textAlign: "center" }}>
+                                                {nome}
+                                            </td>
 
-                                    <tr>
-                                        <th scope="row">Nome</th>
-                                        <td>{this.state.users[0].estafeta[0].nome}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td style={{ textAlign: "center" }}>
+                                                {email}
+                                            </td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Email</th>
-                                        <td>{this.state.users[0].estafeta[0].email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Telefone</th>
+                                            <td style={{ textAlign: "center" }}>
+                                                {telefone}
+                                            </td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Telefone</th>
-                                        <td>{this.state.users[0].estafeta[0].telefone}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Data de nascimento</th>
+                                            <td style={{ textAlign: "center" }}>
+                                                {data_nascimento}
+                                            </td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Data de nascimento</th>
-                                        <td>{this.state.users[0].estafeta[0].data_nascimento}</td>
-
-                                    </tr>
+                                        </tr>
+                                    </tbody>
 
                                 </table>
+
                             </div>
 
                             <div>
@@ -116,5 +134,5 @@ class Detalhes_Estafeta extends Component {
     }
 }
 
-export default Detalhes_Estafeta;
+export default DetalhesEstafeta;
 
