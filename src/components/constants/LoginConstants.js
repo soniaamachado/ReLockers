@@ -1,9 +1,9 @@
 export const CLIENT_ID = "1";
 export const GRANT_TYPE = "password";
-export const CLIENT_SECRET = "406GgUDSzu96fSBJBFVaVxJ0N1tt4W3ZTW3zLCK9";
+export const CLIENT_SECRET = "h7GLgLybYCM71be2OhjRFi6392PmSXXu3giFKw99";
 
 //localhost
-//406GgUDSzu96fSBJBFVaVxJ0N1tt4W3ZTW3zLCK9
+//h7GLgLybYCM71be2OhjRFi6392PmSXXu3giFKw99
 
 //servidor
 //46eduUruAdHcO1b8nI1WYAE06eDyJ4xgUM0pwADz

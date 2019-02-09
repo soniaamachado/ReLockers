@@ -10,9 +10,9 @@ export default class definicoes extends React.Component {
     };
 
     componentDidMount() {
-        axios.get('http://167.99.202.225/api/user', { headers: header.HEADER })
+        axios.get('http://167.99.202.225/api/users/9', { headers: header.HEADER })
             .then(response => {
-                this.setState({ user: response.data })
+                this.setState({ user: response.data.data })
             })
             .catch(function (error) {
                 console.log(error);
@@ -20,7 +20,7 @@ export default class definicoes extends React.Component {
     }
 
     render() {
-
+        console.log(this.state.user.nome)
         const {
             nome, telefone, email,
         } = this.state.user;

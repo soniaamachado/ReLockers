@@ -30,7 +30,7 @@ export default class AdicionarEncomenda extends Component {
         this.handleTamanhoChange = this.handleTamanhoChange.bind(this);
         this.handleDataDeEntregaChange = this.handleDataDeEntregaChange.bind(this);
         this.handleTemperaturaChange = this.handleTemperaturaChange.bind(this);
-        this.handleClienteChange=this.handleClienteChange.bind(this);
+        this.handleClienteChange = this.handleClienteChange.bind(this);
     }
 
     componentDidMount = () => {
@@ -191,12 +191,12 @@ export default class AdicionarEncomenda extends Component {
             tamanho: "",
             observacoes: "",
             temperatura: 20,
-            cacifo_id:1,
-            cliente_id:1,
+            cacifo_id: 1,
+            cliente_id: 1,
 
         });
 
-       console.log(this.state.mensagem)
+        this.props.history.push("/encomendas");
 
     };
 
@@ -326,14 +326,14 @@ export default class AdicionarEncomenda extends Component {
 
                     <Button
                         style={{
-                        display: 'block',
-                        float: 'center',
-                        width: 'auto',
-                        marginTop: '20px',
-                        marginRight: 'auto',
-                        backgroundColor: 'rgb(181, 160, 251)',
-                        border: 'none'
-                    }} size="sm">
+                            display: 'block',
+                            float: 'center',
+                            width: 'auto',
+                            marginTop: '20px',
+                            marginRight: 'auto',
+                            backgroundColor: 'rgb(181, 160, 251)',
+                            border: 'none'
+                        }} size="sm">
                         Adicionar encomenda
                     </Button>
 

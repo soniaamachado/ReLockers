@@ -116,7 +116,7 @@ export default class AdicionarEstafeta extends Component {
             errors: {}
         });
 
-        //this.props.history.push("/news");
+        this.props.history.push("/estafetas");
     };
 
     onChange = e => {

@@ -114,7 +114,7 @@ class Inicio extends Component {
                                             tempo_limite_de_levantamento =
                                                 0
                                         }
-                                        if (index < 1 ) {
+                                        if (index < 1) {
                                             return (
                                                 <CountUp start={0} end={tempo_limite_de_levantamento} duration={5} />
                                             )
